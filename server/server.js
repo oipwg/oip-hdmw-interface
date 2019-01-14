@@ -25,7 +25,8 @@ app.prepare().then(() => {
 	server.get('*', (req, res) => {
 		const url = URL_MAP[req.path];
 		if (url) {
-			app.render(req, res, url);
+			const {query} = req.query
+			app.render(req, res, url, query);
 		} else {
 			handle(req, res);
 		}
