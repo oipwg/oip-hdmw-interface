@@ -20,7 +20,7 @@ import TablePagination from '@material-ui/core/TablePagination'
 
 import withLayout from '../lib/withLayout';
 import EnhancedTableToolbar from '../components/IndexPage/EnhancedTableToolbar'
-import IndexStyles from '../components/styles/IndexPage'
+import IndexStyles from '../components/styles/IndexStyles'
 
 class Index extends React.Component {
 	constructor(props) {
