@@ -94,8 +94,8 @@ function Header(props) {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static" color={'default'} classes={{colorDefault: classes.colorDefault}}>
-				<Toolbar>
+			<AppBar position="static" color={'default'} classes={{colorDefault: classes.colorDefault}} >
+				<Toolbar >
 					<Typography  variant="h6" color="inherit" noWrap>
 						<Link prefetch href={"/"}>
 							<a className={classes.title}>OIP-HDMW</a>
