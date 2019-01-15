@@ -74,7 +74,7 @@ class MyDocument extends Document {
 					margin: '0px auto',
 					fontWeight: '500',
 					lineHeight: '1.5em',
-					backgroundColor: '#fff',
+					backgroundColor: 'white',
 				}}
 			>
 			<Main />
