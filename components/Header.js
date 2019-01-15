@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import {fade} from '@material-ui/core/styles/colorManipulator';
 import {withStyles} from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
+
 
 const styles = theme => ({
 	root: {
@@ -25,10 +23,12 @@ const styles = theme => ({
 		marginRight: 20,
 	},
 	title: {
-		display: 'none',
-		[theme.breakpoints.up('sm')]: {
-			display: 'block',
-		},
+		color: theme.palette.primary.main,
+		fontWeight: '600',
+		// display: 'none',
+		// [theme.breakpoints.up('sm')]: {
+		// 	display: 'block',
+		// },
 	},
 	loginLink: {
 		fontWeight: 'bold',
@@ -96,9 +96,9 @@ function Header(props) {
 		<div className={classes.root}>
 			<AppBar position="static" color={'default'} classes={{colorDefault: classes.colorDefault}}>
 				<Toolbar>
-					<Typography className={classes.title} variant="h6" color="inherit" noWrap>
+					<Typography  variant="h6" color="inherit" noWrap>
 						<Link prefetch href={"/"}>
-							<a style={{fontWeight: '600'}}>OIP-HDMW</a>
+							<a className={classes.title}>OIP-HDMW</a>
 						</Link>
 					</Typography>
 
