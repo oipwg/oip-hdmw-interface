@@ -1,34 +1,15 @@
 import React from 'react'
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-import {withTheme} from '@material-ui/core/styles';
+import {withTheme, withStyles} from '@material-ui/core/styles';
 import {Wallet} from 'oip-hdmw'
 import withLayout from '../lib/withLayout';
-import bitcoinSvg from '../static/bitcoin.svg'
-import floSvg from '../static/flo.svg'
-import litecoinSvg from '../static/litecoin.svg'
 
 
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { lighten } from '@material-ui/core/styles/colorManipulator';
+const styles = theme => ({
 
-//bitcoin hex: f2a900
-//litecoin hex: d3d3d3 or b8b8b8
+
+})
 
 class Index extends React.Component {
 	constructor(props) {
@@ -132,13 +113,13 @@ class Index extends React.Component {
 				<div className={'container-fluid p-0 no-gutters h-100'}>
 					<div className="row no-gutters h-100">
 						<div className='col-3 h-100'>
-							{this.renderCoins()}
+							{/*{this.renderCoins()}*/}
 						</div>
 						<div className='col-6'>
-							{this.renderAddresses()}
+							{/*{this.renderAddresses()}*/}
 						</div>
 						<div className='col-3 h-100'>
-							{this.renderAccounts()}
+							{/*{this.renderAccounts()}*/}
 						</div>
 					</div>
 				</div>
@@ -148,9 +129,12 @@ class Index extends React.Component {
 	}
 }
 
-Index.propTypes = {};
+Index.propTypes = {
+	classes: PropTypes.object.isRequired,
+};
 
-let component = withTheme()(Index)
+let component = withStyles(styles)(Index)
+component = withTheme()(component)
 component = withLayout(component)
 
 export default component

@@ -22,19 +22,22 @@ class MyDocument extends Document {
 					href="https://fonts.googleapis.com/css?family=Muli:300,400:latin"
 				/>
 				<link
+					href="https://fonts.googleapis.com/css?family=Josefin+Sans:700,600,500,400,300|Work+Sans:600, 500, 400, 300"
+					rel="stylesheet"/>
+				<link
 					rel="stylesheet"
 					href="https://storage.googleapis.com/builderbook/nprogress.min.css"
 				/>
 				<link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
 
-				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-				      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-				      crossOrigin="anonymous"/>
-
 				<style>
 					{`
-              a, a:focus {
+               #__next {
+				    height: 100%
+			  }
+			 a, a:focus {
                 font-weight: 400;
+                color: black;
                 text-decoration: none;
                 outline: none
               }
@@ -60,21 +63,18 @@ class MyDocument extends Document {
                 background: #FFF;
                 padding: 3px 5px;
               }
-               #__next {
-				    height: 100%
-			  }
             `}
 				</style>
 			</Head>
 			<body
 				style={{
 					height: '100%',
-					font: '16px Muli',
+					font: '16px Josefin Sans, Helvetica, Roboto, Multi, Arial',
 					color: '#222',
 					margin: '0px auto',
-					fontWeight: '300',
+					fontWeight: '500',
 					lineHeight: '1.5em',
-					backgroundColor: '#F7F9FC',
+					backgroundColor: '#fff',
 				}}
 			>
 			<Main />
