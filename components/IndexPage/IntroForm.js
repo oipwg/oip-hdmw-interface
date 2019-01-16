@@ -1,25 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
+import {Wallet} from 'oip-hdmw'
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import {AccountBalanceWallet} from '@material-ui/icons';
+import {Lock} from '@material-ui/icons';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+
 function IntroForm(props) {
-	const {classes} = props
+	const {classes, loadWallet} = props
+
+	const [mnemonic, setMnemonic] = useState('');
+	const generateMnemonic = (e) => {
+		e.preventDefault()
+		let wallet = new Wallet(undefined, {discover: false})
+		let mnemonic = wallet.getMnemonic()
+		setMnemonic(mnemonic)
+	}
+
+	const displayWarning = (e) => {
+		e.preventDefault()
+		// display warning
+
+		//accept/decline
+		loadWallet(mnemonic)
+	}
+
 	return (
 		<main className={classes.main}>
 			<Paper className={classes.paper}>
-
-				<AccountBalanceWallet/>
-
+				<Lock className={classes.lockIcon}/>
 				<Typography component="h1" variant="h5" align={'center'}>
 					Enter a Mnemonic to Load Your Wallet
 				</Typography>
@@ -27,17 +42,18 @@ function IntroForm(props) {
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="email">Mnemonic</InputLabel>
 						<Input id="mnemonic" name="mnemonic" autoComplete="mnemonic" autoFocus
-						       // value={username}
-						       // onChange={(e) => setUsername(e.target.value)}
+						       value={mnemonic}
+						       onChange={(e) => setMnemonic(e.target.value)}
 						/>
 					</FormControl>
 					<Button
 						type="submit"
 						fullWidth
 						variant="contained"
-						color="secondary"
-						className={classes.submit}
-						onClick={e => {console.log(e)}}
+						className={`${classes.submit} ${classes.gmButton}`}
+						onClick={(e) => {
+							generateMnemonic(e)
+						}}
 						// disabled={disableSignIn}
 					>
 						Generate Mnemonic
@@ -48,7 +64,9 @@ function IntroForm(props) {
 						variant="contained"
 						color="primary"
 						className={classes.submit}
-						onClick={e => {console.log(e)}}
+						onClick={(e) => {
+							displayWarning(e)
+						}}
 						// disabled={disableSignIn}
 					>
 						Load Wallet
@@ -70,7 +88,7 @@ const styles = theme => ({
 		marginLeft: theme.spacing.unit * 3,
 		marginRight: theme.spacing.unit * 3,
 		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-			width: 400,
+			width: 320,
 			marginLeft: 'auto',
 			marginRight: 'auto',
 		},
@@ -93,6 +111,14 @@ const styles = theme => ({
 	submit: {
 		marginTop: theme.spacing.unit * 3,
 	},
+	gmButton: {
+		backgroundColor: theme.palette.primary.dark,
+		color: 'white'
+	},
+	lockIcon: {
+		margin: '25px 0px',
+		fontSize: '30px'
+	}
 });
 
 
