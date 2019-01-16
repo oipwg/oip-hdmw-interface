@@ -6,14 +6,14 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 
 const CoinSection = (props) => {
-	const {classes, wallet} = props
+	const {classes, wallet, fn} = props
 	
 	return <div className={classes.sectionCoins}>
 		{Object.keys(wallet.getCoins()).map((coin, i) => {
 			return (
 				<Card key={i} className={classes.coinCard}>
 					<ButtonBase className={classes.cardButtonBase} onClick={() => {
-						this.handleCoinCardClick(coin)
+						fn.handleCoinCardClick(coin)
 					}}>
 						<CardContent>
 							<Typography className={classes.coinTypography}>
