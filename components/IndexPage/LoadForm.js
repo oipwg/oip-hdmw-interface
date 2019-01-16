@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import IntroFormStyles from '../styles/IntroFormStyles'
+import LoadFormStyles from '../styles/LoadFormStyles'
 import LoadWarningModalStyles from '../styles/LoadWarningModalStyles'
 
 let LoadWarning = (props) => {
@@ -51,7 +51,7 @@ let LoadWarning = (props) => {
 
 LoadWarning = withStyles(LoadWarningModalStyles)(LoadWarning)
 
-function IntroForm(props) {
+function LoadForm(props) {
 	const {classes, loadWallet} = props
 
 	const [mnemonic, setMnemonic] = useState('');
@@ -124,8 +124,8 @@ function IntroForm(props) {
 	);
 }
 
-IntroForm.propTypes = {
+LoadForm.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(IntroFormStyles)(IntroForm)
+export default withStyles(LoadFormStyles)(LoadForm)

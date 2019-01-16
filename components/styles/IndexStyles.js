@@ -1,44 +1,8 @@
-const styles = theme => ({
-	root: {
-		height: `calc(100% - 64px)`,
-		display: 'flex',
-		flexDirection: 'row',
-		[theme.breakpoints.down('sm')]: {
-			flexDirection: 'column',
-		},
-	},
-	renderWalletRoot: {
-		display: 'inherit',
-		flexDirection: 'inherit',
-		width: '100%',
-		height: '100%'
-	},
-	renderIntroRoot: {
-		display: 'inherit',
-		flexDirection: 'inherit',
-		width: '100%',
-		height: '100%',
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	introContainer: {
-		height: '60%',
-		width: '60%',
-		marginBottom: '100px',
-	},
-	introHeading: {
-		color: theme.palette.primary.main,
-		fontSize: theme.typography.font30
-	},
-	rootTable: {
-		width: '100%',
-		overflowX: 'auto',
-	},
-	table: {
-		minWidth: 700,
-	},
+const getStyles = (theme) => {
+const coinSection = {
 	sectionCoins: {
-		width: '30%',
+		width: '20%',
+		padding: '5px',
 		flexDirection: 'column',
 		// backgroundColor: 'red',
 		[theme.breakpoints.down('sm')]: {
@@ -46,31 +10,6 @@ const styles = theme => ({
 			flexDirection: 'row',
 			width: '100%',
 			height: '10%'
-		},
-	},
-	sectionAddresses: {
-		width: '60%',
-		flexDirection: 'column',
-		overflowY: 'auto',
-		// backgroundColor: 'blue',
-		[theme.breakpoints.down('sm')]: {
-			display: 'flex',
-			width: '100%',
-			// order: '3',
-
-		},
-	},
-	sectionAccounts: {
-		width: '30%',
-		flexDirection: 'column',
-		overflowY: 'auto',
-		// backgroundColor: 'green',
-		[theme.breakpoints.down('sm')]: {
-			display: 'flex',
-			flexDirection: 'row',
-			width: '100%',
-			height: '10%',
-			overflowX: 'auto'
 		},
 	},
 	coinCard: {
@@ -94,10 +33,100 @@ const styles = theme => ({
 	extraCoinTypography: {
 		color: theme.palette.error.main
 	},
+}
+
+const addressSection = {
+	sectionAddresses: {
+		width: '40%',
+		padding: '5px',
+		flexDirection: 'column',
+		overflowY: 'auto',
+		// backgroundColor: 'blue',
+		[theme.breakpoints.down('sm')]: {
+			display: 'flex',
+			width: '100%',
+			// order: '3',
+			
+		},
+	},
+	rootTable: {
+		width: '100%',
+		overflowX: 'auto',
+	},
+	table: {
+		minWidth: 700,
+	},
+}
+
+const accountSection = {
+	sectionAccounts: {
+		padding: '5px',
+		width: '10%',
+		flexDirection: 'column',
+		overflowY: 'auto',
+		// backgroundColor: 'green',
+		[theme.breakpoints.down('sm')]: {
+			display: 'flex',
+			flexDirection: 'row',
+			width: '100%',
+			height: '10%',
+			overflowX: 'auto'
+		},
+	},
+}
+
+const txSection = {
+	sectionTX: {
+		padding: '5px',
+		width: '30%',
+		flexDirection: 'column',
+		overflowY: 'auto',
+		// backgroundColor: 'green',
+		[theme.breakpoints.down('sm')]: {
+			display: 'flex',
+			flexDirection: 'row',
+			width: '100%',
+			height: '10%',
+			overflowX: 'auto'
+		},
+	},
+}
+
+const mixedStyles = {
 	cardButtonBase: {
 		width: '100%',
 		height: '100%',
 	}
-})
+}
+
+const root = {
+	root: {
+		height: `calc(100% - 64px)`,
+		display: 'flex',
+		flexDirection: 'row',
+		padding: '20px',
+		[theme.breakpoints.down('sm')]: {
+			flexDirection: 'column',
+		},
+	},
+	renderWalletRoot: {
+		display: 'inherit',
+		flexDirection: 'inherit',
+		width: '100%',
+		height: '100%'
+	},
+}
+
+return {
+	...root,
+	...coinSection,
+	...accountSection,
+	...addressSection,
+	...txSection,
+	...mixedStyles,
+}
+}
+
+const styles = theme => (getStyles(theme))
 
 export default styles
