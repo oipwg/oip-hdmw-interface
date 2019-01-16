@@ -75,6 +75,13 @@ class Index extends React.Component {
 		console.log('this function is not yet available')
 	}
 
+	loadWallet = (mnemonic) => {
+		this.Wallet = new Wallet(mnemonic, {discover: false})
+		this.setState({
+			walletLoaded: true
+		})
+	}
+
 	renderCoinSection = (classes) => {
 		return <div className={classes.sectionCoins}>
 			{Object.keys(this.Wallet.getCoins()).map((coin, i) => {
