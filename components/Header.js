@@ -117,11 +117,11 @@ function Header(props) {
 					{/*</div>*/}
 					{/*<div className={classes.grow}/>*/}
 
-					<div className={classes.sectionDesktop}>
-						<Link prefetch href={{pathname: '/public/login', query: {redirectUrl}}}>
-							<a className={classes.loginLink}>Login</a>
-						</Link>
-					</div>
+					{/*<div className={classes.sectionDesktop}>*/}
+						{/*<Link prefetch href={{pathname: '/public/login', query: {redirectUrl}}}>*/}
+							{/*<a className={classes.loginLink}>Login</a>*/}
+						{/*</Link>*/}
+					{/*</div>*/}
 					<div className={classes.sectionMobile}>
 						{/*...*/}
 					</div>
