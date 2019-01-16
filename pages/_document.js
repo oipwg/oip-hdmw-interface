@@ -70,11 +70,11 @@ class MyDocument extends Document {
 				style={{
 					height: '100%',
 					font: '16px Arial, Multi, Helvetica',
-					color: '#222',
+					color: 'white',
 					margin: '0px auto',
 					fontWeight: '500',
 					lineHeight: '1.5em',
-					backgroundColor: 'white',
+					backgroundColor: 'rgb(244, 247, 250)',
 				}}
 			>
 			<Main />
