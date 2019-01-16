@@ -7,6 +7,29 @@ const styles = theme => ({
 			flexDirection: 'column',
 		},
 	},
+	renderWalletRoot: {
+		display: 'inherit',
+		flexDirection: 'inherit',
+		width: '100%',
+		height: '100%'
+	},
+	renderIntroRoot: {
+		display: 'inherit',
+		flexDirection: 'inherit',
+		width: '100%',
+		height: '100%',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	introContainer: {
+		height: '60%',
+		width: '60%',
+		marginBottom: '100px',
+	},
+	introHeading: {
+		color: theme.palette.primary.main,
+		fontSize: theme.typography.font30
+	},
 	rootTable: {
 		width: '100%',
 		overflowX: 'auto',
@@ -33,7 +56,7 @@ const styles = theme => ({
 		[theme.breakpoints.down('sm')]: {
 			display: 'flex',
 			width: '100%',
-			order: '3',
+			// order: '3',
 
 		},
 	},

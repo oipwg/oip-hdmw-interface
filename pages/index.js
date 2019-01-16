@@ -3,7 +3,6 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import {Wallet} from 'oip-hdmw'
 import _ from 'lodash'
-import classNames from 'classnames';
 
 import {withTheme, withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -21,6 +20,7 @@ import TablePagination from '@material-ui/core/TablePagination'
 import withLayout from '../lib/withLayout';
 import EnhancedTableToolbar from '../components/IndexPage/EnhancedTableToolbar'
 import IndexStyles from '../components/styles/IndexStyles'
+import IntroForm from '../components/IndexPage/IntroForm'
 
 class Index extends React.Component {
 	constructor(props) {
@@ -196,7 +196,34 @@ class Index extends React.Component {
 		)
 	}
 
-	renderWallet = (classes) => {}
+	renderWallet = (classes) => {
+		return <div className={classes.renderWalletRoot}>
+			{this.renderCoinSection(classes)}
+			{this.renderAccountSection(classes)}
+			{this.renderAddressesSection(classes)}
+		</div>
+
+	}
+
+	renderIntro = (classes) => {
+					return <IntroForm/>
+			// return <div className={classes.renderIntroRoot}>
+			// 	<div className={classes.introContainer}>
+			// 		<Typography align={'center'} className={classes.introHeading}>
+			// 			Hierarchical Deterministic Multi-Wallet
+			// 		</Typography>
+			//
+			// 	</div>
+			// </div>
+	}
+
+	renderPage = (classes) => {
+		if (this.state.walletLoaded) {
+			return this.renderWallet(classes)
+		} else {
+			return this.renderIntro(classes)
+		}
+	}
 
 	render() {
 		const {classes} = this.props
@@ -206,10 +233,7 @@ class Index extends React.Component {
 					<title>OIP-HDMW</title>
 					<meta name="description" content="Open Index Protocol HD Multi Wallet"/>
 				</Head>
-				{this.renderCoinSection(classes)}
-				{this.renderAccountSection(classes)}
-				{this.renderAddressesSection(classes)}
-
+				{this.renderPage(classes)}
 			</div>
 		)
 	}
