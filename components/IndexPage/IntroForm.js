@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import Link from 'next/link'
 import PropTypes from 'prop-types';
-import {Wallet} from 'oip-hdmw'
+import {Wallet, util} from 'oip-hdmw'
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
-
+import Modal from '@material-ui/core/Modal'
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import {Lock} from '@material-ui/icons';
@@ -11,26 +12,60 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import IntroFormStyles from '../styles/IntroFormStyles'
+import LoadWarningModalStyles from '../styles/LoadWarningModalStyles'
+
+let LoadWarning = (props) => {
+	const {open, classes, loadWallet, mnemonic, setLoadWarning} = props
+	
+	return <Modal open={open} className={classes.modal}>
+		<Paper className={`${classes.paper}`} >
+			<Typography color="error" align={'center'} className={classes.cautionTyp}>CAUTION</Typography>
+			<Typography color="primary" align={"center"} paragraph={true} className={classes.warningTyp}>
+				This mnemonic is your KEY. DO NOT LOSE THIS. Burn it into your mind. Write it down.
+				Store it, save it, hide it, but do not forget it. It is your wallet.
+			</Typography>
+			<Typography color="error" align={'center'} paragraph={true} className={classes.mnemonicTyp}>{mnemonic}</Typography>
+			<Button
+				className={`${classes.continueButtons} ${classes.continueButton}`}
+				variant={'contained'} color={'primary'}
+				onClick={(e) => {
+					e.preventDefault()
+					loadWallet(mnemonic)
+				}}>
+				I Understand
+			</Button>
+			<Button
+				className={`${classes.continueButtons} ${classes.cancelButton}`}
+				variant={'contained'} color={'error'}
+				onClick={(e) => {
+					e.preventDefault()
+					setLoadWarning(false)
+				}}
+			>
+				Cancel
+			</Button>
+		</Paper>
+	</Modal>
+}
+
+LoadWarning = withStyles(LoadWarningModalStyles)(LoadWarning)
 
 function IntroForm(props) {
 	const {classes, loadWallet} = props
 
 	const [mnemonic, setMnemonic] = useState('');
+	const [displayLoadWarning, setLoadWarning] = useState(false)
+	
 	const generateMnemonic = (e) => {
 		e.preventDefault()
 		let wallet = new Wallet(undefined, {discover: false})
 		let mnemonic = wallet.getMnemonic()
 		setMnemonic(mnemonic)
 	}
-
-	const displayWarning = (e) => {
-		e.preventDefault()
-		// display warning
-
-		//accept/decline
-		loadWallet(mnemonic)
-	}
-
+	
+	const lockLoadButton = !util.isMnemonic(mnemonic);
+	
 	return (
 		<main className={classes.main}>
 			<Paper className={classes.paper}>
@@ -50,11 +85,12 @@ function IntroForm(props) {
 						type="submit"
 						fullWidth
 						variant="contained"
+						// disableFocusRipple={true}
+						// disableRipple={true}
 						className={`${classes.submit} ${classes.gmButton}`}
 						onClick={(e) => {
 							generateMnemonic(e)
 						}}
-						// disabled={disableSignIn}
 					>
 						Generate Mnemonic
 					</Button>
@@ -65,13 +101,24 @@ function IntroForm(props) {
 						color="primary"
 						className={classes.submit}
 						onClick={(e) => {
-							displayWarning(e)
+							e.preventDefault();
+							setLoadWarning(true)
 						}}
-						// disabled={disableSignIn}
+						disabled={lockLoadButton}
 					>
 						Load Wallet
 					</Button>
 				</form>
+				<LoadWarning
+					open={displayLoadWarning}
+					loadWallet={loadWallet}
+					mnemonic={mnemonic}
+					setLoadWarning={setLoadWarning}
+				/>
+				<Typography align={'center'} className={classes.aboutTyp}>
+					If you don't know what a mnemonic is, or want to know more about this wallet,
+					see our <Link href='/public/about' as={'/about'} ><a className={classes.aboutLink}>About Page</a></Link>.
+				</Typography>
 			</Paper>
 		</main>
 	);
@@ -81,45 +128,4 @@ IntroForm.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
 
-const styles = theme => ({
-	main: {
-		width: 'auto',
-		display: 'block', // Fix IE 11 issue.
-		marginLeft: theme.spacing.unit * 3,
-		marginRight: theme.spacing.unit * 3,
-		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-			width: 320,
-			marginLeft: 'auto',
-			marginRight: 'auto',
-		},
-	},
-	paper: {
-		marginTop: theme.spacing.unit * 8,
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-	},
-	avatar: {
-		margin: theme.spacing.unit,
-		backgroundColor: theme.palette.secondary.main,
-	},
-	form: {
-		width: '100%', // Fix IE 11 issue.
-		marginTop: theme.spacing.unit,
-	},
-	submit: {
-		marginTop: theme.spacing.unit * 3,
-	},
-	gmButton: {
-		backgroundColor: theme.palette.primary.dark,
-		color: 'white'
-	},
-	lockIcon: {
-		margin: '25px 0px',
-		fontSize: '30px'
-	}
-});
-
-
-export default withStyles(styles)(IntroForm)
+export default withStyles(IntroFormStyles)(IntroForm)

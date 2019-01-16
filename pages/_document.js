@@ -29,7 +29,7 @@ class MyDocument extends Document {
 					href="https://storage.googleapis.com/builderbook/nprogress.min.css"
 				/>
 				<link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
-
+				<link href="https://fonts.googleapis.com/css?family=Hammersmith+One|Mitr|Varela" rel="stylesheet" />
 				<style>
 					{`
                #__next {
@@ -69,7 +69,7 @@ class MyDocument extends Document {
 			<body
 				style={{
 					height: '100%',
-					font: '16px Josefin Sans, Helvetica, Roboto, Multi, Arial',
+					font: '16px Arial, Multi, Helvetica',
 					color: '#222',
 					margin: '0px auto',
 					fontWeight: '500',
