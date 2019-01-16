@@ -212,23 +212,15 @@ class Index extends React.Component {
 
 	}
 
-	renderIntro = (classes) => {
-					return <IntroForm/>
-			// return <div className={classes.renderIntroRoot}>
-			// 	<div className={classes.introContainer}>
-			// 		<Typography align={'center'} className={classes.introHeading}>
-			// 			Hierarchical Deterministic Multi-Wallet
-			// 		</Typography>
-			//
-			// 	</div>
-			// </div>
+	renderIntro = () => {
+		return <IntroForm loadWallet={this.loadWallet} />
 	}
 
 	renderPage = (classes) => {
 		if (this.state.walletLoaded) {
 			return this.renderWallet(classes)
 		} else {
-			return this.renderIntro(classes)
+			return this.renderIntro()
 		}
 	}
 
