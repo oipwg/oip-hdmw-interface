@@ -13,7 +13,7 @@ import LoadForm from '../components/IndexPage/LoadForm'
 //sections
 import renderTxSection from '../components/IndexPage/sections/TxSection'
 import renderAccountSection from '../components/IndexPage/sections/AccountSection'
-import renderCoinSection from '../components/IndexPage/sections/CoinSection'
+import RenderCoinSection from '../components/IndexPage/sections/CoinSection'
 import renderAddressSection from '../components/IndexPage/sections/AddressSection'
 
 class Index extends React.Component {
@@ -100,7 +100,7 @@ class Index extends React.Component {
 						</h4>
 					</div>
 					<div className={classes.sectionWrapper}>
-						{renderCoinSection(props)}
+						<RenderCoinSection {...props} />
 					
 					</div>
 					{/*{renderAccountSection(props)}*/}

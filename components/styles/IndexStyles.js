@@ -1,38 +1,5 @@
 const getStyles = (theme) => {
-	const coinSection = {
-		sectionCoins: {
-			width: '20%',
-			flexDirection: 'column',
-			// backgroundColor: 'red',
-			// [theme.breakpoints.down('sm')]: {
-			// 	display: 'flex',
-			// 	flexDirection: 'row',
-			// 	width: '100%',
-			// 	height: '10%'
-			// },
-		},
-		coinCard: {
-			display: 'flex',
-			height: '25%',
-			justifyContent: 'center',
-			alignItems: 'Center',
-			borderRadius: '0px',
-			[theme.breakpoints.down('sm')]: {
-				width: '25%',
-				height: '100%'
-			},
-		},
-		coinTypography: {
-			fontSize: '25px',
-			color: theme.palette.primary,
-			[theme.breakpoints.down('sm')]: {
-				fontSize: '16px',
-			},
-		},
-		extraCoinTypography: {
-			color: theme.palette.error.main
-		},
-	}
+	
 	
 	const addressSection = {
 		sectionAddresses: {
@@ -88,11 +55,56 @@ const getStyles = (theme) => {
 		},
 	}
 	
-	const mixedStyles = {
-		cardButtonBase: {
-			width: '100%',
-			height: '100%',
-		}
+	const coinSection = {
+		coinWrapper: {
+			display: 'flex',
+			flexDirection: 'row',
+			flex: '0 0 360px',
+		},
+		coinList: {
+			display: 'flex',
+			flexDirection: 'column',
+			overflowY: 'scroll',
+			flex: '1 1 auto'
+		},
+		MuiCardRoot: {
+			padding: '0px',
+			'&:last-child': {
+				paddingBottom: '0px',
+			},
+		},
+		coinContainer: {
+			display: 'flex',
+			flexDirection: 'row',
+			minWidth: '360px',
+			minHeight: '200px',
+			backgroundColor: 'white',
+			justifyContent: 'center',
+			alignItems: 'center',
+			borderBottom: '1px solid rgb(218, 225, 233)',
+		},
+		cardSpace: {
+			backgroundColor: 'white',
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 auto',
+			borderBottom: '1px solid rgb(218, 225, 233)',
+		},
+
+		//
+		addCoinCard: {
+			marginTop: 'auto',
+			display: 'flex',
+			flexDirection: 'row',
+			flex: '0 1 50px',
+			justifyContent: 'center',
+			alignItems: 'center',
+			backgroundColor: 'white',
+			
+		},
+		addCoinTyp: {
+			fontWeight: 'bold'
+		},
 	}
 	
 	const sectionWrapper = {
@@ -167,7 +179,6 @@ const getStyles = (theme) => {
 		...accountSection,
 		...addressSection,
 		...txSection,
-		...mixedStyles,
 	}
 }
 

@@ -70,7 +70,7 @@ class MyDocument extends Document {
 				style={{
 					height: '100%',
 					font: '16px Arial, Multi, Helvetica',
-					color: 'white',
+					color: 'black',
 					margin: '0px auto',
 					fontWeight: '500',
 					lineHeight: '1.5em',
