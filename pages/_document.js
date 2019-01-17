@@ -33,7 +33,7 @@ class MyDocument extends Document {
 				<style>
 					{`
                #__next {
-				    height: 100%
+				  
 			  }
 			 a, a:focus {
                 font-weight: 400;

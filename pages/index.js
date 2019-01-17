@@ -3,6 +3,7 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import {Wallet} from 'oip-hdmw'
 import {withTheme, withStyles} from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper'
 
 //styles
 import withLayout from '../lib/withLayout';
@@ -90,11 +91,23 @@ class Index extends React.Component {
 				handleAddAccount: this.handleAddAccount
 			}
 		}
-		return <div className={classes.renderWalletRoot}>
-			{renderCoinSection(props)}
-			{renderAccountSection(props)}
-			{renderAddressSection(props)}
-			{renderTxSection(props)}
+		return <div className={classes.walletContainer}>
+			<div className={classes.contentLayout}>
+				<Paper elevation={1} className={classes.paperLayout}>
+					<div className={classes.walletHeader}>
+						<h4 style={{margin: '0px', fontSize: '18px'}}>
+							<span>Balance: $0.00</span>
+						</h4>
+					</div>
+					<div className={classes.sectionWrapper}>
+						{renderCoinSection(props)}
+					
+					</div>
+					{/*{renderAccountSection(props)}*/}
+					{/*{renderAddressSection(props)}*/}
+					{/*{renderTxSection(props)}*/}
+				</Paper>
+			</div>
 		</div>
 	}
 
@@ -113,7 +126,7 @@ class Index extends React.Component {
 	render() {
 		const {classes} = this.props
 		return (
-			<div className={classes.root}>
+			<div className={classes.contentContainer}>
 				<Head>
 					<title>OIP-HDMW</title>
 					<meta name="description" content="Open Index Protocol HD Multi Wallet"/>

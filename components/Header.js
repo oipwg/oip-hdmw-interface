@@ -10,7 +10,13 @@ import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
 	root: {
-		width: '100%',
+		height: '70px',
+		color: theme.palette.primary.main,
+		backgroundColor: 'white',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	colorDefault: {
 		backgroundColor: 'white'
