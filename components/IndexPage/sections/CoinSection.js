@@ -14,22 +14,24 @@ const CoinSection = (props) => {
 		return  coin === state.activeCoinName ? border: {}
 	}
 	return <div className={classes.coinWrapper}>
-		<div className={classes.coinList}>
-			{Object.keys(wallet.getCoins()).map((coin, i) => {
-				return (
-					<div
-						key={i}
-						style={selectedCoinBorder(coin)}
-						className={classes.coinContainer}
-						onClick={(e) => {
-							e.preventDefault();
-							fn.handleCoinCardClick(coin)
-						}}
-					>
-						<h4 >{_.toUpper(coin)}</h4>
-					</div>
-				)
-			})}
+		<div className={classes.coinScrollContainer}>
+			<div className={classes.coinList}>
+				{Object.keys(wallet.getCoins()).map((coin, i) => {
+					return (
+						<div
+							key={i}
+							style={selectedCoinBorder(coin)}
+							className={classes.coinContainer}
+							onClick={(e) => {
+								e.preventDefault();
+								fn.handleCoinCardClick(coin)
+							}}
+						>
+							<h4 >{_.toUpper(coin)}</h4>
+						</div>
+					)
+				})}
+			</div>
 			<div className={classes.cardSpace}/>
 			<div className={classes.addCoinCard}>
 				<h5 style={{margin: '0px'}}>ADD COIN</h5>

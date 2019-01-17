@@ -101,6 +101,9 @@ class Index extends React.Component {
 					</div>
 					<div className={classes.sectionWrapper}>
 						<RenderCoinSection {...props} />
+						<div className={classes.detailsWrapper}>
+						
+						</div>
 					
 					</div>
 					{/*{renderAccountSection(props)}*/}

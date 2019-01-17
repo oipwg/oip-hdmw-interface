@@ -55,17 +55,30 @@ const getStyles = (theme) => {
 		},
 	}
 	
+	const detailsWrapper = {
+		detailsWrapper: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 auto',
+			backgroundColor: 'yellow',
+		},
+	}
+	
 	const coinSection = {
 		coinWrapper: {
 			display: 'flex',
 			flexDirection: 'row',
-			flex: '0 0 360px',
+			flex: '0 0 300px',
+		},
+		coinScrollContainer: {
+			display: 'flex',
+			flexDirection: 'column',
 		},
 		coinList: {
 			display: 'flex',
 			flexDirection: 'column',
 			overflowY: 'scroll',
-			flex: '1 1 auto'
+			// flex: '1 1 auto'
 		},
 		MuiCardRoot: {
 			padding: '0px',
@@ -76,7 +89,7 @@ const getStyles = (theme) => {
 		coinContainer: {
 			display: 'flex',
 			flexDirection: 'row',
-			minWidth: '360px',
+			minWidth: '300px',
 			minHeight: '200px',
 			backgroundColor: 'white',
 			justifyContent: 'center',
@@ -169,13 +182,13 @@ const getStyles = (theme) => {
 			overflow: 'hidden',
 		},
 	}
-
 	
 	return {
 		...root,
 		...walletHeader,
 		...sectionWrapper,
 		...coinSection,
+		...detailsWrapper,
 		...accountSection,
 		...addressSection,
 		...txSection,
