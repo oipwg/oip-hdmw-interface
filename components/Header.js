@@ -104,7 +104,7 @@ function Header(props) {
 				<Toolbar >
 					<Typography  variant="h6" color="inherit" noWrap>
 						<Link prefetch href={"/"}>
-							<a className={classes.title}>OIP-HDMW</a>
+							<a className={classes.title}>hdmw</a>
 						</Link>
 					</Typography>
 

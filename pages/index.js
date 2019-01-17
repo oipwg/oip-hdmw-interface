@@ -3,18 +3,14 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import {Wallet} from 'oip-hdmw'
 import {withTheme, withStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper'
 
 //styles
 import withLayout from '../lib/withLayout';
 import IndexStyles from '../components/styles/IndexStyles'
 //initial load page
 import LoadForm from '../components/IndexPage/LoadForm'
-//sections
-import renderTxSection from '../components/IndexPage/sections/TxSection'
-import renderAccountSection from '../components/IndexPage/sections/AccountSection'
-import RenderCoinSection from '../components/IndexPage/sections/CoinSection'
-import renderAddressSection from '../components/IndexPage/sections/AddressSection'
+//wallet
+import RenderWallet from '../components/IndexPage/Wallet'
 
 class Index extends React.Component {
 	constructor(props) {
@@ -36,8 +32,10 @@ class Index extends React.Component {
 			activeChain: undefined,
 			activeAddress: undefined,
 
-			numOfAccountsToShow: 3,
+			numOfAccountsToShow: 1,
 			numOfAddressesToShow: 1,
+			
+			detailsView: 'addresses',
 		}
 	}
 
@@ -53,7 +51,7 @@ class Index extends React.Component {
 		})
 	}
 	
-	handleAccountCardClick = (Account, i) => {
+	handleAccountClick = (Account, i) => {
 		this.setState({
 			activeAccountIndex: i,
 			activeAccount: Account
@@ -65,6 +63,9 @@ class Index extends React.Component {
 	}
 	
 	handleAddAccount = () => {
+		if (this.state.numOfAccountsToShow === 12) {
+			return
+		}
 		this.setState({numOfAccountsToShow: this.state.numOfAccountsToShow + 1})
 	}
 
@@ -79,6 +80,14 @@ class Index extends React.Component {
 		})
 	}
 	
+	setDetailsView =(view) => {
+		if (view === 'addresses' || view === 'transactions') {
+			this.setState({detailsView: view})
+		} else {
+			throw new Error(`Invalid string passed to setDetailsView`)
+		}
+	}
+	
 	renderWallet = (classes) => {
 		let props = {
 			classes,
@@ -86,32 +95,13 @@ class Index extends React.Component {
 			state: this.state,
 			fn: {
 				handleCoinCardClick: this.handleCoinCardClick,
-				handleAccountCardClick: this.handleAccountCardClick,
+				handleAccountClick: this.handleAccountClick,
 				handleAddCoin: this.handleAddCoin,
-				handleAddAccount: this.handleAddAccount
+				handleAddAccount: this.handleAddAccount,
+				setDetailsView: this.setDetailsView,
 			}
 		}
-		return <div className={classes.walletContainer}>
-			<div className={classes.contentLayout}>
-				<Paper elevation={1} className={classes.paperLayout}>
-					<div className={classes.walletHeader}>
-						<h4 style={{margin: '0px', fontSize: '18px'}}>
-							<span>Balance: $0.00</span>
-						</h4>
-					</div>
-					<div className={classes.sectionWrapper}>
-						<RenderCoinSection {...props} />
-						<div className={classes.detailsWrapper}>
-						
-						</div>
-					
-					</div>
-					{/*{renderAccountSection(props)}*/}
-					{/*{renderAddressSection(props)}*/}
-					{/*{renderTxSection(props)}*/}
-				</Paper>
-			</div>
-		</div>
+		return RenderWallet(props)
 	}
 
 	renderIntro = () => {

@@ -7,7 +7,7 @@ const CoinSection = (props) => {
 	
 	const selectedCoinBorder = (coin) => {
 		let border = {
-			borderLeft: `1px solid ${theme.palette.secondary.main}`,
+			borderLeft: `1px solid ${theme.palette.primary.main}`,
 			marginTop: '1 px'
 		}
 		
@@ -34,7 +34,7 @@ const CoinSection = (props) => {
 			</div>
 			<div className={classes.cardSpace}/>
 			<div className={classes.addCoinCard}>
-				<h5 style={{margin: '0px'}}>ADD COIN</h5>
+				<h5 style={{margin: '0px', cursor: 'pointer'}}>ADD COIN</h5>
 			</div>
 		</div>
 	</div>

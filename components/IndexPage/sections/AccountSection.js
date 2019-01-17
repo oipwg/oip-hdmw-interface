@@ -11,34 +11,31 @@ const AccountSection = (props) => {
 	for (let i = 0; i < state.numOfAccountsToShow; i++) {
 		accounts.push(coin.getAccount(i))
 	}
+	const selectedAccountStyle = (i) => {
+		if ((i === state.activeAccountIndex) && state.numOfAccountsToShow !== 1) {
+			return {
+				fontSize: '23px'
+			}
+		}
+	}
 	return (
 		<div className={classes.sectionAccounts}>
 			{accounts.map((account, i) => {
 				return (
-					<Card key={i} className={classes.coinCard}>
-						<ButtonBase className={classes.cardButtonBase} onClick={() => {
-							fn.handleAccountCardClick(account, i)
-						}}>
-							<CardContent>
-								<Typography className={classes.coinTypography}>
-									Account {i + 1}
-								</Typography>
-							</CardContent>
-						</ButtonBase>
-					</Card>
+					<span
+						onClick={() => fn.handleAccountClick(account, i)}
+						className={classes.accountNumber}
+						style={selectedAccountStyle(i)}
+					>
+						{i + 1}
+					</span>
 				)
 			})}
-			<Card className={`${classes.coinCard}`}>
-				<ButtonBase className={classes.cardButtonBase} onClick={() => {
-					fn.handleAddAccount()
-				}}>
-					<CardContent>
-						<Typography className={classes.extraCoinTypography}>
-							+
-						</Typography>
-					</CardContent>
-				</ButtonBase>
-			</Card>
+			<span
+				onClick={() => {fn.handleAddAccount()}}
+				className={classes.addAccountButton}>
+				+
+			</span>
 		</div>
 	)
 }

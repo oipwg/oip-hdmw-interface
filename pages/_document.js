@@ -45,6 +45,9 @@ class MyDocument extends Document {
                 opacity: 0.75;
                 cursor: pointer
               }
+              span {
+                cursor: default;
+              }
               blockquote {
                 padding: 0 1em;
                 color: #555;

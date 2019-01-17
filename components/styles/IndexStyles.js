@@ -1,44 +1,5 @@
 const getStyles = (theme) => {
 	
-	
-	const addressSection = {
-		sectionAddresses: {
-			width: '40%',
-			flexDirection: 'column',
-			overflowY: 'auto',
-			// backgroundColor: 'blue',
-			// [theme.breakpoints.down('sm')]: {
-			// 	display: 'flex',
-			// 	width: '100%',
-			// 	// order: '3',
-			//
-			// },
-		},
-		rootTable: {
-			width: '100%',
-			overflowX: 'auto',
-		},
-		table: {
-			minWidth: 700,
-		},
-	}
-	
-	const accountSection = {
-		sectionAccounts: {
-			width: '10%',
-			flexDirection: 'column',
-			overflowY: 'auto',
-			// backgroundColor: 'green',
-			// [theme.breakpoints.down('sm')]: {
-			// 	display: 'flex',
-			// 	flexDirection: 'row',
-			// 	width: '100%',
-			// 	height: '10%',
-			// 	overflowX: 'auto'
-			// },
-		},
-	}
-	
 	const txSection = {
 		sectionTX: {
 			width: '30%',
@@ -55,12 +16,109 @@ const getStyles = (theme) => {
 		},
 	}
 	
+	const addressSection = {
+		addressContainer: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 0%',
+			overflowY: 'auto',
+		},
+		addressRow: {
+			display: 'flex',
+			flexDirection: 'row',
+			borderBottom: '1px solid rgb(218, 225, 233)',
+			padding: '20px 20px',
+		}
+	}
+	const accountSection = {
+		sectionAccounts: {
+			alignItems: 'center',
+		},
+		accountNumber: {
+			fontWeight: 'bold',
+			fontSize: '20px',
+			padding: '0px 20px',
+			cursor: 'pointer',
+			textDecoration: 'none',
+		},
+		accountSelected: {
+			fontSize: '23px',
+		},
+		addAccountButton: {
+			cursor: 'pointer',
+			textDecoration: 'none',
+		},
+	}
+	
+	const detailsHeader = {
+		detailsHeader: {
+			display: 'flex',
+			flexDirection: 'row',
+			flex: '0 0 50px',
+			// backgroundColor: 'green',
+			justifyContent: 'flex-start',
+			alignItems: 'center',
+			padding: '0px 16px 0px 24px',
+			borderBottom: '1px solid rgb(218, 225, 233)',
+		},
+		headerLink: {
+			fontWeight: 'bold',
+			padding: '0px 10px'
+		},
+		detailsSearch: {
+			marginLeft: 'auto',
+		},
+	}
+	
+	const detailsBody = {
+		detailsBody: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 auto',
+			// backgroundColor: 'blue',
+		},
+		detailsContainer: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 0%',
+			padding: '0px 24px',
+		},
+		detailsLayout: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 0%',
+			borderRight: '1px solid rgb(218, 225, 233)',
+			borderLeft: '1px solid rgb(218, 225, 233)',
+			backgroundColor: 'white',
+		},
+		
+	}
+	
+	const detailsFooter = {
+		detailsFooter: {
+			display: 'flex',
+			flexDirection: 'row',
+			flex: '0 0 50px',
+			// backgroundColor: 'red',
+			justifyContent: 'flex-start',
+			alignItems: 'center',
+			padding: '0px 16px 0px 24px',
+			borderTop: '1px solid rgb(218, 225, 233)',
+		},
+		accountsTitle: {
+			fontWeight: 'bold',
+			padding: '0px 10px',
+			marginLeft: 'auto',
+			cursor: 'default'
+		},
+	}
+	
 	const detailsWrapper = {
 		detailsWrapper: {
 			display: 'flex',
 			flexDirection: 'column',
 			flex: '1 1 auto',
-			backgroundColor: 'yellow',
+			// backgroundColor: 'yellow',
 		},
 	}
 	
@@ -77,7 +135,7 @@ const getStyles = (theme) => {
 		coinList: {
 			display: 'flex',
 			flexDirection: 'column',
-			overflowY: 'scroll',
+			// overflowY: 'scroll',
 			// flex: '1 1 auto'
 		},
 		MuiCardRoot: {
@@ -97,7 +155,7 @@ const getStyles = (theme) => {
 			borderBottom: '1px solid rgb(218, 225, 233)',
 		},
 		cardSpace: {
-			backgroundColor: 'white',
+			// backgroundColor: 'white',
 			display: 'flex',
 			flexDirection: 'column',
 			flex: '1 1 auto',
@@ -114,9 +172,6 @@ const getStyles = (theme) => {
 			alignItems: 'center',
 			backgroundColor: 'white',
 			
-		},
-		addCoinTyp: {
-			fontWeight: 'bold'
 		},
 	}
 	
@@ -189,6 +244,9 @@ const getStyles = (theme) => {
 		...sectionWrapper,
 		...coinSection,
 		...detailsWrapper,
+		...detailsHeader,
+		...detailsBody,
+		...detailsFooter,
 		...accountSection,
 		...addressSection,
 		...txSection,
