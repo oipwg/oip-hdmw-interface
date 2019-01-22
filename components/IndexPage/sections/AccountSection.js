@@ -23,6 +23,7 @@ const AccountSection = (props) => {
 			{accounts.map((account, i) => {
 				return (
 					<span
+						key={i}
 						onClick={() => fn.handleAccountClick(account, i)}
 						className={classes.accountNumber}
 						style={selectedAccountStyle(i)}
