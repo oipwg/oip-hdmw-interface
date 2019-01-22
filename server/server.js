@@ -1,6 +1,7 @@
 import express from 'express'
 import next from 'next';
 import helmet from 'helmet'
+require('dotenv').config()
 
 import logger from './logs'
 import getRootUrl from '../lib/api/getRootUrl'
@@ -14,14 +15,13 @@ const handle = app.getRequestHandler();
 
 const URL_MAP = {
 	// example URL_MAP
-	// '/login': '/public/login',
-	// '/my-endpoint': '/folder/my-endpoint',
+	'/load': '/public/load'
 };
 
 app.prepare().then(() => {
 	const server = express()
 	server.use(helmet())
-
+	
 	server.get('*', (req, res) => {
 		const url = URL_MAP[req.path];
 		if (url) {
