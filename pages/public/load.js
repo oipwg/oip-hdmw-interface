@@ -33,7 +33,7 @@ let LoadWarning = (props) => {
 					variant={'contained'}
 					color={'primary'}
 					onClick={() => {
-						_api_loadMnemonic(mnemonic).then().catch()
+						//
 					}}
 				>I understand</Button>
 			</Link>
