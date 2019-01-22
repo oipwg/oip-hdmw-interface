@@ -6,7 +6,7 @@ const Wallet = (state = initialState, action) => {
 	switch (action.type) {
 		case actions.LOAD_WALLET:
 			return {
-				...state, wallet: new HDMW(action.mnemonic)
+				...state, wallet: new HDMW(action.mnemonic, {discover: false})
 			}
 		default:
 			return state
