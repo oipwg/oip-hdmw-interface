@@ -130,6 +130,13 @@ class Index extends React.Component {
 	}
 }
 
+Index.getInitialProps = ({ reduxStore, req }) => {
+	const isServer = !!req
+	console.log('Index.getInitialProps', isServer, reduxStore)
+	
+	return {}
+}
+
 Index.propTypes = {
 	classes: PropTypes.object.isRequired,
 };

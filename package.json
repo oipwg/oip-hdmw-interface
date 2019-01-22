@@ -25,6 +25,10 @@
     "react": "^16.8.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1",
     "react-jss": "^8.6.1",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.7",
+    "redux-thunk": "^2.3.0",
     "winston": "^3.1.0"
   },
   "devDependencies": {
@@ -33,6 +37,7 @@
     "@babel/preset-env": "^7.2.3",
     "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "redux-logger": "^3.0.6"
   }
 }
