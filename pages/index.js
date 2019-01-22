@@ -130,9 +130,11 @@ class Index extends React.Component {
 	}
 }
 
-Index.getInitialProps = ({ reduxStore, req }) => {
-	const isServer = !!req
-	console.log('Index.getInitialProps', isServer, reduxStore)
+Index.getInitialProps = ({reduxStore, res}) => {
+	const state = reduxStore.getState()
+	if (!state.wallet) {
+		res.redirect('/load')
+	}
 	
 	return {}
 }
