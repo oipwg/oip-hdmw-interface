@@ -12,11 +12,12 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import LoadFormStyles from '../styles/LoadFormStyles'
-import LoadWarningModalStyles from '../styles/LoadWarningModalStyles'
+import withLayout from '../../lib/withLayout'
+import LoadFormStyles from '../../components/styles/LoadFormStyles'
+import LoadWarningModalStyles from '../../components/styles/LoadWarningModalStyles'
 
 let LoadWarning = (props) => {
-	const {open, classes, loadWallet, mnemonic, setLoadWarning} = props
+	const {open, classes, mnemonic, setLoadWarning} = props
 	
 	return <Modal open={open} className={classes.modal}>
 		<Paper className={`${classes.paper}`} >
@@ -26,18 +27,19 @@ let LoadWarning = (props) => {
 				Store it, save it, hide it, but do not forget it. It is your wallet.
 			</Typography>
 			<Typography color="error" align={'center'} paragraph={true} className={classes.mnemonicTyp}>{mnemonic}</Typography>
-			<Button
-				className={`${classes.continueButtons} ${classes.continueButton}`}
-				variant={'contained'} color={'primary'}
-				onClick={(e) => {
-					e.preventDefault()
-					loadWallet(mnemonic)
-				}}>
-				I Understand
-			</Button>
+			<Link href={{pathname: '/', query:{mnemonic}}} passHref>
+				<Button
+					className={`${classes.continueButtons} ${classes.continueButton}`}
+					variant={'contained'}
+					color={'primary'}
+					onClick={() => {
+						_api_loadMnemonic(mnemonic).then().catch()
+					}}
+				>I understand</Button>
+			</Link>
 			<Button
 				className={`${classes.continueButtons} ${classes.cancelButton}`}
-				variant={'contained'} color={'error'}
+				variant={'contained'}
 				onClick={(e) => {
 					e.preventDefault()
 					setLoadWarning(false)
@@ -53,7 +55,7 @@ LoadWarning = withStyles(LoadWarningModalStyles)(LoadWarning)
 
 function LoadForm(props) {
 	const {classes, loadWallet} = props
-
+	
 	const [mnemonic, setMnemonic] = useState('');
 	const [displayLoadWarning, setLoadWarning] = useState(false)
 	
@@ -128,4 +130,4 @@ LoadForm.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(LoadFormStyles)(LoadForm)
+export default withLayout(withStyles(LoadFormStyles)(LoadForm))
