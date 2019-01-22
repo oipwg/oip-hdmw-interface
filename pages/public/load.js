@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
+import Head from 'next/head';
+import Router from 'next/router'
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Wallet, util} from 'oip-hdmw'
 import Button from '@material-ui/core/Button';
@@ -12,12 +15,16 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+//hocs
 import withLayout from '../../lib/withLayout'
+//styles
 import LoadFormStyles from '../../components/styles/LoadFormStyles'
 import LoadWarningModalStyles from '../../components/styles/LoadWarningModalStyles'
+//actions
+import {loadWallet} from '../../redux/actions/Wallet'
 
 let LoadWarning = (props) => {
-	const {open, classes, mnemonic, setLoadWarning} = props
+	const {open, classes, mnemonic, setLoadWarning, loadWallet} = props
 	
 	return <Modal open={open} className={classes.modal}>
 		<Paper className={`${classes.paper}`} >
@@ -27,13 +34,13 @@ let LoadWarning = (props) => {
 				Store it, save it, hide it, but do not forget it. It is your wallet.
 			</Typography>
 			<Typography color="error" align={'center'} paragraph={true} className={classes.mnemonicTyp}>{mnemonic}</Typography>
-			<Link href={{pathname: '/', query:{mnemonic}}} passHref>
+			<Link href='/'>
 				<Button
 					className={`${classes.continueButtons} ${classes.continueButton}`}
 					variant={'contained'}
 					color={'primary'}
 					onClick={() => {
-						//
+						loadWallet(mnemonic)
 					}}
 				>I understand</Button>
 			</Link>
@@ -51,10 +58,18 @@ let LoadWarning = (props) => {
 	</Modal>
 }
 
-LoadWarning = withStyles(LoadWarningModalStyles)(LoadWarning)
+const mapDispatchToProps = {
+	loadWallet
+}
+
+LoadWarning = connect(undefined, mapDispatchToProps)(withStyles(LoadWarningModalStyles)(LoadWarning))
 
 function LoadForm(props) {
-	const {classes, loadWallet} = props
+	const {classes, wallet} = props
+	
+	if (wallet) {
+		Router.push('/')
+	}
 	
 	const [mnemonic, setMnemonic] = useState('');
 	const [displayLoadWarning, setLoadWarning] = useState(false)
@@ -70,6 +85,10 @@ function LoadForm(props) {
 	
 	return (
 		<main className={classes.main}>
+			<Head>
+				<title>oip-hdmw</title>
+				<meta name="description" content="load a bip 44 hdmw (hierarchical deterministic multi-wallet) from open index protocol (OIP)"/>
+			</Head>
 			<Paper className={classes.paper}>
 				<Lock className={classes.lockIcon}/>
 				<Typography component="h1" variant="h5" align={'center'}>
@@ -124,6 +143,14 @@ function LoadForm(props) {
 			</Paper>
 		</main>
 	);
+}
+
+LoadForm.getInitialProps = async ({reduxStore}) => {
+	const state = reduxStore.getState()
+	if (state.Wallet && state.Wallet.wallet) {
+		return {wallet: state.Wallet.wallet}
+	}
+	return {}
 }
 
 LoadForm.propTypes = {
