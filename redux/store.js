@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
-import {WalletReducer} from './reducers'
+import {Wallet} from './reducers'
 
 export const initialState = {
 	wallet: undefined,
@@ -22,7 +22,7 @@ export const initialState = {
 
 // Create our Store
 const createStoreFn = (initialState = initialState) => {
-	const reducers = {WalletReducer}
+	const reducers = {Wallet}
 	
 	// Create the logger to log Actions to the console
 	const logger = createLogger({
