@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 
-const AccountSection = (props) => {
+const Accounts = (props) => {
 	const {classes, state, wallet, fn} = props
 	let coin = wallet.getCoin(state.activeCoinName)
 	let accounts = []
@@ -41,4 +41,4 @@ const AccountSection = (props) => {
 	)
 }
 
-export default AccountSection
+export default Accounts

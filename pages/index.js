@@ -7,8 +7,6 @@ import {withTheme, withStyles} from '@material-ui/core/styles';
 //styles
 import withLayout from '../lib/withLayout';
 import IndexStyles from '../components/styles/IndexStyles'
-//initial load page
-import LoadForm from '../components/IndexPage/LoadForm'
 //wallet
 import RenderWallet from '../components/IndexPage/Wallet'
 
@@ -89,7 +87,7 @@ class Index extends React.Component {
 	}
 	
 	renderWallet = (classes) => {
-		let props = {
+		let cops = {
 			classes,
 			wallet: this.Wallet,
 			state: this.state,
@@ -101,19 +99,7 @@ class Index extends React.Component {
 				setDetailsView: this.setDetailsView,
 			}
 		}
-		return RenderWallet(props)
-	}
-
-	renderIntro = () => {
-		return <LoadForm loadWallet={this.loadWallet} />
-	}
-
-	renderPage = (classes) => {
-		if (this.state.walletLoaded) {
-			return this.renderWallet(classes)
-		} else {
-			return this.renderIntro()
-		}
+		return <RenderWallet classes={cops.classes} wallet={cops.wallet} fn={cops.fn} state={cops.state}/>
 	}
 
 	render() {
@@ -124,7 +110,7 @@ class Index extends React.Component {
 					<title>OIP-HDMW</title>
 					<meta name="description" content="Open Index Protocol HD Multi Wallet"/>
 				</Head>
-				{this.renderPage(classes)}
+				{this.renderWallet(classes)}
 			</div>
 		)
 	}

@@ -30,6 +30,7 @@ const getStyles = (theme) => {
 			padding: '20px 20px',
 		}
 	}
+	
 	const accountSection = {
 		sectionAccounts: {
 			alignItems: 'center',

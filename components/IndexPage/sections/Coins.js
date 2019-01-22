@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import {withTheme} from '@material-ui/core/styles';
 
-const CoinSection = (props) => {
+const Coins = (props) => {
 	const {classes, wallet, state, fn, theme} = props
 	
 	const selectedCoinBorder = (coin) => {
@@ -40,4 +40,4 @@ const CoinSection = (props) => {
 	</div>
 }
 
-export default withTheme()(CoinSection);
+export default withTheme()(Coins);
