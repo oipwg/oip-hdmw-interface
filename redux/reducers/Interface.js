@@ -42,7 +42,7 @@ const Interface = (state = initialState, action) => {
 			return {
 				...state, activeAddressIndex: action.activeAddressIndex,
 			}
-		case actions.INCREASE_NUM_OF_ACCOUNTS:
+		case actions.INCREASE_ACCOUNT_COUNT:
 			return {
 				...state,
 				[state.activeCoinName]: {...state[state.activeCoinName], accounts: state[state.activeCoinName].accounts + action.count}
