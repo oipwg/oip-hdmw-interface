@@ -17,8 +17,8 @@ import {
 	setActiveAddressIndex,
 	setActiveChainIndex,
 	setActiveCoin,
-	increaseNumOfAccounts,
-	increaseNumOfAddresses,
+	increaseAccountCount,
+	increaseAddressCount,
 } from '../redux/actions/Interface'
 
 class Index extends React.Component {
@@ -36,8 +36,8 @@ class Index extends React.Component {
 			setActiveAddressIndex,
 			setActiveChainIndex,
 			setActiveCoin,
-			increaseNumOfAccounts,
-			increaseNumOfAddresses,
+			increaseAccountCount,
+			increaseAddressCount,
 			Interface
 		} = this.props
 		
@@ -47,8 +47,8 @@ class Index extends React.Component {
 			setActiveAddressIndex,
 			setActiveChainIndex,
 			setActiveCoin,
-			increaseNumOfAccounts,
-			increaseNumOfAddresses,
+			increaseAccountCount,
+			increaseAddressCount,
 		}
 		
 		return (
@@ -70,8 +70,8 @@ const mapDispatchToProps = {
 	setActiveAddressIndex,
 	setActiveChainIndex,
 	setActiveCoin,
-	increaseNumOfAccounts,
-	increaseNumOfAddresses,
+	increaseAccountCount,
+	increaseAddressCount,
 }
 
 const mapStateToProps = (state) => {
@@ -100,8 +100,8 @@ Index.propTypes = {
 	setActiveAddressIndex: PropTypes.func.isRequired,
 	setActiveChainIndex: PropTypes.func.isRequired,
 	setActiveCoin: PropTypes.func.isRequired,
-	increaseNumOfAccounts: PropTypes.func.isRequired,
-	increaseNumOfAddresses: PropTypes.func.isRequired,
+	increaseAccountCount: PropTypes.func.isRequired,
+	increaseAddressCount: PropTypes.func.isRequired,
 };
 
 let component = withStyles(InterfaceStyles)(Index) //jss-css

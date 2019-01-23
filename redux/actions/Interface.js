@@ -41,16 +41,16 @@ export const setActiveAddressIndex = (activeAddressIndex) => ({
 	activeAddressIndex
 })
 
-export const INCREASE_NUM_OF_ACCOUNTS = 'INCREASE_NUM_OF_ACCOUNTS'
-export const increaseNumOfAccounts = (i = 1) => ({
-	type: INCREASE_NUM_OF_ACCOUNTS,
+export const INCREASE_ACCOUNT_COUNT = 'INCREASE_ACCOUNT_COUNT'
+export const increaseAccountCount = (i = 1) => ({
+	type: INCREASE_ACCOUNT_COUNT,
 	numOfAccountsToShow: i
 })
 
-export const INCREASE_NUM_OF_ADDRESSES = 'INCREASE_NUM_OF_ADDRESSES'
-export const increaseNumOfAddresses = (i = 1) => ({
-	type: INCREASE_NUM_OF_ADDRESSES,
-	numOfAddressesToShow: i
+export const INCREASE_ADDRESS_COUNT = 'INCREASE_ADDRESS_COUNT'
+export const increaseAddressCount = (i = 1) => ({
+	type: INCREASE_ADDRESS_COUNT,
+	count: i
 })
 
 

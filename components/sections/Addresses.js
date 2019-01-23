@@ -1,16 +1,20 @@
 import React from 'react'
 import ClipboardJS from 'clipboard'
 import {FileCopy} from "@material-ui/icons";
+import {increaseAddressCount} from "../../redux/actions/Interface";
 
 const Addresses = (props) => {
 	// console.log('Addresses()')
 	const {classes, Interface, actions} = props
 	
+	const activeCoin = Interface.activeCoinName
+	const coinProperties = Interface[activeCoin]
+	
 	let addresses = []
-	let coin = Interface.Coin ? Interface.Coin : Interface.wallet.getCoin(Interface.activeCoinName)
-	let account = coin.getAccount(Interface.activeAccountIndex)
-	for (let i = 0; i < Interface.numOfAddressesToShow; i++) {
-		addresses.push(account.getAddress(Interface.activeChainIndex, i))
+	let Coin = Interface.wallet.getCoin(activeCoin)
+	let Account = Coin.getAccount(Interface.activeAccountIndex)
+	for (let i = 0; i < coinProperties.addresses; i++) {
+		addresses.push(Account.getAddress(Interface.activeChainIndex, i))
 	}
 	// for (let addr of addresses) {
 	// 	console.log(addr.getPublicAddress())
@@ -28,6 +32,7 @@ const Addresses = (props) => {
 							onClick={() => {
 								let sel = window.getSelection()
 								sel.empty()
+								actions.increaseAddressCount()
 							}}/>
 					</div>
 				))}

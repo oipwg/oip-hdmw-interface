@@ -2,6 +2,9 @@ import {Wallet as HDMW} from 'oip-hdmw'
 import {InterfaceActions as actions} from '../actions'
 import {initialState} from '../store'
 
+const _accounts = '_accounts';
+const _addresses = '_addresses';
+
 const Interface = (state = initialState, action) => {
 	switch (action.type) {
 		case actions.LOAD_WALLET:
@@ -41,11 +44,14 @@ const Interface = (state = initialState, action) => {
 			}
 		case actions.INCREASE_NUM_OF_ACCOUNTS:
 			return {
-				...state, numOfAccountsToShow: state.numOfAccountsToShow + action.numOfAccountsToShow
+				...state,
+				[state.activeCoinName]: {...state[state.activeCoinName], accounts: state[state.activeCoinName].accounts + action.count}
 			}
-		case actions.INCREASE_NUM_OF_ADDRESSES:
+		case actions.INCREASE_ADDRESS_COUNT:
 			return {
-				...state, numOfAddressesToShow: state.numOfAddressesToShow + action.numOfAddressesToShow
+				...state,
+				[state.activeCoinName]: {...state[state.activeCoinName], addresses: state[state.activeCoinName].addresses + action.count}
+				
 			}
 		default:
 			return state
