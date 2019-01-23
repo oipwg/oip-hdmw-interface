@@ -1,5 +1,5 @@
-import Wallet from './Wallet'
+import Interface from './Interface'
 
 export {
-	Wallet
+	Interface
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import {Wallet} from 'oip-hdmw'
+import {connect} from 'react-redux'
 import {withTheme, withStyles} from '@material-ui/core/styles';
 
 //styles
@@ -9,6 +10,8 @@ import withLayout from '../lib/withLayout';
 import IndexStyles from '../components/styles/IndexStyles'
 //wallet
 import RenderWallet from '../components/IndexPage/Wallet'
+//actions/thunks
+import {fetchAndSetBalances} from '../redux/actions/Interface'
 
 class Index extends React.Component {
 	constructor(props) {
@@ -36,7 +39,12 @@ class Index extends React.Component {
 			detailsView: 'addresses',
 		}
 	}
-
+	
+	componentDidMount() {
+		console.log('Index.componentDidMount')
+		this.props.fetchAndSetBalances()
+	}
+	
 	handleCoinCardClick = (coin) => {
 		let Coin = this.Wallet.getCoin(coin)
 		let resetAccountIndex = 0
@@ -116,21 +124,28 @@ class Index extends React.Component {
 	}
 }
 
+const mapDispatchToProps = {
+	fetchAndSetBalances
+}
+
 Index.getInitialProps = ({reduxStore, res}) => {
+	console.log('Index.getInitialProps')
 	const state = reduxStore.getState()
-	if (!state.wallet) {
+	const {Interface} = state //state.Wallet is a default property
+	if (res && !Interface.wallet) {
 		res.redirect('/load')
 	}
 	
-	return {}
+	return {Interface}
 }
 
 Index.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
 
-let component = withStyles(IndexStyles)(Index)
-component = withTheme()(component)
-component = withLayout(component)
+let component = withStyles(IndexStyles)(Index) //jss-css
+component = withTheme()(component) //jss-css
+component = withLayout(component) //hoc
+component = connect(undefined, mapDispatchToProps)(component) //redux
 
 export default component

@@ -21,7 +21,7 @@ import withLayout from '../../lib/withLayout'
 import LoadFormStyles from '../../components/styles/LoadFormStyles'
 import LoadWarningModalStyles from '../../components/styles/LoadWarningModalStyles'
 //actions
-import {loadWallet} from '../../redux/actions/Wallet'
+import {loadWallet} from '../../redux/actions/Interface'
 
 let LoadWarning = (props) => {
 	const {open, classes, mnemonic, setLoadWarning, loadWallet} = props
@@ -146,9 +146,10 @@ function LoadForm(props) {
 }
 
 LoadForm.getInitialProps = async ({reduxStore}) => {
+	console.log('LoadForm.getInitialProps')
 	const state = reduxStore.getState()
-	if (state.Wallet && state.Wallet.wallet) {
-		return {wallet: state.Wallet.wallet}
+	if (state.Interface && state.Interface.wallet) {
+		return {wallet: state.Interface.wallet}
 	}
 	return {}
 }

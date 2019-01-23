@@ -1,5 +1,5 @@
-import * as WalletActions from './Wallet'
+import * as InterfaceActions from './Interface'
 
 export {
-	WalletActions
+	InterfaceActions
 }
