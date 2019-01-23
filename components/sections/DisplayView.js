@@ -7,12 +7,21 @@ import RenderCoinSection from './Coins'
 const DisplayView = (props) => {
 	const {actions, classes, Interface} = props
 	
-	const renderDetailsBody = () => {
-		return Interface.detailView === 'addresses' ? RenderAddressSection(props) : null
+	const renderDisplayBody = () => {
+		switch (Interface.displayView) {
+			case 'addresses':
+				return RenderAddressSection(props)
+			case 'transactions':
+				break
+			case 'send':
+				break
+			default:
+				return 'Invalid Display View'
+		}
 	}
 	
 	const getActiveViewStyle = (view) => {
-		if (view === Interface.detailView) {
+		if (view === Interface.displayView) {
 			return {
 				fontWeight: 'bold',
 			}
@@ -23,22 +32,22 @@ const DisplayView = (props) => {
 		<div className={classes.detailsHeader}>
 			<span
 				style={getActiveViewStyle('addresses')}
-				onClick={() => actions.setDetailView('addresses')}
+				onClick={() => actions.setDisplayView('addresses')}
 				className={classes.viewLink}>Addresses
 			</span>
 			<span
 				style={getActiveViewStyle('transactions')}
-				onClick={() => actions.setDetailView('transactions')}
+				onClick={() => actions.setDisplayView('transactions')}
 				className={classes.viewLink}>Transactions
 			</span>
 			<div className={classes.detailsSearch}>
 			
 			</div>
 		</div>
-		<div className={classes.detailsBody}>
-			<div className={classes.detailsContainer}>
-				<div className={classes.detailsLayout}>
-					{renderDetailsBody()}
+		<div className={classes.displayWrapper}>
+			<div className={classes.displayContainer}>
+				<div className={classes.displayLayout}>
+					{renderDisplayBody()}
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,10 @@ import React from "react";
 import Paper from '@material-ui/core/Paper'
 import {Send} from '@material-ui/icons'
 
+import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+
 import RenderCoinSection from './sections/Coins'
 import RenderDisplayView from './sections/DisplayView'
 
@@ -13,10 +17,10 @@ class WalletInterface extends React.Component {
 			detailsSearchValue: '',
 		}
 	}
-	
+
 	render() {
 		// console.log('WalletInterface.render')
-		const {classes} = this.props;
+		const {classes, actions} = this.props;
 		
 		return (
 			<div className={classes.walletContainer}>
@@ -27,7 +31,7 @@ class WalletInterface extends React.Component {
 								<span>Balance: $0.00</span>
 							</h4>
 							
-							<Send onClick={() => {console.log('SEND')}}/>
+							<Send onClick={() => {actions.setDisplayView('send')}}/>
 						</div>
 						<div className={classes.sectionWrapper}>
 							<RenderCoinSection {...this.props} />

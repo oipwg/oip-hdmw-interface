@@ -82,20 +82,20 @@ const getStyles = (theme) => {
 		},
 	}
 	
-	const detailsBody = {
-		detailsBody: {
+	const displayBody = {
+		displayWrapper: {
 			display: 'flex',
 			flexDirection: 'column',
 			flex: '1 1 auto',
 			// backgroundColor: 'blue',
 		},
-		detailsContainer: {
+		displayContainer: {
 			display: 'flex',
 			flexDirection: 'column',
 			flex: '1 1 0%',
 			padding: '0px 24px',
 		},
-		detailsLayout: {
+		displayLayout: {
 			display: 'flex',
 			flexDirection: 'column',
 			flex: '1 1 0%',
@@ -208,6 +208,16 @@ const getStyles = (theme) => {
 			color: theme.palette.primary.main,
 			alignItems: 'center',
 			justifyContent: 'space-between'
+		},
+		sendModal: {
+			position: 'relative',
+			margin: 'auto',
+			top: '20%',
+			width: theme.spacing.unit * 50,
+			backgroundColor: theme.palette.background.paper,
+			boxShadow: theme.shadows[5],
+			padding: theme.spacing.unit * 4,
+			outline: 'none',
 		}
 	}
 	
@@ -258,7 +268,7 @@ const getStyles = (theme) => {
 		...coinSection,
 		...detailsWrapper,
 		...detailsHeader,
-		...detailsBody,
+		...displayBody,
 		...detailsFooter,
 		...accountSection,
 		...addressSection,
