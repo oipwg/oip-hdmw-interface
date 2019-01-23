@@ -45,7 +45,7 @@ const Interface = (state = initialState, action) => {
 			}
 		case actions.INCREASE_NUM_OF_ADDRESSES:
 			return {
-				...state, numOfAddressesToShow: state.numOfAccountsToShow + action.numOfAddressesToShow
+				...state, numOfAddressesToShow: state.numOfAddressesToShow + action.numOfAddressesToShow
 			}
 		default:
 			return state
