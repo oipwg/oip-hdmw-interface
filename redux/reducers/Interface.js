@@ -2,9 +2,6 @@ import {Wallet as HDMW} from 'oip-hdmw'
 import {InterfaceActions as actions} from '../actions'
 import {initialState} from '../store'
 
-const _accounts = '_accounts';
-const _addresses = '_addresses';
-
 const Interface = (state = initialState, action) => {
 	switch (action.type) {
 		case actions.LOAD_WALLET:
@@ -25,22 +22,22 @@ const Interface = (state = initialState, action) => {
 		case actions.SET_ACTIVE_COIN:
 			return {
 				...state,
-				activeCoinName: action.activeCoin,
-				activeAccountIndex: 0,
-				activeChainIndex: 0,
-				activeAddressIndex: 0,
+				activeCoinName: action.coin,
 			}
 		case actions.SET_ACTIVE_ACCOUNT_INDEX:
 			return {
-				...state, activeAccountIndex: action.activeAccountIndex,
+				...state,
+				[state.activeCoinName]: {...state[state.activeCoinName], activeAccount: action.index},
 			}
 		case actions.SET_ACTIVE_CHAIN_INDEX:
 			return {
-				...state, activeChainIndex: action.activeChainIndex,
+				...state,
+				[state.activeCoinName]: {...state[state.activeCoinName], activeChain: action.index}
 			}
 		case actions.SET_ACTIVE_ADDRESS_INDEX:
 			return {
-				...state, activeAddressIndex: action.activeAddressIndex,
+				...state,
+				[state.activeCoinName]: {...state[state.activeCoinName], activeAddress: action.index}
 			}
 		case actions.INCREASE_ACCOUNT_COUNT:
 			return {

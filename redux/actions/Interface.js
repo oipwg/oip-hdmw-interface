@@ -18,27 +18,27 @@ export const setDetailView = (detailView) => ({
 })
 
 export const SET_ACTIVE_COIN = 'SET_ACTIVE_COIN'
-export const setActiveCoin = (activeCoin) => ({
+export const setActiveCoin = (coin) => ({
 	type: SET_ACTIVE_COIN,
-	activeCoin
+	coin
 })
 
 export const SET_ACTIVE_ACCOUNT_INDEX = 'SET_ACTIVE_ACCOUNT_INDEX'
-export const setActiveAccountIndex = (activeAccountIndex) => ({
+export const setActiveAccountIndex = (index) => ({
 	type: SET_ACTIVE_ACCOUNT_INDEX,
-	activeAccountIndex
+	index
 })
 
 export const SET_ACTIVE_CHAIN_INDEX = 'SET_ACTIVE_CHAIN_INDEX'
-export const setActiveChainIndex = (activeChainIndex) => ({
+export const setActiveChainIndex = (index) => ({
 	type: SET_ACTIVE_CHAIN_INDEX,
-	activeChainIndex
+	index
 })
 
 export const SET_ACTIVE_ADDRESS_INDEX = 'SET_ACTIVE_ADDRESS_INDEX'
-export const setActiveAddressIndex = (activeAddressIndex) => ({
+export const setActiveAddressIndex = (index) => ({
 	type: SET_ACTIVE_ADDRESS_INDEX,
-	activeAddressIndex
+	index
 })
 
 export const INCREASE_ACCOUNT_COUNT = 'INCREASE_ACCOUNT_COUNT'

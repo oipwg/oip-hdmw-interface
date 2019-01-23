@@ -9,12 +9,15 @@ const Addresses = (props) => {
 	
 	const activeCoin = Interface.activeCoinName
 	const coinProperties = Interface[activeCoin]
+	console.log('activeCoin: ', activeCoin)
+	console.log('coinProperties: ', coinProperties)
+	
 	
 	let addresses = []
 	let Coin = Interface.wallet.getCoin(activeCoin)
-	let Account = Coin.getAccount(Interface.activeAccountIndex)
+	let Account = Coin.getAccount(coinProperties.activeAccount)
 	for (let i = 0; i < coinProperties.addresses; i++) {
-		addresses.push(Account.getAddress(Interface.activeChainIndex, i))
+		addresses.push(Account.getAddress(coinProperties.activeChain, i))
 	}
 	// for (let addr of addresses) {
 	// 	console.log(addr.getPublicAddress())

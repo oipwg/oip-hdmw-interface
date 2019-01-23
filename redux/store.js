@@ -14,22 +14,22 @@ export const initialState = {
 	activeAddressIndex: 0,
 	
 	bitcoin: {
-		addresses: 0,
-		accounts: 0,
+		addresses: 1,
+		accounts: 1,
 		activeAccount: 0,
 		activeChain: 0,
 		activeAddress: 0,
 	},
 	flo: {
-		addresses: 0,
-		accounts: 0,
+		addresses: 1,
+		accounts: 1,
 		activeAccount: 0,
 		activeChain: 0,
 		activeAddress: 0,
 	},
 	litecoin: {
-		addresses: 0,
-		accounts: 0,
+		addresses: 1,
+		accounts: 1,
 		activeAccount: 0,
 		activeChain: 0,
 		activeAddress: 0,
