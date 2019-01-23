@@ -32,7 +32,7 @@ const Addresses = (props) => {
 							onClick={() => {
 								let sel = window.getSelection()
 								sel.empty()
-								actions.increaseAddressCount()
+								// actions.increaseAddressCount()
 							}}/>
 					</div>
 				))}
