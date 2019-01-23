@@ -18,8 +18,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 //hocs
 import withLayout from '../../lib/withLayout'
 //styles
-import LoadFormStyles from '../../components/styles/LoadFormStyles'
-import LoadWarningModalStyles from '../../components/styles/LoadWarningModalStyles'
+import LoadFormStyles from '../../styles/Load'
+import LoadWarningModalStyles from '../../styles/LoadWarningModal'
 //actions
 import {loadWallet} from '../../redux/actions/Interface'
 
@@ -62,6 +62,7 @@ const mapDispatchToProps = {
 	loadWallet
 }
 
+// noinspection JSValidateTypes
 LoadWarning = connect(undefined, mapDispatchToProps)(withStyles(LoadWarningModalStyles)(LoadWarning))
 
 function LoadForm(props) {

@@ -5,7 +5,7 @@ import RenderAccountSection from "./sections/Accounts";
 import RenderAddressSection from "./sections/Addresses"
 import RenderCoinSection from './sections/Coins'
 
-class Wallet extends React.Component {
+class WalletInterface extends React.Component {
 	constructor(props) {
 		super(props)
 		
@@ -15,14 +15,15 @@ class Wallet extends React.Component {
 	}
 	
 	render() {
-		
-		const {classes, state, fn} = this.props;
+		console.log('WalletInterface.render')
+		const {classes, actions, Interface} = this.props;
 		
 		const renderDetailsBody = () => {
-			return state.detailsView === 'addresses' ? RenderAddressSection(this.props) : ''
+			return Interface.detailView === 'addresses' ?  RenderAddressSection(this.props) : null
 		}
+		
 		const getActiveViewStyle = (view) => {
-			if (view === state.detailsView) {
+			if (view === Interface.detailView) {
 				return {
 					fontSize: '18px',
 				}
@@ -44,12 +45,12 @@ class Wallet extends React.Component {
 								<div className={classes.detailsHeader}>
 									<span
 										style={getActiveViewStyle('addresses')}
-										onClick={() => fn.setDetailsView('addresses')}
+										onClick={() => actions.setDetailView('addresses')}
 										className={classes.headerLink}>Addresses
 									</span>
 									<span
 										style={getActiveViewStyle('transactions')}
-										onClick={() => fn.setDetailsView('transactions')}
+										onClick={() => actions.setDetailView('transactions')}
 										className={classes.headerLink}>Transactions
 									</span>
 									<div className={classes.detailsSearch}>
@@ -64,8 +65,8 @@ class Wallet extends React.Component {
 									</div>
 								</div>
 								<div className={classes.detailsFooter}>
-									{RenderAccountSection(this.props)}
-									<span className={classes.accountsTitle}>Accounts</span>
+									{/*{RenderAccountSection(this.props)}*/}
+									{/*<span className={classes.accountsTitle}>Accounts</span>*/}
 								</div>
 							</div>
 						
@@ -79,4 +80,4 @@ class Wallet extends React.Component {
 	}
 }
 
-export default Wallet
+export default WalletInterface

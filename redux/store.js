@@ -17,7 +17,9 @@ export const initialState = {
 	numOfAddressesToShow: 1,
 	
 	displayAddresses: true,
-	displayTransactions: false
+	displayTransactions: false,
+	
+	detailView: 'addresses'
 }
 
 // Create our Store

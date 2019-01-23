@@ -3,20 +3,22 @@ import _ from 'lodash'
 import {withTheme} from '@material-ui/core/styles';
 
 const Coins = (props) => {
-	const {classes, wallet, state, fn, theme} = props
+	console.log('Coins()')
+	const {classes, Interface, actions, theme} = props
 	
 	const selectedCoinBorder = (coin) => {
 		let border = {
 			borderLeft: `1px solid ${theme.palette.primary.main}`,
 			marginTop: '1 px'
 		}
-		
-		return  coin === state.activeCoinName ? border: {}
+		console.log(coin, coin === Interface.activeCoinName)
+		return coin === Interface.activeCoinName ? border: {}
 	}
+	
 	return <div className={classes.coinWrapper}>
 		<div className={classes.coinScrollContainer}>
 			<div className={classes.coinList}>
-				{Object.keys(wallet.getCoins()).map((coin, i) => {
+				{Object.keys(Interface.wallet.getCoins()).map((coin, i) => {
 					return (
 						<div
 							key={i}
@@ -24,7 +26,7 @@ const Coins = (props) => {
 							className={classes.coinContainer}
 							onClick={(e) => {
 								e.preventDefault();
-								fn.handleCoinCardClick(coin)
+								actions.setActiveCoin(coin)
 							}}
 						>
 							<h4 >{_.toUpper(coin)}</h4>
