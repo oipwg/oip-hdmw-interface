@@ -35,7 +35,7 @@ export const setActiveChainIndex = (activeChainIndex) => ({
 	activeChainIndex
 })
 
-export const SET_ACTIVE_ADDRESS_INDEX = 'SET_ACTIVE_CHAIN_INDEX'
+export const SET_ACTIVE_ADDRESS_INDEX = 'SET_ACTIVE_ADDRESS_INDEX'
 export const setActiveAddressIndex = (activeAddressIndex) => ({
 	type: SET_ACTIVE_ADDRESS_INDEX,
 	activeAddressIndex
