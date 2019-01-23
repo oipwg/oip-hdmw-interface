@@ -28,7 +28,7 @@ class Index extends React.Component {
 	}
 	
 	render() {
-		console.log('Index.render')
+		// console.log('Index.render')
 		const {
 			classes,
 			setDetailView,
@@ -81,7 +81,7 @@ const mapStateToProps = (state) => {
 }
 
 Index.getInitialProps = ({reduxStore, res}) => {
-	console.log('Index.getInitialProps')
+	// console.log('Index.getInitialProps')
 	const state = reduxStore.getState()
 	const {Interface} = state //state.Wallet is a default property
 	if (res && !Interface.wallet) {

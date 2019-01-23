@@ -196,6 +196,7 @@ const getStyles = (theme) => {
 			backgroundColor: 'white',
 			color: theme.palette.primary.main,
 			alignItems: 'center',
+			justifyContent: 'space-between'
 		}
 	}
 	

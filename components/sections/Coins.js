@@ -3,7 +3,7 @@ import _ from 'lodash'
 import {withTheme} from '@material-ui/core/styles';
 
 const Coins = (props) => {
-	console.log('Coins()')
+	// console.log('Coins()')
 	const {classes, Interface, actions, theme} = props
 	
 	const selectedCoinBorder = (coin) => {
@@ -11,7 +11,7 @@ const Coins = (props) => {
 			borderLeft: `1px solid ${theme.palette.primary.main}`,
 			marginTop: '1 px'
 		}
-		console.log(coin, coin === Interface.activeCoinName)
+		
 		return coin === Interface.activeCoinName ? border: {}
 	}
 	

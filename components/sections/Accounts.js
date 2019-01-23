@@ -1,7 +1,7 @@
 import React from "react";
 
 const Accounts = (props) => {
-	console.log('Accounts()')
+	// console.log('Accounts()')
 	const {classes, Interface, actions} = props
 	let coin = Interface.wallet.getCoin(Interface.activeCoinName)
 	let accounts = []

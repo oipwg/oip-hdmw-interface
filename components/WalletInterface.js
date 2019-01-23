@@ -1,5 +1,6 @@
 import React from "react";
 import Paper from '@material-ui/core/Paper'
+import {Send} from '@material-ui/icons'
 
 import RenderAccountSection from "./sections/Accounts";
 import RenderAddressSection from "./sections/Addresses"
@@ -15,7 +16,7 @@ class WalletInterface extends React.Component {
 	}
 	
 	render() {
-		console.log('WalletInterface.render')
+		// console.log('WalletInterface.render')
 		const {classes, actions, Interface} = this.props;
 		
 		const renderDetailsBody = () => {
@@ -38,6 +39,8 @@ class WalletInterface extends React.Component {
 							<h4 style={{margin: '0px', fontSize: '18px'}}>
 								<span>Balance: $0.00</span>
 							</h4>
+							
+							<Send onClick={() => {console.log('SEND')}}/>
 						</div>
 						<div className={classes.sectionWrapper}>
 							<RenderCoinSection {...this.props} />

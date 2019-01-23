@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Addresses = (props) => {
-	console.log('Addresses()')
+	// console.log('Addresses()')
 	const {classes, Interface} = props
 	
 	let addresses = []
