@@ -1,6 +1,7 @@
 import React from 'react';
 
 import RenderAddressSection from "./Addresses"
+import RenderSendView from './Send'
 import RenderAccountSection from "./Accounts";
 import RenderCoinSection from './Coins'
 
@@ -14,7 +15,7 @@ const DisplayView = (props) => {
 			case 'transactions':
 				break
 			case 'send':
-				break
+				return <RenderSendView {...props}/>
 			default:
 				return 'Invalid Display View'
 		}

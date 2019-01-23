@@ -27,6 +27,7 @@ const Interface = (state = initialState, action) => {
 			return {
 				...state,
 				activeCoinName: action.coin,
+				displayView: 'addresses',
 			}
 		case actions.SET_ACTIVE_ACCOUNT_INDEX:
 			return {
