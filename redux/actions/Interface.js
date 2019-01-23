@@ -11,6 +11,12 @@ export const setBalances = (balances) => ({
 	balances
 })
 
+export const SET_DISPLAY_VIEW = 'SET_DISPLAY_VIEW'
+export const setDisplayView = (view) => ({
+	type: SET_DISPLAY_VIEW,
+	view
+})
+
 export const SET_DETAIL_VIEW = 'SET_DETAIL_VIEW'
 export const setDetailView = (detailView) => ({
 	type: SET_DETAIL_VIEW,

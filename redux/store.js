@@ -9,9 +9,6 @@ export const initialState = {
 	balances: undefined,
 	
 	activeCoinName: 'bitcoin',
-	activeAccountIndex: 0,
-	activeChainIndex: 0,
-	activeAddressIndex: 0,
 	
 	bitcoin: {
 		addresses: 1,
@@ -38,6 +35,7 @@ export const initialState = {
 	displayAddresses: true,
 	displayTransactions: false,
 	
+	displayView: 'addresses',
 	detailView: 'addresses'
 }
 

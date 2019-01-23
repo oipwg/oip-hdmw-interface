@@ -15,6 +15,10 @@ const Interface = (state = initialState, action) => {
 			return {
 				...state, balances: action.balances,
 			}
+		case actions.SET_DISPLAY_VIEW:
+			return {
+				...state, displayView: action.view,
+			}
 		case actions.SET_DETAIL_VIEW:
 			return {
 				...state, detailView: action.detailView,
