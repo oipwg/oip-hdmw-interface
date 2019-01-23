@@ -26,7 +26,7 @@ class WalletInterface extends React.Component {
 		const getActiveViewStyle = (view) => {
 			if (view === Interface.detailView) {
 				return {
-					fontSize: '18px',
+					fontWeight: 'bold',
 				}
 			}
 		}
@@ -44,17 +44,18 @@ class WalletInterface extends React.Component {
 						</div>
 						<div className={classes.sectionWrapper}>
 							<RenderCoinSection {...this.props} />
+							
 							<div className={classes.detailsWrapper}>
 								<div className={classes.detailsHeader}>
 									<span
 										style={getActiveViewStyle('addresses')}
 										onClick={() => actions.setDetailView('addresses')}
-										className={classes.headerLink}>Addresses
+										className={classes.viewLink}>Addresses
 									</span>
 									<span
 										style={getActiveViewStyle('transactions')}
 										onClick={() => actions.setDetailView('transactions')}
-										className={classes.headerLink}>Transactions
+										className={classes.viewLink}>Transactions
 									</span>
 									<div className={classes.detailsSearch}>
 									

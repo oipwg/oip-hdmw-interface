@@ -73,9 +73,10 @@ const getStyles = (theme) => {
 			padding: '0px 16px 0px 24px',
 			borderBottom: '1px solid rgb(218, 225, 233)',
 		},
-		headerLink: {
-			fontWeight: 'bold',
-			padding: '0px 10px'
+		viewLink: {
+			padding: '0px 10px',
+			color: theme.palette.primary.dark,
+			fontWeight: 600,
 		},
 		detailsSearch: {
 			marginLeft: 'auto',
