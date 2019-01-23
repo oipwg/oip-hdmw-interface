@@ -29,13 +29,16 @@ const getStyles = (theme) => {
 			borderBottom: '1px solid rgb(218, 225, 233)',
 			padding: '20px 20px',
 			justifyContent: 'space-between',
-			minHeight: '50px',
+			alignItems: 'center',
+			minHeight: '65px',
 		},
 		publicAddress: {
-			fontFamily: 'monospace'
+			fontFamily: 'monospace',
+			fontSize: '14px',
 		},
 		copyToClipBoard: {
 			cursor: 'copy',
+			fontSize: '18px',
 		},
 	}
 	
