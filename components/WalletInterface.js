@@ -5,6 +5,7 @@ import {Send} from '@material-ui/icons'
 import RenderAccountSection from "./sections/Accounts";
 import RenderAddressSection from "./sections/Addresses"
 import RenderCoinSection from './sections/Coins'
+import RenderDisplayView from './sections/DisplayView'
 
 class WalletInterface extends React.Component {
 	constructor(props) {
@@ -17,19 +18,7 @@ class WalletInterface extends React.Component {
 	
 	render() {
 		// console.log('WalletInterface.render')
-		const {classes, actions, Interface} = this.props;
-		
-		const renderDetailsBody = () => {
-			return Interface.detailView === 'addresses' ?  RenderAddressSection(this.props) : null
-		}
-		
-		const getActiveViewStyle = (view) => {
-			if (view === Interface.detailView) {
-				return {
-					fontWeight: 'bold',
-				}
-			}
-		}
+		const {classes} = this.props;
 		
 		return (
 			<div className={classes.walletContainer}>
@@ -44,36 +33,7 @@ class WalletInterface extends React.Component {
 						</div>
 						<div className={classes.sectionWrapper}>
 							<RenderCoinSection {...this.props} />
-							
-							<div className={classes.detailsWrapper}>
-								<div className={classes.detailsHeader}>
-									<span
-										style={getActiveViewStyle('addresses')}
-										onClick={() => actions.setDetailView('addresses')}
-										className={classes.viewLink}>Addresses
-									</span>
-									<span
-										style={getActiveViewStyle('transactions')}
-										onClick={() => actions.setDetailView('transactions')}
-										className={classes.viewLink}>Transactions
-									</span>
-									<div className={classes.detailsSearch}>
-									
-									</div>
-								</div>
-								<div className={classes.detailsBody}>
-									<div className={classes.detailsContainer}>
-										<div className={classes.detailsLayout}>
-											{renderDetailsBody()}
-										</div>
-									</div>
-								</div>
-								<div className={classes.detailsFooter}>
-									{/*{RenderAccountSection(this.props)}*/}
-									{/*<span className={classes.accountsTitle}>Accounts</span>*/}
-								</div>
-							</div>
-						
+							{RenderDisplayView(this.props)}
 						</div>
 						{/*{renderAddressSection(props)}*/}
 						{/*{renderTxSection(props)}*/}
