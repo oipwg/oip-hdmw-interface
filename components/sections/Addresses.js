@@ -1,8 +1,10 @@
 import React from 'react'
+import ClipboardJS from 'clipboard'
+import {FileCopy} from "@material-ui/icons";
 
 const Addresses = (props) => {
 	// console.log('Addresses()')
-	const {classes, Interface} = props
+	const {classes, Interface, actions} = props
 	
 	let addresses = []
 	let coin = Interface.Coin ? Interface.Coin : Interface.wallet.getCoin(Interface.activeCoinName)
@@ -13,11 +15,20 @@ const Addresses = (props) => {
 	// for (let addr of addresses) {
 	// 	console.log(addr.getPublicAddress())
 	// }
+	new ClipboardJS('.copy-to-clipboard')
+	
 	return (
 		<div className={classes.addressContainer}>
-				{addresses.map((addr, id) => (
-					<div key={id} className={classes.addressRow}>
-						<span>{addr.getPublicAddress()}</span>
+				{addresses.map((addr, i) => (
+					<div key={i} className={classes.addressRow}>
+						<span id={`id-${i}`} className={classes.publicAddress}>{addr.getPublicAddress()}</span>
+						<FileCopy
+							className={`copy-to-clipboard ${classes.copyToClipBoard}`}
+							data-clipboard-target={`#id-${i}`}
+							onClick={() => {
+								let sel = window.getSelection()
+								sel.empty()
+							}}/>
 					</div>
 				))}
 		</div>

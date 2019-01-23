@@ -28,7 +28,15 @@ const getStyles = (theme) => {
 			flexDirection: 'row',
 			borderBottom: '1px solid rgb(218, 225, 233)',
 			padding: '20px 20px',
-		}
+			justifyContent: 'space-between',
+			minHeight: '50px',
+		},
+		publicAddress: {
+			fontFamily: 'monospace'
+		},
+		copyToClipBoard: {
+			cursor: 'copy',
+		},
 	}
 	
 	const accountSection = {
