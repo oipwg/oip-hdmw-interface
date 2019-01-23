@@ -76,7 +76,6 @@ const getStyles = (theme) => {
 		viewLink: {
 			padding: '0px 10px',
 			color: theme.palette.primary.dark,
-			fontWeight: 600,
 		},
 		detailsSearch: {
 			marginLeft: 'auto',
