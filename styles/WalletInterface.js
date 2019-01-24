@@ -238,7 +238,10 @@ const getStyles = (theme) => {
 		coinList: {
 			display: 'flex',
 			flexDirection: 'column',
-			// overflowY: 'scroll',
+			overflowY: 'auto',
+			'&::-webkit-scrollbar': {
+				width: '0px',
+			}
 			// flex: '1 1 auto'
 		},
 		MuiCardRoot: {
@@ -264,8 +267,6 @@ const getStyles = (theme) => {
 			flex: '1 1 auto',
 			borderBottom: '1px solid rgb(218, 225, 233)',
 		},
-
-		//
 		addCoinCard: {
 			marginTop: 'auto',
 			display: 'flex',
@@ -274,7 +275,7 @@ const getStyles = (theme) => {
 			justifyContent: 'center',
 			alignItems: 'center',
 			backgroundColor: 'white',
-			
+			minHeight: '50px',
 		},
 	}
 	
