@@ -3,6 +3,7 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {withTheme, withStyles} from '@material-ui/core/styles';
+import _ from 'lodash'
 
 //styles
 import withLayout from '../lib/withLayout';
@@ -10,17 +11,7 @@ import InterfaceStyles from '../styles/WalletInterface'
 //wallet
 import WalletInterface from '../components/WalletInterface'
 //actions/thunks
-import {
-	fetchAndSetBalances,
-	setDetailView,
-	setActiveAccountIndex,
-	setActiveAddressIndex,
-	setActiveChainIndex,
-	setActiveCoin,
-	increaseAccountCount,
-	increaseAddressCount,
-	setDisplayView
-} from '../redux/actions/Interface'
+import {InterfaceActions as _actions} from '../redux/actions'
 
 class Index extends React.Component {
 	componentDidMount() {
@@ -32,29 +23,11 @@ class Index extends React.Component {
 		// console.log('Index.render')
 		const {
 			classes,
-			setDetailView,
-			setActiveAccountIndex,
-			setActiveAddressIndex,
-			setActiveChainIndex,
-			setActiveCoin,
-			increaseAccountCount,
-			increaseAddressCount,
-			setDisplayView,
 			Interface,
-			fetchAndSetBalances,
+			theme,
+			pageContext,
+			...actions
 		} = this.props
-		
-		let actions = {
-			fetchAndSetBalances,
-			setDetailView,
-			setActiveAccountIndex,
-			setActiveAddressIndex,
-			setActiveChainIndex,
-			setActiveCoin,
-			setDisplayView,
-			increaseAccountCount,
-			increaseAddressCount,
-		}
 		
 		return (
 			<div className={classes.contentContainer}>
@@ -68,16 +41,12 @@ class Index extends React.Component {
 	}
 }
 
-const mapDispatchToProps = {
-	fetchAndSetBalances,
-	setDetailView,
-	setActiveAccountIndex,
-	setActiveAddressIndex,
-	setActiveChainIndex,
-	setActiveCoin,
-	increaseAccountCount,
-	increaseAddressCount,
-	setDisplayView
+const mapDispatchToProps = {}
+for (let action in _actions) {
+	// console.log(_.isFunction(actions[action]))
+	if (_.isFunction(_actions[action])) {
+		mapDispatchToProps[action] = _actions[action]
+	}
 }
 
 const mapStateToProps = (state) => {
@@ -98,8 +67,13 @@ Index.getInitialProps = ({reduxStore, res}) => {
 }
 
 Index.propTypes = {
+	//jss
 	classes: PropTypes.object.isRequired,
+	theme: PropTypes.object.isRequired,
+	pageContent: PropTypes.object,
+	//store
 	Interface: PropTypes.object.isRequired,
+	//actions
 	fetchAndSetBalances: PropTypes.func.isRequired,
 	setDetailView: PropTypes.func.isRequired,
 	setActiveAccountIndex: PropTypes.func.isRequired,
@@ -109,6 +83,7 @@ Index.propTypes = {
 	increaseAccountCount: PropTypes.func.isRequired,
 	increaseAddressCount: PropTypes.func.isRequired,
 	setDisplayView: PropTypes.func.isRequired,
+	showTestnetCoins: PropTypes.func.isRequired,
 };
 
 let component = withStyles(InterfaceStyles)(Index) //jss-css
