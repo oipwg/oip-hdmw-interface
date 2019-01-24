@@ -41,6 +41,11 @@ const DisplayView = (props) => {
 				onClick={() => actions.setDisplayView('transactions')}
 				className={classes.viewLink}>Transactions
 			</span>
+			<span
+				style={getActiveViewStyle('send')}
+				onClick={() => actions.setDisplayView('send')}
+				className={classes.viewLink}>Send
+			</span>
 			<div className={classes.detailsSearch}>
 			
 			</div>

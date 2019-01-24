@@ -1,6 +1,6 @@
 import React from "react";
 import Paper from '@material-ui/core/Paper'
-import {Send} from '@material-ui/icons'
+import {Send, Refresh} from '@material-ui/icons'
 
 import RenderCoinSection from './sections/Coins'
 import RenderDisplayView from './sections/DisplayView'
@@ -16,18 +16,40 @@ class WalletInterface extends React.Component {
 
 	render() {
 		// console.log('WalletInterface.render')
-		const {classes, actions} = this.props;
+		const {classes, actions, Interface} = this.props;
 		
+		let balances
+		let balanceColorStyle = {color: 'black'}
+		
+		if (Interface.balances) {
+			balances = 0
+			for (let coin in Interface.balances) {
+				if (typeof Interface.balances[coin] === 'number') {
+					balances += Interface.balances[coin]
+				} else {
+					balances = 'Error'
+					balanceColorStyle.color = 'red'
+					break;
+				}
+				balanceColorStyle.color = 'green'
+			}
+		}
+		
+		let displayBalances = balances === undefined ? '...loading' : `$${balances}`
+	
 		return (
 			<div className={classes.walletContainer}>
 				<div className={classes.contentLayout}>
 					<Paper elevation={1} className={classes.paperLayout}>
 						<div className={classes.walletHeader}>
-							<h4 style={{margin: '0px', fontSize: '18px'}}>
-								<span>Balance: $0.00</span>
+							<h4 style={{margin: '0px'}}>
+								<span style={balanceColorStyle}>Balance: {displayBalances}</span>
 							</h4>
 							
-							<Send onClick={() => {actions.setDisplayView('send')}}/>
+							<Refresh
+								onClick={() => {actions.fetchAndSetBalances()}}
+								className={classes.refreshBalanceIcon}
+							/>
 						</div>
 						<div className={classes.sectionWrapper}>
 							<RenderCoinSection {...this.props} />
