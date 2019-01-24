@@ -35,7 +35,7 @@ class SendView extends React.Component {
 	handleSendClick = (e, wallet) => {
 		// e.preventDefault()
 		if (this.state.address === '' || this.state.amount === 0) {
-			alert('Properly fill out fields')
+			alert('Please fill out fields')
 			return
 		}
 		const options = {
