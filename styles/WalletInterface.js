@@ -132,7 +132,7 @@ const getStyles = (theme) => {
 			display: 'flex',
 			flexDirection: 'column',
 			flex: '1 1 auto',
-			padding: '30px 50px',
+			padding: '20px 50px',
 		},
 		sendHeader: {
 			display: 'flex',
