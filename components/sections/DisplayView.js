@@ -2,6 +2,7 @@ import React from 'react';
 
 import RenderAddressSection from "./Addresses"
 import RenderSendView from './Send'
+import RenderSettingsView from './Settings'
 import RenderAccountSection from "./Accounts";
 import RenderCoinSection from './Coins'
 
@@ -16,6 +17,8 @@ const DisplayView = (props) => {
 				break
 			case 'send':
 				return <RenderSendView {...props}/>
+			case 'settings':
+				return <RenderSettingsView action={actions} Interface={Interface}/>
 			default:
 				return 'Invalid Display View'
 		}
@@ -45,6 +48,11 @@ const DisplayView = (props) => {
 				style={getActiveViewStyle('send')}
 				onClick={() => actions.setDisplayView('send')}
 				className={classes.viewLink}>Send
+			</span>
+			<span
+				style={getActiveViewStyle('settings')}
+				onClick={() => actions.setDisplayView('settings')}
+				className={classes.viewLink}>Settings
 			</span>
 			<div className={classes.detailsSearch}>
 			
