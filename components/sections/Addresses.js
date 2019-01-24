@@ -24,7 +24,7 @@ const Addresses = (props) => {
 				{addresses.map((addr, i) => (
 					<div key={i} className={classes.addressRow}>
 						<div className={classes.addressInfo}>
-							<span>{i} - </span>
+							<span className={classes.addressIndex}>/{i}  </span>
 							<span id={`id-${i}`} className={classes.publicAddress}>{addr.getPublicAddress()}</span>
 						</div>
 						<FileCopy
