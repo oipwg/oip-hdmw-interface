@@ -59,6 +59,22 @@ export const increaseAddressCount = (i = 1) => ({
 	count: i
 })
 
+export const SET_INITIAL_COIN_STATES = 'SET_INITIAL_COIN_STATES'
+export const setInitialCoinStates = (coinObject) => {
+	console.log('setting InitialCoinStates', coinObject)
+	return {
+		type: SET_INITIAL_COIN_STATES,
+		coinObject
+	}
+}
+
+export const UPDATE_WALLET_TESTNET_COINS = 'UPDATE_WALLET_TESTNET_COINS'
+export const updateWalletTestnetCoins = (addOrRemove) => ({
+	type: UPDATE_WALLET_TESTNET_COINS,
+	addOrRemove
+})
+
+
 //thunks
 export const fetchAndSetBalances = () => async (dispatch, getState) => {
 	const wallet = getState().Interface.wallet
@@ -66,4 +82,31 @@ export const fetchAndSetBalances = () => async (dispatch, getState) => {
 	dispatch(setBalances(balances))
 }
 
+export const setCoinState = () => (dispatch, getState) => {
+	const state = getState().Interface
+	const wallet = state.wallet
+	let coinnames = Object.keys(wallet.getCoins())
+	let coinObject = {}
+	
+	for (let coin of coinnames) {
+		let match = false
+		for (let prop in state) {
+			if (prop === coin) {
+				match = true
+			}
+		}
+		if (!match) {
+			coinObject[coin] = {
+				addresses: 1,
+				accounts: 1,
+				activeAccount: 0,
+				activeChain: 0,
+				activeAddress: 0,
+			}
+		}
+	}
+
+	if (Object.keys(coinObject).length > 0)
+		dispatch(setInitialCoinStates(coinObject))
+}
 

@@ -30,7 +30,9 @@ class Settings extends React.Component {
 								name="coinSetting"
 								value="showTestnetCoins"
 								checked={Settings.showTestnetCoins}
-								onChange={() => {actions.showTestnetCoins()}}/>
+								onChange={() => {
+									actions.handleTestnetCoins(!Settings.showTestnetCoins)
+								}}/>
 						</div>
 					
 					</div>

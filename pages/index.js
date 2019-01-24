@@ -87,6 +87,7 @@ Index.propTypes = {
 	increaseAddressCount: PropTypes.func.isRequired,
 	setDisplayView: PropTypes.func.isRequired,
 	showTestnetCoins: PropTypes.func.isRequired,
+	handleTestnetCoins: PropTypes.func.isRequired,
 };
 
 let component = withStyles(InterfaceStyles)(Index) //jss-css

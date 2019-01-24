@@ -9,7 +9,7 @@ const Interface = (state = initialState, action) => {
 				...state,
 				...initialState,
 				wallet: new HDMW(action.mnemonic, {discover: false}),
-				
+				mnemonic: action.mnemonic,
 			}
 		case actions.SET_BALANCES:
 			return {
@@ -54,10 +54,20 @@ const Interface = (state = initialState, action) => {
 				...state,
 				[state.activeCoinName]: {...state[state.activeCoinName], addresses: state[state.activeCoinName].addresses + action.count}
 			}
-		case actions.SHOW_TESTNET_COINS:
+		case actions.SET_INITIAL_COIN_STATES:
 			return {
 				...state,
-				showTestnetCoins: !state.showTestnetCoins,
+				...action.coinObject,
+			}
+		case actions.UPDATE_WALLET_TESTNET_COINS:
+			let _tmpWal = new HDMW(state.mnemonic, {discover: false})
+			if (action.addOrRemove)
+				_tmpWal.addTestnetCoins()
+			else
+				_tmpWal.removeTestnetCoins()
+			return {
+				...state,
+				wallet: _tmpWal
 			}
 		default:
 			return state
