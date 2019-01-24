@@ -8592,7 +8592,26 @@ oip-exchange-rate@^1.0.7:
     axios "^0.18.0"
     insight-explorer "^1.0.3"
 
-oip-hdmw@^1.3.6, oip-hdmw@^1.3.7:
+oip-hdmw@^1.3.10:
+  version "1.3.10"
+  resolved "https://registry.yarnpkg.com/oip-hdmw/-/oip-hdmw-1.3.10.tgz#a3c6bd24b48bd5858478a69cbd125992cd6e5eda"
+  integrity sha512-sKIdZctpRGzsBE+hBWqQkaPQZV3PmcMs5tv4imjPZ1IujCPMKgNmMM+v0ebLQBd32PcVVsv4KdOsIOzjqtU34g==
+  dependencies:
+    bip32 "1.0.2"
+    bip32-utils "git+https://github.com/oipwg/bip32-utils.git"
+    bip39 "^2.5.0"
+    bip44-constants "5.0.0"
+    bitcoinjs-lib "git+https://github.com/oipwg/bitcoinjs-lib.git#export-classify"
+    bitcoinjs-message "^2.0.0"
+    coininfo "^4.0.1"
+    coinselect "git+https://github.com/oipwg/coinselect.git"
+    eventemitter3 "^3.1.0"
+    insight-explorer "^1.0.10"
+    oip-exchange-rate "^1.0.7"
+    varuint-bitcoin "^1.1.0"
+    wif "^2.0.6"
+
+oip-hdmw@^1.3.6:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/oip-hdmw/-/oip-hdmw-1.3.7.tgz#0dfd14fede9e7c8cc77910d5f3e6a7019d53b3b9"
   integrity sha512-YduYsXCm9NeRDf/0KyMIAA8uFVcpU4ImTmwd2vS+z1i9H9UabqtR72n5UKu0uwK0HEecIsZRAywjdcxHheGn8g==
