@@ -53,7 +53,11 @@ const Interface = (state = initialState, action) => {
 			return {
 				...state,
 				[state.activeCoinName]: {...state[state.activeCoinName], addresses: state[state.activeCoinName].addresses + action.count}
-				
+			}
+		case actions.SHOW_TESTNET_COINS:
+			return {
+				...state,
+				showTestnetCoins: !state.showTestnetCoins,
 			}
 		default:
 			return state

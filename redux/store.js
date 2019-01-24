@@ -7,6 +7,7 @@ export const initialState = {
 	wallet: undefined,
 	discover: false,
 	balances: undefined,
+	showTestnetCoins: false,
 	
 	activeCoinName: 'bitcoin',
 	
