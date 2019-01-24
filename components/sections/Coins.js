@@ -4,7 +4,11 @@ import {withTheme} from '@material-ui/core/styles';
 
 const Coins = (props) => {
 	// console.log('Coins()')
-	const {classes, Interface, actions, theme} = props
+	const {classes, Interface, actions, theme, Settings} = props
+	
+	if (Settings.showTestnetCoins) {
+		Interface.wallet.addTestnetCoins()
+	} else {Interface.wallet.removeTestnetCoins()}
 	
 	const selectedCoinBorder = (coin) => {
 		let border = {
