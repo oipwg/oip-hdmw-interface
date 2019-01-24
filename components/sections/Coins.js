@@ -36,7 +36,9 @@ const Coins = (props) => {
 			</div>
 			<div className={classes.cardSpace}/>
 			<div className={classes.addCoinCard}>
-				{/*<h5 style={{margin: '0px', cursor: 'pointer'}}>ADD COIN</h5>*/}
+				<h5
+					onClick={() => {actions.setDisplayView('add_coin')}}
+					style={{margin: '0px', cursor: 'pointer'}}>ADD COIN</h5>
 			</div>
 		</div>
 	</div>

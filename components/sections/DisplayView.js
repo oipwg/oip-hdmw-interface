@@ -2,6 +2,7 @@ import React from 'react';
 
 import RenderAddressSection from "./Addresses"
 import RenderSendView from './Send'
+import RenderAddCoinView from './AddCoin'
 import RenderSettingsView from './Settings'
 import RenderAccountSection from "./Accounts";
 import RenderCoinSection from './Coins'
@@ -17,6 +18,8 @@ const DisplayView = (props) => {
 				break
 			case 'send':
 				return <RenderSendView {...props}/>
+			case 'add_coin':
+				return <RenderAddCoinView actions={actions} Interface={Interface}/>
 			case 'settings':
 				return <RenderSettingsView action={actions} Interface={Interface}/>
 			default:
