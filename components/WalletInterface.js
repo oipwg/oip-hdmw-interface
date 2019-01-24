@@ -1,6 +1,6 @@
 import React from "react";
 import Paper from '@material-ui/core/Paper'
-import {Send, Refresh} from '@material-ui/icons'
+import {Refresh} from '@material-ui/icons'
 
 import RenderCoinSection from './sections/Coins'
 import RenderDisplayView from './sections/DisplayView'
