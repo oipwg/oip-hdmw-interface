@@ -5,7 +5,7 @@ import notifier from '../../lib/notifier'
 
 const Addresses = (props) => {
 	// console.log('Addresses()')
-	const {classes, Interface} = props
+	const {classes, Interface, actions} = props
 	
 	const activeCoin = Interface.activeCoinName
 	const coinProperties = Interface[activeCoin]
@@ -23,7 +23,10 @@ const Addresses = (props) => {
 		<div className={classes.addressContainer}>
 				{addresses.map((addr, i) => (
 					<div key={i} className={classes.addressRow}>
-						<span id={`id-${i}`} className={classes.publicAddress}>{addr.getPublicAddress()}</span>
+						<div className={classes.addressInfo}>
+							<span>{i} - </span>
+							<span id={`id-${i}`} className={classes.publicAddress}>{addr.getPublicAddress()}</span>
+						</div>
 						<FileCopy
 							className={`copy-to-clipboard ${classes.copyToClipBoard}`}
 							data-clipboard-target={`#id-${i}`}
@@ -34,6 +37,13 @@ const Addresses = (props) => {
 							}}/>
 					</div>
 				))}
+				<div className={classes.showExtraAddressContainer}>
+					<span
+						className={classes.showExtraAddress}
+						onClick={() => {actions.increaseAddressCount()}}>
+						+ Show new address
+					</span>
+				</div>
 		</div>
 	)
 }

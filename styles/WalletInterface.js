@@ -32,6 +32,10 @@ const getStyles = (theme) => {
 			alignItems: 'center',
 			minHeight: '65px',
 		},
+		addressInfo: {
+			fontFamily: 'monospace',
+			fontSize: '14px',
+		},
 		publicAddress: {
 			fontFamily: 'monospace',
 			fontSize: '14px',
@@ -39,6 +43,21 @@ const getStyles = (theme) => {
 		copyToClipBoard: {
 			cursor: 'copy',
 			fontSize: '18px',
+		},
+		showExtraAddressContainer: {
+			display: 'flex',
+			flexDirection: 'row',
+			alignItems: 'center',
+			padding: '10px',
+			minHeight: '65px',
+		},
+		showExtraAddress: {
+			border: '1px solid grey',
+			padding: '5px 20px',
+			borderRadius: '3px',
+			fontSize: '12px',
+			marginLeft: '15px',
+			cursor: 'pointer',
 		},
 	}
 	
@@ -229,7 +248,7 @@ const getStyles = (theme) => {
 			display: 'flex',
 			flexDirection: 'row',
 			minWidth: '300px',
-			minHeight: '200px',
+			minHeight: '150px',
 			backgroundColor: 'white',
 			justifyContent: 'center',
 			alignItems: 'center',
@@ -278,16 +297,10 @@ const getStyles = (theme) => {
 			alignItems: 'center',
 			justifyContent: 'space-between'
 		},
-		sendModal: {
-			position: 'relative',
-			margin: 'auto',
-			top: '20%',
-			width: theme.spacing.unit * 50,
-			backgroundColor: theme.palette.background.paper,
-			boxShadow: theme.shadows[5],
-			padding: theme.spacing.unit * 4,
-			outline: 'none',
-		}
+		refreshBalanceIcon: {
+			marginLeft: '10px',
+			cursor: 'pointer'
+		},
 	}
 	
 	const root = {
