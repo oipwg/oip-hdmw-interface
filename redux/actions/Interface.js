@@ -59,12 +59,6 @@ export const increaseAddressCount = (i = 1) => ({
 	count: i
 })
 
-export const SHOW_TESTNET_COINS = "SHOW_TESTNET_COINS"
-export const showTestnetCoins = () => ({
-	type: SHOW_TESTNET_COINS,
-})
-
-
 //thunks
 export const fetchAndSetBalances = () => async (dispatch, getState) => {
 	const wallet = getState().Interface.wallet

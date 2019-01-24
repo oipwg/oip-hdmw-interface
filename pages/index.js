@@ -24,6 +24,7 @@ class Index extends React.Component {
 		const {
 			classes,
 			Interface,
+			Settings,
 			theme,
 			pageContext,
 			...actions
@@ -35,6 +36,7 @@ class Index extends React.Component {
 					<title>oip-hdmw</title>
 					<meta name="description" content="Open Index Protocol HD Multi Wallet"/>
 				</Head>
+				<WalletInterface Interface={Interface} Settings={Settings} classes={classes}  actions={actions}/>
 			</div>
 		)
 	}
@@ -52,6 +54,7 @@ for (let actionStore in _actions) {
 const mapStateToProps = (state) => {
 	return {
 		Interface: state.Interface,
+		Settings: state.Settings
 	}
 }
 

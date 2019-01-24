@@ -1,13 +1,13 @@
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
-import {Interface} from './reducers'
+import {Interface, Settings} from './reducers'
+
 
 export const initialState = {
 	wallet: undefined,
 	discover: false,
 	balances: undefined,
-	showTestnetCoins: false,
 	
 	activeCoinName: 'bitcoin',
 	
@@ -42,7 +42,10 @@ export const initialState = {
 
 // Create our Store
 const createStoreFn = (initialState = initialState) => {
-	const reducers = {Interface}
+	const reducers = {
+		Interface,
+		Settings
+	}
 	
 	// Create the logger to log Actions to the console
 	const logger = createLogger({
