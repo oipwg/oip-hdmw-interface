@@ -36,6 +36,9 @@ const getStyles = (theme) => {
 			fontFamily: 'monospace',
 			fontSize: '14px',
 		},
+		addressIndex: {
+			color: theme.palette.primary.light,
+		},
 		publicAddress: {
 			fontFamily: 'monospace',
 			fontSize: '14px',
