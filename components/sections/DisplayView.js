@@ -8,7 +8,7 @@ import RenderAccountSection from "./Accounts";
 import RenderCoinSection from './Coins'
 
 const DisplayView = (props) => {
-	const {actions, classes, Interface} = props
+	const {actions, classes, Interface, Settings} = props
 	
 	const renderDisplayBody = () => {
 		switch (Interface.displayView) {
@@ -21,7 +21,7 @@ const DisplayView = (props) => {
 			case 'add_coin':
 				return <RenderAddCoinView actions={actions} Interface={Interface}/>
 			case 'settings':
-				return <RenderSettingsView action={actions} Interface={Interface}/>
+				return <RenderSettingsView actions={actions} Interface={Interface} Settings={Settings}/>
 			default:
 				return 'Invalid Display View'
 		}

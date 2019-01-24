@@ -22,6 +22,26 @@ const styles = theme => ({
 		flexDirection: 'column',
 		flex: '1 1 auto',
 	},
+	coinSettingsContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+	},
+	coinSettingsHeader: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		padding: '10px 0px',
+		color: theme.palette.primary.light,
+	},
+	coinSettings: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	apiSettings: {
+	
+	},
 })
 
 export default styles

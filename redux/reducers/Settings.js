@@ -6,7 +6,7 @@ const Settings = (state = {
 	switch (action.type) {
 		case actions.SHOW_TESTNET_COINS:
 			return {
-				...state, showTestnetCoins: true,
+				...state, showTestnetCoins: !state.showTestnetCoins,
 			}
 		default:
 			return state

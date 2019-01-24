@@ -5,14 +5,12 @@ import {withStyles} from '@material-ui/core/styles';
 import styles from '../../styles/Settings'
 
 class Settings extends React.Component {
-	constructor(props) {
-		super(props);
-		
-		this.state = {}
+	handleCheckboxChange = (target) => {
+		console.log(target)
 	}
 	
 	render() {
-		const {classes, actions} = this.props
+		const {classes, actions, Settings} = this.props
 		return (
 			<div className={classes.settingsContainer}>
 				<div className={classes.settingsHeader}>
@@ -21,7 +19,19 @@ class Settings extends React.Component {
 					</h4>
 				</div>
 				<div className={classes.settingsBody}>
-					<div className={classes.coinSettings}>
+					<div className={classes.coinSettingsContainer}>
+						<div className={classes.coinSettingsHeader}>
+							<h3 style={{margin: '0'}}>Coins</h3>
+						</div>
+						<div className={classes.coinSettings}>
+							<span>Display testnet coins</span>
+							<input
+								type='checkbox'
+								name="coinSetting"
+								value="showTestnetCoins"
+								checked={Settings.showTestnetCoins}
+								onChange={() => {actions.showTestnetCoins()}}/>
+						</div>
 					
 					</div>
 					<div className={classes.apiSettings}>
