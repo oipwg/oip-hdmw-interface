@@ -41,9 +41,11 @@ class Index extends React.Component {
 			increaseAddressCount,
 			setDisplayView,
 			Interface,
+			fetchAndSetBalances,
 		} = this.props
 		
 		let actions = {
+			fetchAndSetBalances,
 			setDetailView,
 			setActiveAccountIndex,
 			setActiveAddressIndex,
