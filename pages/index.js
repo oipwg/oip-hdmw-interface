@@ -11,7 +11,7 @@ import InterfaceStyles from '../styles/WalletInterface'
 //wallet
 import WalletInterface from '../components/WalletInterface'
 //actions/thunks
-import {InterfaceActions as _actions} from '../redux/actions'
+import * as _actions from '../redux/actions'
 
 class Index extends React.Component {
 	componentDidMount() {
@@ -35,23 +35,23 @@ class Index extends React.Component {
 					<title>oip-hdmw</title>
 					<meta name="description" content="Open Index Protocol HD Multi Wallet"/>
 				</Head>
-				<WalletInterface Interface={Interface} classes={classes}  actions={actions}/>
 			</div>
 		)
 	}
 }
 
 const mapDispatchToProps = {}
-for (let action in _actions) {
-	// console.log(_.isFunction(actions[action]))
-	if (_.isFunction(_actions[action])) {
-		mapDispatchToProps[action] = _actions[action]
+for (let actionStore in _actions) {
+	for (let action in _actions[actionStore]) {
+		if (_.isFunction(_actions[actionStore][action])) {
+			mapDispatchToProps[action] = _actions[actionStore][action]
+		}
 	}
 }
 
 const mapStateToProps = (state) => {
 	return {
-		Interface: state.Interface
+		Interface: state.Interface,
 	}
 }
 
