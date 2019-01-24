@@ -12,10 +12,22 @@ class Settings extends React.Component {
 	}
 	
 	render() {
-		const {classes} = this.props
+		const {classes, actions} = this.props
 		return (
-			<div className={classes.settingsWrapper}>
-			
+			<div className={classes.settingsContainer}>
+				<div className={classes.settingsHeader}>
+					<h4 className={classes.settingsHeaderTitle}>
+						Settings
+					</h4>
+				</div>
+				<div className={classes.settingsBody}>
+					<div className={classes.coinSettings}>
+					
+					</div>
+					<div className={classes.apiSettings}>
+					
+					</div>
+				</div>
 			</div>
 		)
 	}
