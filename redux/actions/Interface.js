@@ -79,19 +79,29 @@ export const setExchangeRates = (xr) => ({
 export const getExchangeRates = () => async (dispatch, getState) => {
 	const wallet = getState().Interface.wallet
 	let coins = Object.keys(wallet.getCoins())
+	
+	//remove testnet coins
 	for (let i = coins.length -1; i >= 0; i--) {
 		if (coins[i].includes('_testnet')) {
 			coins.splice(i, 1)
 		}
 	}
-
-	const xr = await wallet.getExchangeRates({coins})
+	
+	let xr = await wallet.getExchangeRates({coins})
+	
+	// set the testnet coin rates to the mainnet coin rates
+	for (let coin of Object.keys(wallet.getCoins())) {
+		if (coin.includes('_testnet')) {
+			let coinSplit = coin.split('_')
+			xr[coin] = xr[coinSplit[0]]
+		}
+	}
 	dispatch(setExchangeRates(xr))
 }
 
 export const fetchAndSetBalances = () => async (dispatch, getState) => {
 	const wallet = getState().Interface.wallet
-	const balances = await wallet.getCoinBalances({testnet: false})
+	const balances = await wallet.getCoinBalances()
 	dispatch(setBalances(balances))
 }
 
@@ -119,7 +129,13 @@ export const setCoinState = () => (dispatch, getState) => {
 		}
 	}
 
-	if (Object.keys(coinObject).length > 0)
+	if (Object.keys(coinObject).length > 0) {
 		dispatch(setInitialCoinStates(coinObject))
+		dispatch(refreshBalances())
+	}
 }
 
+export const refreshBalances = () => (dispatch) => {
+	dispatch(fetchAndSetBalances())
+	dispatch(getExchangeRates())
+}

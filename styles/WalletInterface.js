@@ -260,6 +260,21 @@ const getStyles = (theme) => {
 			alignItems: 'center',
 			borderBottom: '1px solid rgb(218, 225, 233)',
 		},
+		coinInfoWrapper: {
+			display: 'flex',
+			flexDirection: 'column',
+			alignItems: 'center',
+		},
+		coinName: {
+			margin: '5px 0px',
+		},
+		balanceInformation: {
+			display: 'flex',
+			flexDirection: 'row',
+			alignItems: 'center',
+			justifyContent: 'center',
+			flexWrap: 'wrap',
+		},
 		cardSpace: {
 			// backgroundColor: 'white',
 			display: 'flex',

@@ -4,7 +4,7 @@ import {withTheme} from '@material-ui/core/styles';
 
 const Coins = (props) => {
 	// console.log('Coins()')
-	const {classes, Interface, actions, theme, Settings} = props
+	const {classes, Interface, actions, theme} = props
 	
 	// if (Settings.showTestnetCoins) {
 	// 	Interface.wallet.addTestnetCoins()
@@ -17,6 +17,34 @@ const Coins = (props) => {
 		}
 		
 		return coin === Interface.activeCoinName ? border: {}
+	}
+	
+	const getCoinInformation = (coin) => {
+		const {balances, exchangeRates} = Interface
+		if (!balances || !exchangeRates) {
+			return null
+		}
+		let coinTicker = Interface.wallet.networks[coin].ticker
+		
+		let balance = balances[coin]
+		let xr = exchangeRates[coin]
+		
+		let fiat
+		if (_.isNumber(balance) && _.isNumber(xr)) {
+			fiat = balance * xr
+		} else {fiat = 'error'}
+		
+		let balanceInformation = `${balance} ${coinTicker} = ${fiat} USD`
+		
+		if (!_.isNumber(balance)) {
+			balanceInformation = 'error'
+		}
+		if (!balance && balance !== 0) {
+			balanceInformation = 'loading'
+		}
+		
+		return  <span className={classes.balanceInformation}>{balanceInformation}</span>
+		
 	}
 	
 	return <div className={classes.coinWrapper}>
@@ -33,7 +61,10 @@ const Coins = (props) => {
 								actions.setActiveCoin(coin)
 							}}
 						>
-							<h4 >{_.toUpper(coin)}</h4>
+							<div className={classes.coinInfoWrapper}>
+								<h4 className={classes.coinName}>{_.toUpper(coin)}</h4>
+								{getCoinInformation(coin)}
+							</div>
 						</div>
 					)
 				})}

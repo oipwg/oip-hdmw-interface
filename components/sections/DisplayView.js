@@ -4,8 +4,6 @@ import RenderAddressSection from "./Addresses"
 import RenderSendView from './Send'
 import RenderAddCoinView from './AddCoin'
 import RenderSettingsView from './Settings'
-import RenderAccountSection from "./Accounts";
-import RenderCoinSection from './Coins'
 
 const DisplayView = (props) => {
 	const {actions, classes, Interface, Settings} = props

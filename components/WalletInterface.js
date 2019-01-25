@@ -29,6 +29,9 @@ class WalletInterface extends React.Component {
 		if (Interface.balances) {
 			balances = 0
 			for (let coin in Interface.balances) {
+				if (coin.includes('_testnet')) {
+					break
+				}
 				if (typeof Interface.balances[coin] === 'number') {
 					balances += Interface.balances[coin]
 				} else {
