@@ -1,12 +1,20 @@
+//actions
 export const SHOW_TESTNET_COINS = "SHOW_TESTNET_COINS"
 export const showTestnetCoins = () => ({
 	type: SHOW_TESTNET_COINS,
 })
 
-import {updateWalletTestnetCoins, setCoinState} from './Interface'
+//thunks
+import {updateWalletTestnetCoins, setCoinState, setActiveCoin} from './Interface'
 export const HANDLE_TESTNET_COINS = "HANDLE_TESTNET_COINS"
-export const handleTestnetCoins = (bool) => dispatch => {
+export const handleTestnetCoins = (addOrRemove) => (dispatch, getState) => {
 	dispatch(showTestnetCoins())
-	dispatch(updateWalletTestnetCoins(bool))
-	dispatch(setCoinState())
+	dispatch(updateWalletTestnetCoins(addOrRemove))
+	//true if ADDING testnet coins, false if REMOVING testnet coins
+	if (addOrRemove) {
+		dispatch(setCoinState())
+	} else {
+		if (getState().Interface.activeCoinName.includes('_testnet'))
+			dispatch(setActiveCoin('bitcoin'))
+	}
 }
