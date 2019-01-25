@@ -42,9 +42,11 @@ class WalletInterface extends React.Component {
 				<div className={classes.contentLayout}>
 					<Paper elevation={1} className={classes.paperLayout}>
 						<div className={classes.walletHeader}>
-							<h4 style={{margin: '0px'}}>
-								<span style={balanceColorStyle}>Balance: {displayBalances}</span>
-							</h4>
+							<div className={classes.balanceContainer}>
+								<h4 style={{margin: '0px'}}>
+									<span style={balanceColorStyle}>Balance: {displayBalances}</span>
+								</h4>
+							</div>
 							
 							<Refresh
 								onClick={() => {actions.fetchAndSetBalances()}}

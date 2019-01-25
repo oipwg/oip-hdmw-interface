@@ -301,6 +301,11 @@ const getStyles = (theme) => {
 			alignItems: 'center',
 			justifyContent: 'space-between'
 		},
+		balanceContainer: {
+			display: 'flex',
+			flexDirection: 'row',
+			alignItems: 'center',
+		},
 		refreshBalanceIcon: {
 			marginLeft: '10px',
 			cursor: 'pointer'
