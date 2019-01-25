@@ -78,7 +78,7 @@ export const updateWalletTestnetCoins = (addOrRemove) => ({
 //thunks
 export const fetchAndSetBalances = () => async (dispatch, getState) => {
 	const wallet = getState().Interface.wallet
-	const balances = await wallet.getCoinBalances()
+	const balances = await wallet.getCoinBalances({testnet: false})
 	dispatch(setBalances(balances))
 }
 
