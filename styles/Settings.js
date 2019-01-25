@@ -36,6 +36,11 @@ const styles = theme => ({
 	},
 	coinSettings: {
 		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+	},
+	showTestnetCoins: {
+		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
