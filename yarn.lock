@@ -8720,10 +8720,10 @@ oip-exchange-rate@^1.0.7:
     axios "^0.18.0"
     insight-explorer "^1.0.3"
 
-oip-hdmw@^1.3.13:
-  version "1.3.13"
-  resolved "https://registry.yarnpkg.com/oip-hdmw/-/oip-hdmw-1.3.13.tgz#6b6221351fb1ed01eb1593651628a1e75f45b096"
-  integrity sha512-ZcovVIhlpRaG5PrWQz6upKMh/dQnnr4zuoVpfxSsW23EXzI9uMLOz2+LbAHqqjJ9io+xAcqEviFWbkh36C2d6Q==
+oip-hdmw@^1.3.14:
+  version "1.3.14"
+  resolved "https://registry.yarnpkg.com/oip-hdmw/-/oip-hdmw-1.3.14.tgz#4937158c379eda9a439c830921508570523a44a9"
+  integrity sha512-nuOyyuoKj6HBDPQZ01dPI/pQ8ntmYY2EtT9lR+wLspiTMBoAj7jvUOSQulxCegzfUuPV/Hi7uKLBfUmHhyUPOQ==
   dependencies:
     bip32 "1.0.2"
     bip32-utils "git+https://github.com/oipwg/bip32-utils.git"
