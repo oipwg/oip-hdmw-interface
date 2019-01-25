@@ -78,7 +78,6 @@ Index.propTypes = {
 	Interface: PropTypes.object.isRequired,
 	//actions
 	fetchAndSetBalances: PropTypes.func.isRequired,
-	setDetailView: PropTypes.func.isRequired,
 	setActiveAccountIndex: PropTypes.func.isRequired,
 	setActiveAddressIndex: PropTypes.func.isRequired,
 	setActiveChainIndex: PropTypes.func.isRequired,

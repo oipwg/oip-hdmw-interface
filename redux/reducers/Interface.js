@@ -19,10 +19,6 @@ const Interface = (state = initialState, action) => {
 			return {
 				...state, displayView: action.view,
 			}
-		case actions.SET_DETAIL_VIEW:
-			return {
-				...state, detailView: action.detailView,
-			}
 		case actions.SET_ACTIVE_COIN:
 			return {
 				...state,

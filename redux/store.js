@@ -37,7 +37,6 @@ export const initialState = {
 	displayTransactions: false,
 	
 	displayView: 'addresses',
-	detailView: 'addresses'
 }
 
 // Create our Store

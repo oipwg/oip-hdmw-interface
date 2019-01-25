@@ -17,12 +17,6 @@ export const setDisplayView = (view) => ({
 	view
 })
 
-export const SET_DETAIL_VIEW = 'SET_DETAIL_VIEW'
-export const setDetailView = (detailView) => ({
-	type: SET_DETAIL_VIEW,
-	detailView
-})
-
 export const SET_ACTIVE_COIN = 'SET_ACTIVE_COIN'
 export const setActiveCoin = (coin) => ({
 	type: SET_ACTIVE_COIN,
