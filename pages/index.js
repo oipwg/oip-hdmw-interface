@@ -17,6 +17,7 @@ class Index extends React.Component {
 	componentDidMount() {
 		console.log('Index.componentDidMount')
 		this.props.fetchAndSetBalances()
+		this.props.getExchangeRates()
 	}
 	
 	render() {
@@ -87,6 +88,7 @@ Index.propTypes = {
 	setDisplayView: PropTypes.func.isRequired,
 	showTestnetCoins: PropTypes.func.isRequired,
 	handleTestnetCoins: PropTypes.func.isRequired,
+	getExchangeRates: PropTypes.func.isRequired,
 };
 
 let component = withStyles(InterfaceStyles)(Index) //jss-css

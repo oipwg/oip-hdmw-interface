@@ -68,8 +68,27 @@ export const updateWalletTestnetCoins = (addOrRemove) => ({
 	addOrRemove
 })
 
+export const SET_EXCHANGE_RATES = 'SET_EXCHANGE_RATES'
+export const setExchangeRates = (xr) => ({
+	type: SET_EXCHANGE_RATES,
+	xr
+})
+
 
 //thunks
+export const getExchangeRates = () => async (dispatch, getState) => {
+	const wallet = getState().Interface.wallet
+	let coins = Object.keys(wallet.getCoins())
+	for (let i = coins.length -1; i >= 0; i--) {
+		if (coins[i].includes('_testnet')) {
+			coins.splice(i, 1)
+		}
+	}
+
+	const xr = await wallet.getExchangeRates({coins})
+	dispatch(setExchangeRates(xr))
+}
+
 export const fetchAndSetBalances = () => async (dispatch, getState) => {
 	const wallet = getState().Interface.wallet
 	const balances = await wallet.getCoinBalances({testnet: false})

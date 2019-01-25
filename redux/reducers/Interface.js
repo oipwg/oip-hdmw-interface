@@ -65,6 +65,11 @@ const Interface = (state = initialState, action) => {
 				...state,
 				wallet: _tmpWal
 			}
+		case actions.SET_EXCHANGE_RATES:
+			return {
+				...state,
+				exchangeRates: action.xr
+			}
 		default:
 			return state
 	}

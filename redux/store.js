@@ -8,6 +8,7 @@ export const initialState = {
 	wallet: undefined,
 	discover: false,
 	balances: undefined,
+	exchangeRates: undefined,
 	
 	activeCoinName: 'bitcoin',
 	

@@ -13,10 +13,15 @@ class WalletInterface extends React.Component {
 			detailsSearchValue: '',
 		}
 	}
+	
+	handleRefresh = () => {
+		this.props.actions.fetchAndSetBalances()
+		this.props.actions.getExchangeRates()
+	}
 
 	render() {
 		// console.log('WalletInterface.render')
-		const {classes, actions, Interface} = this.props;
+		const {classes, Interface} = this.props;
 		
 		let balances
 		let balanceColorStyle = {color: 'black'}
@@ -49,7 +54,7 @@ class WalletInterface extends React.Component {
 							</div>
 							
 							<Refresh
-								onClick={() => {actions.fetchAndSetBalances()}}
+								onClick={() => {this.handleRefresh()}}
 								className={classes.refreshBalanceIcon}
 							/>
 						</div>
