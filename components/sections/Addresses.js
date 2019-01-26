@@ -5,13 +5,13 @@ import notifier from '../../lib/notifier'
 
 const Addresses = (props) => {
 	// console.log('Addresses()')
-	const {classes, Interface, actions} = props
+	const {classes, Interface, actions, Wallet} = props
 	
 	const activeCoin = Interface.activeCoinName
 	const coinProperties = Interface[activeCoin]
 	
 	let addresses = []
-	let Coin = Interface.wallet.getCoin(activeCoin)
+	let Coin = Wallet.getCoin(activeCoin)
 	let Account = Coin.getAccount(coinProperties.activeAccount)
 	for (let i = 0; i < coinProperties.addresses; i++) {
 		addresses.push(Account.getAddress(coinProperties.activeChain, i))

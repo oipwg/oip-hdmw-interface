@@ -1,14 +1,12 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import _ from 'lodash'
 import {withTheme} from '@material-ui/core/styles';
 
 const Coins = (props) => {
-	// console.log('Coins()')
-	const {classes, Interface, actions, theme} = props
+	const {classes, HDMW, Wallet, Interface, actions, Settings, theme} = props
 	
-	// if (Settings.showTestnetCoins) {
-	// 	Interface.wallet.addTestnetCoins()
-	// } else {Interface.wallet.removeTestnetCoins()}
+	// noinspection JSUnresolvedFunction
+	Wallet.addTestnetCoins(Settings.toggleTestnetCoins)
 	
 	const selectedCoinBorder = (coin) => {
 		let border = {
@@ -16,15 +14,15 @@ const Coins = (props) => {
 			marginTop: '1 px'
 		}
 		
-		return coin === Interface.activeCoinName ? border: {}
+		return coin === Interface.activeCoinName ? border : {}
 	}
 	
 	const getCoinInformation = (coin) => {
-		const {balances, exchangeRates} = Interface
+		const {balances, exchangeRates} = HDMW
 		if (!balances || !exchangeRates) {
 			return null
 		}
-		let coinTicker = Interface.wallet.networks[coin].ticker
+		let coinTicker = Wallet.networks[coin].ticker
 		
 		let balance = balances[coin]
 		let xr = exchangeRates[coin]
@@ -32,9 +30,15 @@ const Coins = (props) => {
 		let fiat
 		if (_.isNumber(balance) && _.isNumber(xr)) {
 			fiat = balance * xr
-		} else {fiat = 'error'}
-		
-		let balanceInformation = `${balance} ${coinTicker} = ${fiat} USD`
+		} else {
+			fiat = 'error'
+		}
+		let balanceInformation
+		if (coin.includes('_testnet')) {
+			balanceInformation = `${balance} ${coinTicker}`
+		} else {
+			balanceInformation = `${balance} ${coinTicker} = ${fiat} USD`
+		}
 		
 		if (!_.isNumber(balance)) {
 			balanceInformation = 'error'
@@ -43,14 +47,24 @@ const Coins = (props) => {
 			balanceInformation = 'loading'
 		}
 		
-		return  <span className={classes.balanceInformation}>{balanceInformation}</span>
+		return <span className={classes.balanceInformation}>{balanceInformation}</span>
 		
 	}
+	
+	const [isShowingTestnetCoins, toggleTNC] = useState(false)
+	useEffect(() => {
+		if (isShowingTestnetCoins !== Settings.toggleTestnetCoins) {
+			toggleTNC(Settings.toggleTestnetCoins)
+			if (Settings.toggleTestnetCoins) {
+				actions.updateBalances(Wallet)
+			}
+		}
+	})
 	
 	return <div className={classes.coinWrapper}>
 		<div className={classes.coinScrollContainer}>
 			<div className={classes.coinList}>
-				{Object.keys(Interface.wallet.getCoins()).map((coin, i) => {
+				{Object.keys(Wallet.getCoins()).map((coin, i) => {
 					return (
 						<div
 							key={i}
@@ -68,12 +82,13 @@ const Coins = (props) => {
 						</div>
 					)
 				})}
+				{/*{updateCoinBalances()}*/}
 			</div>
 			<div className={classes.cardSpace}/>
 			<div className={classes.addCoinCard}>
 				{/*<h5*/}
-					{/*onClick={() => {actions.setDisplayView('add_coin')}}*/}
-					{/*style={{margin: '0px', cursor: 'pointer'}}>ADD COIN</h5>*/}
+				{/*onClick={() => {actions.setDisplayView('add_coin')}}*/}
+				{/*style={{margin: '0px', cursor: 'pointer'}}>ADD COIN</h5>*/}
 			</div>
 		</div>
 	</div>

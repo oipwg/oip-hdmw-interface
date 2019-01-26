@@ -4,22 +4,23 @@ import RenderAddressSection from "./Addresses"
 import RenderSendView from './Send'
 import RenderAddCoinView from './AddCoin'
 import RenderSettingsView from './Settings'
+import RenderTransactionView from './Transactions'
 
 const DisplayView = (props) => {
-	const {actions, classes, Interface, Settings} = props
+	const {actions, classes, Interface, Settings, Wallet} = props
 	
 	const renderDisplayBody = () => {
 		switch (Interface.displayView) {
 			case 'addresses':
 				return RenderAddressSection(props)
 			case 'transactions':
-				break
+				return <RenderTransactionView {...props} />
 			case 'send':
 				return <RenderSendView {...props}/>
 			case 'add_coin':
-				return <RenderAddCoinView actions={actions} Interface={Interface}/>
+				// return <RenderAddCoinView actions={actions} Interface={Interface}/>
 			case 'settings':
-				return <RenderSettingsView actions={actions} Interface={Interface} Settings={Settings}/>
+				return <RenderSettingsView actions={actions} Interface={Interface} Settings={Settings} Wallet={Wallet}/>
 			default:
 				return 'Invalid Display View'
 		}
@@ -67,8 +68,7 @@ const DisplayView = (props) => {
 			</div>
 		</div>
 		<div className={classes.detailsFooter}>
-			{/*{RenderAccountSection(this.props)}*/}
-			{/*<span className={classes.accountsTitle}>Accounts</span>*/}
+			{/**/}
 		</div>
 	</div>
 }

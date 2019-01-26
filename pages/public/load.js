@@ -21,10 +21,10 @@ import withLayout from '../../lib/withLayout'
 import LoadFormStyles from '../../styles/Load'
 import LoadWarningModalStyles from '../../styles/LoadWarningModal'
 //actions
-import {loadWallet} from '../../redux/actions/Interface'
+import {setMnemonic} from '../../redux/actions/HDMW/creators'
 
 let LoadWarning = (props) => {
-	const {open, classes, mnemonic, setLoadWarning, loadWallet} = props
+	const {open, classes, mnemonic, setLoadWarning, setMnemonic} = props
 	
 	return <Modal open={open} className={classes.modal}>
 		<Paper className={`${classes.paper}`} >
@@ -40,7 +40,7 @@ let LoadWarning = (props) => {
 					variant={'contained'}
 					color={'primary'}
 					onClick={() => {
-						loadWallet(mnemonic)
+						setMnemonic(mnemonic)
 					}}
 				>I understand</Button>
 			</Link>
@@ -59,18 +59,14 @@ let LoadWarning = (props) => {
 }
 
 const mapDispatchToProps = {
-	loadWallet
+	setMnemonic
 }
 
 // noinspection JSValidateTypes
 LoadWarning = connect(undefined, mapDispatchToProps)(withStyles(LoadWarningModalStyles)(LoadWarning))
 
 function LoadForm(props) {
-	const {classes, wallet} = props
-	
-	if (wallet) {
-		Router.push('/')
-	}
+	const {classes} = props
 	
 	const [mnemonic, setMnemonic] = useState('');
 	const [displayLoadWarning, setLoadWarning] = useState(false)
@@ -107,19 +103,6 @@ function LoadForm(props) {
 						type="submit"
 						fullWidth
 						variant="contained"
-						// disableFocusRipple={true}
-						// disableRipple={true}
-						className={`${classes.submit} ${classes.gmButton}`}
-						onClick={(e) => {
-							generateMnemonic(e)
-						}}
-					>
-						Generate Mnemonic
-					</Button>
-					<Button
-						type="submit"
-						fullWidth
-						variant="contained"
 						color="primary"
 						className={classes.submit}
 						onClick={(e) => {
@@ -130,10 +113,22 @@ function LoadForm(props) {
 					>
 						Load Wallet
 					</Button>
+					<Button
+						type="submit"
+						fullWidth
+						variant="contained"
+						// disableFocusRipple={true}
+						// disableRipple={true}
+						className={`${classes.submit} ${classes.gmButton}`}
+						onClick={(e) => {
+							generateMnemonic(e)
+						}}
+					>
+						Generate Mnemonic
+					</Button>
 				</form>
 				<LoadWarning
 					open={displayLoadWarning}
-					loadWallet={loadWallet}
 					mnemonic={mnemonic}
 					setLoadWarning={setLoadWarning}
 				/>
@@ -148,10 +143,6 @@ function LoadForm(props) {
 
 LoadForm.getInitialProps = async ({reduxStore}) => {
 	console.log('LoadForm.getInitialProps')
-	const state = reduxStore.getState()
-	if (state.Interface && state.Interface.wallet) {
-		return {wallet: state.Interface.wallet}
-	}
 	return {}
 }
 

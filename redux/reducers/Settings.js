@@ -1,13 +1,13 @@
-import * as actions from '../actions/Settings'
+import * as actions from '../actions/Settings/creators'
 
 const Settings = (state = {
-	showTestnetCoins: false,
+	toggleTestnetCoins: false,
 }, action) => {
 	switch (action.type) {
-		case actions.SHOW_TESTNET_COINS:
+		case actions.TOGGLE_TESTNET_COINS:
 			return {
 				...state,
-				showTestnetCoins: !state.showTestnetCoins
+				toggleTestnetCoins: !state.toggleTestnetCoins
 			}
 		default:
 			return state

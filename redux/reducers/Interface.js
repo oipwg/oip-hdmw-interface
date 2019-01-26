@@ -1,20 +1,32 @@
-import {Wallet as HDMW} from 'oip-hdmw'
-import {InterfaceActions as actions} from '../actions'
-import {initialState} from '../store'
+import * as actions from '../actions/Interface/creators'
 
-const Interface = (state = initialState, action) => {
+const Interface = (state = {
+	activeCoinName: 'bitcoin',
+	displayView: 'addresses',
+	
+	bitcoin: {
+		addresses: 1,
+		accounts: 1,
+		activeAccount: 0,
+		activeChain: 0,
+		activeAddress: 0,
+	},
+	flo: {
+		addresses: 1,
+		accounts: 1,
+		activeAccount: 0,
+		activeChain: 0,
+		activeAddress: 0,
+	},
+	litecoin: {
+		addresses: 1,
+		accounts: 1,
+		activeAccount: 0,
+		activeChain: 0,
+		activeAddress: 0,
+	},
+}, action) => {
 	switch (action.type) {
-		case actions.LOAD_WALLET:
-			return {
-				...state,
-				...initialState,
-				wallet: new HDMW(action.mnemonic, {discover: false}),
-				mnemonic: action.mnemonic,
-			}
-		case actions.SET_BALANCES:
-			return {
-				...state, balances: action.balances,
-			}
 		case actions.SET_DISPLAY_VIEW:
 			return {
 				...state, displayView: action.view,
@@ -53,21 +65,6 @@ const Interface = (state = initialState, action) => {
 			return {
 				...state,
 				...action.coinObject,
-			}
-		case actions.UPDATE_WALLET_TESTNET_COINS:
-			let _tmpWal = new HDMW(state.mnemonic, {discover: false})
-			if (action.addOrRemove)
-				_tmpWal.addTestnetCoins()
-			else
-				_tmpWal.removeTestnetCoins()
-			return {
-				...state,
-				wallet: _tmpWal
-			}
-		case actions.SET_EXCHANGE_RATES:
-			return {
-				...state,
-				exchangeRates: action.xr
 			}
 		default:
 			return state

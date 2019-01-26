@@ -1,6 +1,9 @@
-import * as InterfaceActions from './Interface'
-import * as SettingsActions from './Settings'
+import {InterfaceActions} from './Interface'
+import {SettingsActions} from './Settings'
+import {HDMWActions} from './HDMW'
+
 export {
 	InterfaceActions,
-	SettingsActions
+	SettingsActions,
+	HDMWActions
 }

@@ -1,18 +1,15 @@
 import React from 'react'
-
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-
-
 
 class SendView extends React.Component {
 	constructor(props) {
 		super(props)
 		
 		this.state = {
-			coinChecked: 'bitcoin',
+			coinChecked: props.Interface.activeCoinName,
 			address: '',
 			amount: ''
 		}
@@ -32,7 +29,7 @@ class SendView extends React.Component {
 		this.setState({amount: value})
 	}
 	
-	handleSendClick = (e, wallet) => {
+	handleSendClick = () => {
 		// e.preventDefault()
 		if (this.state.address === '' || this.state.amount === 0) {
 			alert('Please fill out fields')
@@ -42,11 +39,11 @@ class SendView extends React.Component {
 			to: {[this.state.address]: this.state.amount},
 			coin: this.state.coinChecked,
 		}
-		wallet.sendPayment(options).then(res => alert(res)).catch(err => alert(err))
+		this.props.Wallet.sendPayment(options).then(res => alert(res)).catch(err => alert(err))
 	}
 
 	render() {
-		const {classes, Interface} = this.props
+		const {classes, Wallet} = this.props
 		return (
 			<div className={classes.sendContainer}>
 				<div className={classes.sendHeader}>
@@ -54,7 +51,7 @@ class SendView extends React.Component {
 				</div>
 				<div className={classes.sendBody}>
 					<div className={classes.sendCoinSelection}>
-						{Object.keys(Interface.wallet.getCoins()).map((coin, i) => {
+						{Object.keys(Wallet.getCoins()).map((coin, i) => {
 							return (
 								<FormGroup key={i} row>
 									<FormControlLabel
@@ -100,7 +97,7 @@ class SendView extends React.Component {
 							color={'primary'}
 							variant={'outlined'}
 							className={classes.sendButton}
-							onClick={(e) => {this.handleSendClick(e, Interface.wallet)}}
+							onClick={() => {this.handleSendClick()}}
 						>Send</Button>
 					</div>
 				</div>

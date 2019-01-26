@@ -26,9 +26,9 @@ class Settings extends React.Component {
 									type='checkbox'
 									name="coinSetting"
 									value="showTestnetCoins"
-									checked={Settings.showTestnetCoins}
+									checked={Settings.toggleTestnetCoins}
 									onChange={() => {
-										actions.handleTestnetCoins(!Settings.showTestnetCoins)
+										actions.toggleTestnetCoins()
 									}}/>
 							</div>
 						</div>

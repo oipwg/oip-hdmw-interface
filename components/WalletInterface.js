@@ -5,45 +5,59 @@ import {Refresh} from '@material-ui/icons'
 import RenderCoinSection from './sections/Coins'
 import RenderDisplayView from './sections/DisplayView'
 
+const loading = '...loading',
+	error = 'error',
+	normal = 'normal'
+
 class WalletInterface extends React.Component {
 	constructor(props) {
 		super(props)
 		
 		this.state = {
 			detailsSearchValue: '',
+			balanceState: loading,
 		}
 	}
 	
 	handleRefresh = () => {
-		this.props.actions.fetchAndSetBalances()
-		this.props.actions.getExchangeRates()
+		this.props.actions.updateBalances(this.props.Wallet)
 	}
-
-	render() {
-		// console.log('WalletInterface.render')
-		const {classes, Interface} = this.props;
-		
-		let balances
-		let balanceColorStyle = {color: 'black'}
-		
-		if (Interface.balances) {
-			balances = 0
-			for (let coin in Interface.balances) {
-				if (coin.includes('_testnet')) {
-					break
-				}
-				if (typeof Interface.balances[coin] === 'number') {
-					balances += Interface.balances[coin]
-				} else {
-					balances = 'Error'
-					balanceColorStyle.color = 'red'
-					break;
-				}
-				balanceColorStyle.color = 'green'
+	
+	//toDo: THIS NEEDS TO GRAB FIAT BALANCES NOT CRYPTO BALANCES
+	getBalance = () => {
+		const {HDMW} = this.props
+		if (!HDMW.fiatBalances) {
+			return loading
+		}
+	
+		let total = 0
+		for (let coin in HDMW.fiatBalances) {
+			if (coin.includes('_testnet')) {
+				break
 			}
+			if (typeof HDMW.fiatBalances[coin] !== 'number') {
+				return error
+			}
+			total += HDMW.fiatBalances[coin]
 		}
 		
-		let displayBalances = balances === undefined ? '...loading' : `$${balances}`
+		return total
+	}
+	
+	getBalanceColorStyle = () => {
+		switch (this.getBalance()) {
+			case loading:
+				return {color: 'grey'}
+			case error:
+				return {color: 'red'}
+			default:
+				return {color: 'blue'}
+		}
+	}
+	
+	render() {
+		// console.log('WalletInterface.render')
+		const {classes} = this.props;
 	
 		return (
 			<div className={classes.walletContainer}>
@@ -52,12 +66,15 @@ class WalletInterface extends React.Component {
 						<div className={classes.walletHeader}>
 							<div className={classes.balanceContainer}>
 								<h4 style={{margin: '0px'}}>
-									<span style={balanceColorStyle}>Balance: {displayBalances}</span>
+									<span className={classes.balanceTag}>Balance: </span>
+									<span style={this.getBalanceColorStyle()}>${this.getBalance()}</span>
 								</h4>
 							</div>
 							
 							<Refresh
-								onClick={() => {this.handleRefresh()}}
+								onClick={() => {
+									this.handleRefresh()
+								}}
 								className={classes.refreshBalanceIcon}
 							/>
 						</div>
