@@ -14,22 +14,23 @@ class Settings extends React.Component {
 		super(props);
 		
 		this.state = {
-			coinNetworkApiUrls: {},
-			defaultCoinNetworkApiUrls: undefined
+			coinNetworkApiUrls: props.Wallet.getNetworkApiUrls(),
+			defaultCoinNetworkApiUrls: props.Wallet.getNetworkApiUrls()
 		}
 	}
 	
-	componentDidMount() {
-		let apiUrls = this.props.Wallet.getNetworkApiUrls()
-		this.setState({
-			coinNetworkApiUrls: apiUrls,
-			defaultCoinNetworkApiUrls: apiUrls
-		})
+	componentDidUpdate(prevProps, prevState) {
+		console.log('Settings.componentDidUpdate')
+		if (prevProps.Settings.toggleTestnetCoins !== this.props.Settings.toggleTestnetCoins) {
+			this.setState( {
+				coinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls(),
+				defaultCoinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls()
+			})
+		}
 	}
 	
 	handleApiUrlChange = (e) => {
-		let name = e.target.name
-		let coin = name.split('_')[0]
+		let coin = e.target.name
 		let api = e.target.value
 		let urls = {...this.state.coinNetworkApiUrls}
 		urls[coin] = api
@@ -118,8 +119,7 @@ class Settings extends React.Component {
 										className={classes.inputField}
 										type={'url'}
 										value={this.state.coinNetworkApiUrls[coin]}
-										placeholder={this.state.coinNetworkApiUrls[coin]}
-										name={`${coin}_explorerApi`}
+										name={`${coin}`}
 									/>
 								</div>
 							)
