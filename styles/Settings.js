@@ -32,6 +32,12 @@ const styles = theme => ({
 		// color: theme.palette.primary.light,
 		color: '#474a54',
 	},
+	flexWrap: {
+		flexWrap: 'wrap',
+	},
+	display_CoinName: {
+		marginRight: '10px',
+	},
 	settingCheckboxLeft: {
 		marginRight: '10px',
 	},

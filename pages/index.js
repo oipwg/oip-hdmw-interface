@@ -32,21 +32,25 @@ class Index extends React.Component {
 			this.props.updateBalances(this.Wallet)
 		}
 		//check if new coin were added
-		let newCoinsAdded = false
-		for (let coin of Object.keys(this.Wallet)) {
+		let newCoinsAdded = []
+		for (let coin of Object.keys(this.Wallet.getCoins())) {
 			if (!this.props.Interface[coin]) {
-				newCoinsAdded = true
-				break
+				newCoinsAdded.push(coin)
 			}
 		}
-		//if there were, create initial interface states for them
-		if (newCoinsAdded) {
+		//if there were, create initial interface states for them and set display to true
+		if (newCoinsAdded.length > 0) {
+			for (let coin of newCoinsAdded) {
+				this.props.displayCoin(coin)
+			}
 			this.props.createInitialCoinStates(this.Wallet)
 		}
 		//if the activeCoin is stale, default it to flo
 		if (!this.Wallet.getCoin(this.props.Interface.activeCoinName)) {
 			this.props.setActiveCoin('flo')
 		}
+		
+		
 	}
 	
 	render() {
@@ -83,6 +87,7 @@ class Index extends React.Component {
 	}
 }
 
+//auto map actions to props
 const mapDispatchToProps = {}
 for (let actionStore in _actions) {
 	// noinspection JSUnfilteredForInLoop
@@ -135,6 +140,7 @@ Index.propTypes = {
 	updateBalances: PropTypes.func.isRequired,
 	createInitialCoinStates: PropTypes.func.isRequired,
 	displayBalances: PropTypes.func.isRequired,
+	displayCoin: PropTypes.func.isRequired,
 };
 
 let component = withStyles(InterfaceStyles)(Index) //jss-css

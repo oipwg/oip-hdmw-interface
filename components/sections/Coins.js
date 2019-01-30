@@ -61,10 +61,12 @@ const Coins = (props) => {
 		}
 	})
 	
+	let coinsToDisplay = Object.keys(Wallet.getCoins()).filter(coin => Settings.displayCoins.includes(coin))
+	
 	return <div className={classes.coinWrapper}>
 		<div className={classes.coinScrollContainer}>
 			<div className={classes.coinList}>
-				{Object.keys(Wallet.getCoins()).map((coin, i) => {
+				{coinsToDisplay.map((coin, i) => {
 					return (
 						<div
 							key={i}
