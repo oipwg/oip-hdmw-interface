@@ -3,6 +3,7 @@ import {withStyles} from '@material-ui/core/styles';
 
 //styles
 import styles from '../../styles/Settings'
+import notifier from '../../lib/notifier'
 
 //easily concat jss classes. Two underscores to not get confused with lodash
 const __ = (...classes) => {
@@ -53,7 +54,20 @@ class Settings extends React.Component {
 			coinNetworkApiUrls: this.state.defaultCoinNetworkApiUrls
 		})
 	}
+	
+	saveSettings = () => {
+		let settings = this.props.Settings
+		try {
+			localStorage.setItem('hdmw_settings', JSON.stringify(settings))
+			notifier('Settings saved!')
+		} catch (err) {
+			notifier(`Error: ${err}`)
+			return false
+		}
+	}
+	
 	render() {
+		console.log('Settings.render()')
 		const {classes, actions, Settings, Wallet} = this.props
 		return (
 			<div className={classes.settingsWrapper}>
@@ -132,6 +146,18 @@ class Settings extends React.Component {
 							<input
 								onClick={this.handleApiUrlReset}
 								value={'Reset'}
+								type={'submit'}/>
+						</div>
+					</div>
+					<div className={classes.sectionDivider}/>
+					<div className={classes.settingContainer}>
+						<div className={classes.settingHeader}>
+							<h3 style={{margin: '0'}}>Save Settings</h3>
+						</div>
+						<div className={classes.settingRow}>
+							<input
+								onClick={this.saveSettings}
+								value={'Save'}
 								type={'submit'}/>
 						</div>
 					</div>
