@@ -134,6 +134,7 @@ Index.propTypes = {
 	toggleTestnetCoins: PropTypes.func.isRequired,
 	updateBalances: PropTypes.func.isRequired,
 	createInitialCoinStates: PropTypes.func.isRequired,
+	displayBalances: PropTypes.func.isRequired,
 };
 
 let component = withStyles(InterfaceStyles)(Index) //jss-css

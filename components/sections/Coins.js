@@ -17,7 +17,7 @@ const Coins = (props) => {
 		return coin === Interface.activeCoinName ? border : {}
 	}
 	
-	const getCoinInformation = (coin) => {
+	const displayBalances = (coin) => {
 		const {balances, exchangeRates} = HDMW
 		if (!balances || !exchangeRates) {
 			return null
@@ -77,12 +77,11 @@ const Coins = (props) => {
 						>
 							<div className={classes.coinInfoWrapper}>
 								<h4 className={classes.coinName}>{_.toUpper(coin)}</h4>
-								{getCoinInformation(coin)}
+								{Settings.displayBalances ? displayBalances(coin) : null}
 							</div>
 						</div>
 					)
 				})}
-				{/*{updateCoinBalances()}*/}
 			</div>
 			<div className={classes.cardSpace}/>
 			<div className={classes.addCoinCard}>

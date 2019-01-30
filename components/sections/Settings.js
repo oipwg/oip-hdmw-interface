@@ -8,35 +8,38 @@ class Settings extends React.Component {
 	render() {
 		const {classes, actions, Settings} = this.props
 		return (
-			<div className={classes.settingsContainer}>
-				<div className={classes.settingsHeader}>
-					<h4 className={classes.settingsHeaderTitle}>
-						Settings
-					</h4>
-				</div>
-				<div className={classes.settingsBody}>
-					<div className={classes.coinSettingsContainer}>
-						<div className={classes.coinSettingsHeader}>
+			<div className={classes.settingsWrapper}>
+				<div className={classes.settingsContainer}>
+					<div className={classes.settingContainer}>
+						<div className={classes.settingHeader}>
 							<h3 style={{margin: '0'}}>Coins</h3>
 						</div>
-						<div className={classes.coinSettings}>
-							<div className={classes.showTestnetCoins}>
-								<span>Display testnet coins</span>
-								<input
-									type='checkbox'
-									name="coinSetting"
-									value="showTestnetCoins"
-									checked={Settings.toggleTestnetCoins}
-									onChange={() => {
-										actions.toggleTestnetCoins()
-									}}/>
-							</div>
+						<div className={classes.settingRow}>
+							<input
+								className={classes.settingCheckboxLeft}
+								type='checkbox'
+								name="coinSetting"
+								value="showTestnetCoins"
+								checked={Settings.toggleTestnetCoins}
+								onChange={() => {
+									actions.toggleTestnetCoins()
+								}}/>
+							<span>Display testnet coins</span>
 						</div>
-					
+						<div className={classes.settingRow}>
+							<input
+								className={classes.settingCheckboxLeft}
+								type='checkbox'
+								name="displayBalances"
+								value="displayBalances"
+								checked={Settings.displayBalances}
+								onChange={() => {
+									actions.displayBalances()
+								}}/>
+							<span>Display balances</span>
+						</div>
 					</div>
-					<div className={classes.apiSettings}>
 					
-					</div>
 				</div>
 			</div>
 		)

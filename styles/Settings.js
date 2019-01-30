@@ -1,51 +1,39 @@
 const styles = theme => ({
+	settingsWrapper: {
+		display: 'flex',
+		flexDirection: 'column',
+		flex: '1 1 auto',
+	},
 	settingsContainer: {
 		display: 'flex',
 		flexDirection: 'column',
 		flex: '1 1 auto',
 		padding: '20px 50px',
 	},
-	settingsHeader: {
-		display: 'flex',
-		flexDirection: 'row',
-		flex: '0 1 50px',
-		color: theme.palette.primary.light,
-		justifyContent: 'flex-start',
-		alignItems: 'center',
-	},
-	settingsHeaderTitle: {
-		fontSize: '24px',
-		fontWeight: 'bold',
-	},
-	settingsBody: {
-		display: 'flex',
-		flexDirection: 'column',
-		flex: '1 1 auto',
-	},
-	coinSettingsContainer: {
+	settingContainer: {
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'center',
 	},
-	coinSettingsHeader: {
+	settingHeader: {
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
 		padding: '10px 0px',
-		color: theme.palette.primary.light,
+		borderBottom: '1px solid lightgrey',
+		marginBottom: '20px',
 	},
-	coinSettings: {
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-	},
-	showTestnetCoins: {
+	settingRow: {
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
+		padding: '3px 5px',
+		fontWeight: 'bold',
+		// color: theme.palette.primary.light,
+		color: '#474a54',
 	},
-	apiSettings: {
-	
+	settingCheckboxLeft: {
+		marginRight: '10px',
 	},
 })
 
