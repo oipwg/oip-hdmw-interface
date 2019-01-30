@@ -23,7 +23,9 @@ class Index extends React.Component {
 	}
 	componentDidMount() {
 		console.log('Index.componentDidMount')
-		this.props.updateBalances(this.Wallet)
+		if (this.props.shouldRefresh()) {
+			this.props.updateBalances(this.Wallet)
+		}
 	}
 	componentDidUpdate(prevProps) {
 		//check if new wallet needs to be created
@@ -49,8 +51,6 @@ class Index extends React.Component {
 		if (!this.Wallet.getCoin(this.props.Interface.activeCoinName)) {
 			this.props.setActiveCoin('flo')
 		}
-		
-		
 	}
 	
 	render() {
@@ -141,6 +141,7 @@ Index.propTypes = {
 	createInitialCoinStates: PropTypes.func.isRequired,
 	displayBalances: PropTypes.func.isRequired,
 	displayCoin: PropTypes.func.isRequired,
+	shouldRefresh: PropTypes.func.isRequired,
 	setCoinNetworkApis: PropTypes.func.isRequired,
 };
 

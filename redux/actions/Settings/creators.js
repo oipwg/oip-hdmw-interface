@@ -21,3 +21,8 @@ export const removeDisplayCoin = (displayCoin) => ({
 	displayCoin
 })
 
+export const SET_COIN_NETWORK_APIS = 'SET_COIN_NETWORK_APIS'
+export const setCoinNetworkApis = (coinNetworkApis) => ({
+	type: SET_COIN_NETWORK_APIS,
+	coinNetworkApis
+})

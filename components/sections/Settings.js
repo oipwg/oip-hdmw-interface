@@ -10,6 +10,48 @@ const __ = (...classes) => {
 }
 
 class Settings extends React.Component {
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			coinNetworkApiUrls: {},
+			defaultCoinNetworkApiUrls: undefined
+		}
+	}
+	
+	componentDidMount() {
+		let apiUrls = this.props.Wallet.getNetworkApiUrls()
+		this.setState({
+			coinNetworkApiUrls: apiUrls,
+			defaultCoinNetworkApiUrls: apiUrls
+		})
+	}
+	
+	handleApiUrlChange = (e) => {
+		let name = e.target.name
+		let coin = name.split('_')[0]
+		let api = e.target.value
+		let urls = {...this.state.coinNetworkApiUrls}
+		urls[coin] = api
+		this.setState({coinNetworkApiUrls: urls})
+	}
+	
+	handleApiUrlSubmit = () => {
+		this.props.Wallet.setNetworkApis(this.state.coinNetworkApiUrls)
+		//dispatch
+		this.props.actions.setCoinNetworkApis(this.state.coinNetworkApiUrls)
+	}
+	
+	handleApiUrlReset = () => {
+		//set wallet urls
+		this.props.Wallet.setNetworkApis(this.state.defaultCoinNetworkApiUrls)
+		//set redux urls
+		this.props.actions.setCoinNetworkApis(this.state.defaultCoinNetworkApiUrls)
+		//set state urls
+		this.setState({
+			coinNetworkApiUrls: this.state.defaultCoinNetworkApiUrls
+		})
+	}
 	render() {
 		const {classes, actions, Settings, Wallet} = this.props
 		return (
@@ -58,6 +100,39 @@ class Settings extends React.Component {
 									<span className={classes.display_CoinName}>{coin}</span>
 								</label>
 							})}
+						</div>
+					</div>
+					<div className={classes.sectionDivider}/>
+					<div className={classes.settingContainer}>
+						<div className={classes.settingHeader}>
+							<h3 style={{margin: '0'}}>APIs</h3>
+						</div>
+						{Object.keys(Wallet.getNetworkApiUrls()).map( (coin, i) => {
+							return (
+								<div key={i} className={__(classes.settingRow, classes.marginTB3)}>
+									<span
+									    className={classes.spanWidth120}
+									>{coin}</span>
+									<input
+										onChange={(e) => {this.handleApiUrlChange(e)}}
+										className={classes.inputField}
+										type={'url'}
+										value={this.state.coinNetworkApiUrls[coin]}
+										placeholder={this.state.coinNetworkApiUrls[coin]}
+										name={`${coin}_explorerApi`}
+									/>
+								</div>
+							)
+						})}
+						<div className={classes.settingRow}>
+							<input
+								onClick={this.handleApiUrlSubmit}
+								type={'submit'}/>
+							<div className={classes.marginLR3}/>
+							<input
+								onClick={this.handleApiUrlReset}
+								value={'Reset'}
+								type={'submit'}/>
 						</div>
 					</div>
 					

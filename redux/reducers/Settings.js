@@ -1,10 +1,13 @@
 import * as actions from '../actions/Settings/creators'
 
-const Settings = (state = {
+const initialState = {
 	toggleTestnetCoins: false,
 	displayBalances: true,
-	displayCoins: ['bitcoin', 'litecoin', 'flo']
-}, action) => {
+	displayCoins: ['bitcoin', 'litecoin', 'flo'],
+	customNetworkUrlApis: undefined,
+}
+
+const Settings = (state = initialState, action) => {
 	switch (action.type) {
 		case actions.TOGGLE_TESTNET_COINS:
 			return {
@@ -25,6 +28,11 @@ const Settings = (state = {
 			return {
 				...state,
 				displayCoins: removeItemFromArray(state.displayCoins, action.displayCoin)
+			}
+		case actions.SET_COIN_NETWORK_APIS:
+			return {
+				...state,
+				customNetworkUrlApis: action.coinNetworkApis
 			}
 		default:
 			return state

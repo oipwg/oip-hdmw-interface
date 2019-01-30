@@ -41,6 +41,23 @@ const styles = theme => ({
 	settingCheckboxLeft: {
 		marginRight: '10px',
 	},
+	sectionDivider: {
+		margin: '10px 0px'
+	},
+	inputField: {
+		margin: '0px 10px',
+		width: '300px',
+	},
+	spanWidth120: {
+		width: '120px',
+	},
+	marginTB3: {
+		margin: '3px 0px',
+	},
+	marginLR3: {
+		margin: '0px 3px',
+	},
+	
 })
 
 export default styles
