@@ -6,6 +6,8 @@ const HDMW = (state = {
 	balances: undefined,
 	fiatBalances: undefined,
 	exchangeRates: undefined,
+	refreshLimit: 15000, // 15 seconds
+	lastRefresh: 0,
 }, action) => {
 	switch (action.type) {
 		case actions.SET_MNEMONIC:
@@ -35,6 +37,12 @@ const HDMW = (state = {
 			return {
 				...state,
 				exchangeRates: action.xr
+			}
+		}
+		case actions.SET_LAST_REFRESH: {
+			return {
+				...state,
+				lastRefresh: action.refreshTimestamp
 			}
 		}
 		default:

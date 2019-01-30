@@ -141,6 +141,7 @@ Index.propTypes = {
 	createInitialCoinStates: PropTypes.func.isRequired,
 	displayBalances: PropTypes.func.isRequired,
 	displayCoin: PropTypes.func.isRequired,
+	setCoinNetworkApis: PropTypes.func.isRequired,
 };
 
 let component = withStyles(InterfaceStyles)(Index) //jss-css

@@ -27,3 +27,9 @@ export const setExchangeRates = (xr) => ({
 	type: SET_EXCHANGE_RATES,
 	xr
 })
+
+export const SET_LAST_REFRESH = 'SET_LAST_REFRESH'
+export const setLastRefresh = (refreshTimestamp) => ({
+	type: SET_LAST_REFRESH,
+	refreshTimestamp
+})

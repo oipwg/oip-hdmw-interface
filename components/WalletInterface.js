@@ -4,6 +4,7 @@ import {Refresh} from '@material-ui/icons'
 
 import RenderCoinSection from './sections/Coins'
 import RenderDisplayView from './sections/DisplayView'
+import notifier from '../lib/notifier'
 
 const loading = '...loading',
 	error = 'error',
@@ -20,10 +21,13 @@ class WalletInterface extends React.Component {
 	}
 	
 	handleRefresh = () => {
-		this.props.actions.updateBalances(this.props.Wallet)
+		if (this.props.actions.shouldRefresh()) {
+			this.props.actions.updateBalances(this.props.Wallet)
+		} else {
+			notifier('Refresh capped, please wait up to 15 seconds')
+		}
 	}
 	
-	//toDo: THIS NEEDS TO GRAB FIAT BALANCES NOT CRYPTO BALANCES
 	getBalance = () => {
 		const {HDMW} = this.props
 		if (!HDMW.fiatBalances) {

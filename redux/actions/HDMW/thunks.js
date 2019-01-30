@@ -1,4 +1,4 @@
-import {setBalances, setExchangeRates, setFiatBalances} from "./creators";
+import {setBalances, setExchangeRates, setFiatBalances, setLastRefresh} from "./creators";
 
 export const fetchAndSetBalances = (wallet) => async (dispatch) => {
 	const balances = await wallet.getCoinBalances()
@@ -46,4 +46,13 @@ export const updateBalances = (wallet) => async (dispatch) => {
 	dispatch(setBalances(balances))
 	dispatch(setExchangeRates(xr))
 	dispatch(setFiatBalances(fiatBalances))
+	dispatch(setLastRefresh(Date.now()))
+}
+
+export const shouldRefresh = (force) => (dispatch, getState) => {
+	const {lastRefresh, refreshLimit} = getState().HDMW
+	if (force) {
+		return true
+	}
+	return (Date.now() - refreshLimit) >= lastRefresh;
 }
