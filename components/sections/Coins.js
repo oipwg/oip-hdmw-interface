@@ -5,9 +5,6 @@ import {withTheme} from '@material-ui/core/styles';
 const Coins = (props) => {
 	const {classes, HDMW, Wallet, Interface, actions, Settings, theme} = props
 	
-	// noinspection JSUnresolvedFunction
-	Wallet.addTestnetCoins(Settings.toggleTestnetCoins)
-	
 	const selectedCoinBorder = (coin) => {
 		let border = {
 			borderLeft: `1px solid ${theme.palette.primary.main}`,
@@ -17,6 +14,7 @@ const Coins = (props) => {
 		return coin === Interface.activeCoinName ? border : {}
 	}
 	
+	//ToDo: refactor to use redux balances
 	const displayBalances = (coin) => {
 		const {balances, exchangeRates} = HDMW
 		if (!balances || !exchangeRates) {
@@ -52,6 +50,7 @@ const Coins = (props) => {
 	}
 	
 	const [isShowingTestnetCoins, toggleTNC] = useState(false)
+	//this runs AFTER render
 	useEffect(() => {
 		if (isShowingTestnetCoins !== Settings.toggleTestnetCoins) {
 			toggleTNC(Settings.toggleTestnetCoins)
@@ -61,8 +60,9 @@ const Coins = (props) => {
 		}
 	})
 	
+	//filter out coins that are set not to be displayed
 	const coinsToDisplay = Object.keys(Wallet.getCoins()).filter(coin => Settings.displayCoins.includes(coin))
-	
+	console.log('Coins.render()')
 	return <div className={classes.coinWrapper}>
 		<div className={classes.coinScrollContainer}>
 			<div className={classes.coinList}>

@@ -28,6 +28,7 @@ class Index extends React.Component {
 		}
 	}
 	componentDidUpdate(prevProps) {
+		console.log('Index.componentDidUpdate')
 		//check if new wallet needs to be created
 		if (this.props.HDMW.mnemonic !== prevProps.HDMW.mnemonic) {
 			this.Wallet = new Wallet(this.props.HDMW.mnemonic, {discover: this.props.HDMW.discover})
@@ -51,10 +52,14 @@ class Index extends React.Component {
 		if (!this.Wallet.getCoin(this.props.Interface.activeCoinName)) {
 			this.props.setActiveCoin('flo')
 		}
+		//if the apis changed
+		if (prevProps.Settings.coinNetworkApiUrls !== this.props.Settings.coinNetworkApiUrls) {
+			this.Wallet.setNetworkApis(this.props.Settings.coinNetworkApiUrls)
+		}
 	}
 	
 	render() {
-		// console.log('Index.render')
+		console.log('Index.render')
 		const {
 			classes,
 			Interface,

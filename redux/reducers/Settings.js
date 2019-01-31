@@ -1,10 +1,11 @@
+import {Wallet} from 'oip-hdmw'
 import * as actions from '../actions/Settings/creators'
 
 const initialState = {
 	toggleTestnetCoins: false,
 	displayBalances: true,
 	displayCoins: ['bitcoin', 'litecoin', 'flo'],
-	customNetworkUrlApis: undefined,
+	coinNetworkApiUrls: Wallet.getDefaultNetworkApiUrls(),
 }
 
 const Settings = (state = initialState, action) => {
@@ -32,7 +33,7 @@ const Settings = (state = initialState, action) => {
 		case actions.SET_COIN_NETWORK_APIS:
 			return {
 				...state,
-				customNetworkUrlApis: action.coinNetworkApis
+				coinNetworkApiUrls: {...state.coinNetworkApiUrls, ...action.coinNetworkApis}
 			}
 		default:
 			return state

@@ -14,18 +14,36 @@ class Settings extends React.Component {
 	constructor(props) {
 		super(props);
 		
+		this.defaultNetworkApiUrls = props.Settings.coinNetworkApiUrls
+		
 		this.state = {
-			coinNetworkApiUrls: props.Wallet.getNetworkApiUrls(),
-			defaultCoinNetworkApiUrls: props.Wallet.getNetworkApiUrls()
+			coinNetworkApiUrls: this.defaultNetworkApiUrls,
 		}
+	}
+	
+	componentDidMount() {
+		console.log('Settings.componentDidMount()')
 	}
 	
 	componentDidUpdate(prevProps, prevState) {
 		console.log('Settings.componentDidUpdate')
+		//set: state -> redux -> component
+		//reset: redux -> component -> state
+		
+		//if there was a change in the redux settings
+		if (prevProps.Settings.coinNetworkApiUrls !== this.props.Settings.coinNetworkApiUrls) {
+			//and the settings don't match the state as in a reset situation
+			if (this.props.Settings.coinNetworkApiUrls !== this.state.coinNetworkApiUrls) {
+				//then update the state to match the props
+				this.setState({
+					coinNetworkApiUrls: this.props.Settings.coinNetworkApiUrls
+				})
+			}
+		}
 		if (prevProps.Settings.toggleTestnetCoins !== this.props.Settings.toggleTestnetCoins) {
-			this.setState( {
-				coinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls(),
-				defaultCoinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls()
+			this.props.Wallet.addTestnetCoins(this.props.Settings.toggleTestnetCoins)
+			this.setState({
+				coinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls()
 			})
 		}
 	}
@@ -39,20 +57,17 @@ class Settings extends React.Component {
 	}
 	
 	handleApiUrlSubmit = () => {
-		this.props.Wallet.setNetworkApis(this.state.coinNetworkApiUrls)
-		//dispatch
 		this.props.actions.setCoinNetworkApis(this.state.coinNetworkApiUrls)
 	}
 	
 	handleApiUrlReset = () => {
-		//set wallet urls
-		this.props.Wallet.setNetworkApis(this.state.defaultCoinNetworkApiUrls)
-		//set redux urls
-		this.props.actions.setCoinNetworkApis(this.state.defaultCoinNetworkApiUrls)
-		//set state urls
+		//this is needed so that when the prevProps are default and the current props are default,
+		//but the state is out of sync, we sync it up
 		this.setState({
-			coinNetworkApiUrls: this.state.defaultCoinNetworkApiUrls
+			coinNetworkApiUrls: this.defaultNetworkApiUrls
 		})
+		//dispatch
+		this.props.actions.setCoinNetworkApis(this.defaultNetworkApiUrls)
 	}
 	
 	saveSettings = () => {
@@ -69,6 +84,7 @@ class Settings extends React.Component {
 	render() {
 		console.log('Settings.render()')
 		const {classes, actions, Settings, Wallet} = this.props
+		
 		return (
 			<div className={classes.settingsWrapper}>
 				<div className={classes.settingsContainer}>
@@ -122,7 +138,7 @@ class Settings extends React.Component {
 						<div className={classes.settingHeader}>
 							<h3 style={{margin: '0'}}>APIs</h3>
 						</div>
-						{Object.keys(Wallet.getNetworkApiUrls()).map( (coin, i) => {
+						{Object.keys(Wallet.getCoins()).map( (coin, i) => {
 							return (
 								<div key={i} className={__(classes.settingRow, classes.marginTB3)}>
 									<span
@@ -161,7 +177,6 @@ class Settings extends React.Component {
 								type={'submit'}/>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 		)
