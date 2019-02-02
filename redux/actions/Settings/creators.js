@@ -9,20 +9,15 @@ export const displayBalances = () => ({
 	type: DISPLAY_BALANCES
 })
 
-export const ADD_DISPLAY_COIN = 'ADD_DISPLAY_COIN'
-export const addDisplayCoin = (displayCoin) => ({
-	type: ADD_DISPLAY_COIN,
-	displayCoin
-})
-
-export const REMOVE_DISPLAY_COIN = 'REMOVE_DISPLAY_COIN'
-export const removeDisplayCoin = (displayCoin) => ({
-	type: REMOVE_DISPLAY_COIN,
-	displayCoin
-})
-
 export const SET_COIN_NETWORK_APIS = 'SET_COIN_NETWORK_APIS'
 export const setCoinNetworkApis = (coinNetworkApis) => ({
 	type: SET_COIN_NETWORK_APIS,
 	coinNetworkApis
+})
+
+export const LOAD_FROM_LOCAL_STORAGE = 'LOAD_FROM_LOCAL_STORAGE'
+export const loadFromLocalStorage = (settingsObject) => ({
+	type: LOAD_FROM_LOCAL_STORAGE,
+	settingsObject
+	
 })

@@ -5,9 +5,9 @@ import notifier from '../../lib/notifier'
 
 const Addresses = (props) => {
 	// console.log('Addresses()')
-	const {classes, Interface, actions, Wallet} = props
+	const {classes, Interface, actions, Wallet, increaseAddressCount} = props
 	
-	const activeCoin = Interface.activeCoinName
+	const activeCoin = Interface.activeCoin
 	const coinProperties = Interface[activeCoin]
 	
 	let addresses = []
@@ -18,7 +18,7 @@ const Addresses = (props) => {
 	}
 	
 	new ClipboardJS('.copy-to-clipboard')
-	
+	console.log("Addresses.render()")
 	return (
 		<div className={classes.addressContainer}>
 				{addresses.map((addr, i) => (
@@ -40,7 +40,7 @@ const Addresses = (props) => {
 				<div className={classes.showExtraAddressContainer}>
 					<span
 						className={classes.showExtraAddress}
-						onClick={() => {actions.increaseAddressCount()}}>
+						onClick={() => {increaseAddressCount()}}>
 						+ Show new address
 					</span>
 				</div>

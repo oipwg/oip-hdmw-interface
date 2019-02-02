@@ -1,58 +1,43 @@
-import {setBalances, setExchangeRates, setFiatBalances, setLastRefresh} from "./creators";
+import {setCoinBalance, setCoinBalances, setExchangeRates} from "./creators";
 
-export const fetchAndSetBalances = (wallet) => async (dispatch) => {
-	const balances = await wallet.getCoinBalances()
-	dispatch(setBalances(balances))
+export const updateCoinBalance = (coin, wallet, force = false) => async (dispatch, getState) => {
+	if (dispatch(shouldUpdate(coin)) || force) {
+		let balance = await wallet.getCoinBalances({coins: [coin]})
+		dispatch(setCoinBalance(coin, balance))
+	}
 }
 
-export const fetchAndSetExchangeRates = (wallet) => async (dispatch) => {
-	let coins = Object.keys(wallet.getCoins())
-
-	let xr = await wallet.getExchangeRates({coins})
-	
-	// set the testnet coin rates to the mainnet coin rates
-	for (let coin of Object.keys(wallet.getCoins())) {
-		if (coin.includes('_testnet')) {
-			let coinSplit = coin.split('_')
-			xr[coin] = xr[coinSplit[0]]
-		}
+export const updateExchangeRates = (wallet, coins) => async dispatch => {
+	if (dispatch(shouldUpdate('xr'))) {
+		let options = {}
+		if (coins)
+			options.coins = coins
+		let xr = await wallet.getExchangeRates(options)
+		dispatch(setExchangeRates(xr))
 	}
-	dispatch(setExchangeRates(xr))
 }
 
-export const updateBalances = (wallet) => async (dispatch) => {
-	const balances = await wallet.getCoinBalances()
-	let xr = await wallet.getExchangeRates()
-	
-	// set the testnet coin rates to the mainnet coin rates
-	for (let coin of Object.keys(wallet.getCoins())) {
-		if (coin.includes('_testnet')) {
-			let coinSplit = coin.split('_')
-			xr[coin] = xr[coinSplit[0]]
+export const updateBalances = (wallet, coins) => async (dispatch) => {
+	let _coins = coins ? coins : Object.keys(wallet.getCoins())
+	if (typeof _coins === 'string') {
+		_coins = [_coins]
+	}
+	let coinsToFetchBalances = []
+	for (let coin of _coins) {
+		if (dispatch(shouldUpdate(coin))) {
+			coinsToFetchBalances.push(coin)
 		}
 	}
+	let balances = await wallet.getCoinBalances({coins: coinsToFetchBalances})
+	dispatch(setCoinBalances(balances))
 	
-	let fiatBalances = {}
-	for (let coinB in balances) {
-		for (let coinX in xr) {
-			if (coinB === coinX) {
-				if (typeof balances[coinB] === 'number' && typeof xr[coinX] === 'number') {
-					fiatBalances[coinB] = balances[coinB] * xr[coinX]
-				} else {fiatBalances[coinB] = 'error'}
-			}
-		}
-	}
-
-	dispatch(setBalances(balances))
-	dispatch(setExchangeRates(xr))
-	dispatch(setFiatBalances(fiatBalances))
-	dispatch(setLastRefresh(Date.now()))
+	dispatch(updateExchangeRates(wallet, _coins)) // toDo: move into new func?
 }
 
-export const shouldRefresh = (force) => (dispatch, getState) => {
-	const {lastRefresh, refreshLimit} = getState().HDMW
-	if (force) {
+export const shouldUpdate = name => (undefined, getState) => {
+	const {Settings, HDMW} = getState()
+	if (!HDMW.lastUpdate[name]) {
 		return true
 	}
-	return (Date.now() - refreshLimit) >= lastRefresh;
+	return (Date.now() - Settings.refreshLimit) >= HDMW.lastUpdate[name];
 }

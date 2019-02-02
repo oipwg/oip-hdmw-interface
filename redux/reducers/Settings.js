@@ -4,8 +4,8 @@ import * as actions from '../actions/Settings/creators'
 const initialState = {
 	toggleTestnetCoins: false,
 	displayBalances: true,
-	displayCoins: ['bitcoin', 'litecoin', 'flo'],
 	coinNetworkApiUrls: Wallet.getDefaultNetworkApiUrls(),
+	refreshLimit: 15000, // 15 seconds
 }
 
 const Settings = (state = initialState, action) => {
@@ -20,20 +20,15 @@ const Settings = (state = initialState, action) => {
 				...state,
 				displayBalances: !state.displayBalances
 			}
-		case actions.ADD_DISPLAY_COIN:
-			return {
-				...state,
-				displayCoins: [...state.displayCoins, action.displayCoin]
-			}
-		case actions.REMOVE_DISPLAY_COIN:
-			return {
-				...state,
-				displayCoins: removeItemFromArray(state.displayCoins, action.displayCoin)
-			}
 		case actions.SET_COIN_NETWORK_APIS:
 			return {
 				...state,
 				coinNetworkApiUrls: {...state.coinNetworkApiUrls, ...action.coinNetworkApis}
+			}
+		case actions.LOAD_FROM_LOCAL_STORAGE:
+			return {
+				...state,
+				...action.settingsObject
 			}
 		default:
 			return state
@@ -41,5 +36,3 @@ const Settings = (state = initialState, action) => {
 }
 
 export default Settings
-
-const removeItemFromArray = (originalArray, itemToRemove) => originalArray.filter(item => item !== itemToRemove)

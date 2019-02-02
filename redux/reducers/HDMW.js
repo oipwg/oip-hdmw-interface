@@ -2,12 +2,9 @@ import * as actions from '../actions/HDMW/creators'
 
 const HDMW = (state = {
 	mnemonic: undefined,
-	discover: false,
-	balances: undefined,
-	fiatBalances: undefined,
-	exchangeRates: undefined,
-	refreshLimit: 15000, // 15 seconds
-	lastRefresh: 0,
+	balances: {},
+	exchangeRates: {},
+	lastUpdate: {}, //for coin balances
 }, action) => {
 	switch (action.type) {
 		case actions.SET_MNEMONIC:
@@ -15,34 +12,30 @@ const HDMW = (state = {
 				...state,
 				mnemonic: action.mnemonic
 			}
-		case actions.SET_DISCOVER: {
-			return {
-				...state,
-				discover: action.discover
-			}
-		}
-		case actions.SET_BALANCES: {
-			return {
-				...state,
-				balances: action.balances,
-			}
-		}
-		case actions.SET_FIAT_BALANCES: {
-			return {
-				...state,
-				fiatBalances: action.fiatBalances
-			}
-		}
 		case actions.SET_EXCHANGE_RATES: {
 			return {
 				...state,
-				exchangeRates: action.xr
+				exchangeRates: {...state.exchangeRates, ...action.xr},
+				lastUpdate: {...state.lastUpdate, xr: Date.now()}
 			}
 		}
-		case actions.SET_LAST_REFRESH: {
+		case actions.SET_COIN_BALANCE: {
 			return {
 				...state,
-				lastRefresh: action.refreshTimestamp
+				balances: {...state.balances, [action.coin]: action.balance},
+				lastUpdate: {...state.lastUpdate, [action.coin]: Date.now()}
+			}
+		}
+		case actions.SET_COIN_BALANCES: {
+			let coins = Object.keys(action.balances)
+			let updateObject = {}
+			for (let coin of coins) {
+				updateObject[coin] = Date.now()
+			}
+			return {
+				...state,
+				balances: {...state.balances, ...action.balances},
+				lastUpdate: {...state.lastUpdate, ...updateObject}
 			}
 		}
 		default:

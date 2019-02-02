@@ -110,8 +110,51 @@ const getStyles = (theme) => {
 		},
 	}
 	
-	const detailsHeader = {
-		detailsHeader: {
+	const displayContainer = {
+		displayContainer: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 auto',
+			// backgroundColor: 'yellow',
+		},
+		displayBodyWrapper: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 auto',
+			// backgroundColor: 'blue',
+		},
+		displayBodyLayout: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 0%',
+			padding: '0px 24px',
+		},
+		displayBody: {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: '1 1 0%',
+			borderRight: '1px solid rgb(218, 225, 233)',
+			borderLeft: '1px solid rgb(218, 225, 233)',
+			backgroundColor: 'white',
+		},
+		
+	}
+	
+	const displayFooter = {
+		displayFooter: {
+			display: 'flex',
+			flexDirection: 'row',
+			flex: '0 0 50px',
+			// backgroundColor: 'red',
+			justifyContent: 'flex-start',
+			alignItems: 'center',
+			padding: '0px 16px 0px 24px',
+			borderTop: '1px solid rgb(218, 225, 233)',
+		},
+	}
+	
+	const displayHeader = {
+		displayHeader: {
 			display: 'flex',
 			flexDirection: 'row',
 			flex: '0 0 50px',
@@ -124,32 +167,6 @@ const getStyles = (theme) => {
 		viewLink: {
 			padding: '0px 10px',
 			color: theme.palette.primary.dark,
-		},
-		detailsSearch: {
-			marginLeft: 'auto',
-		},
-	}
-	
-	const displayBody = {
-		displayWrapper: {
-			display: 'flex',
-			flexDirection: 'column',
-			flex: '1 1 auto',
-			// backgroundColor: 'blue',
-		},
-		displayContainer: {
-			display: 'flex',
-			flexDirection: 'column',
-			flex: '1 1 0%',
-			padding: '0px 24px',
-		},
-		displayLayout: {
-			display: 'flex',
-			flexDirection: 'column',
-			flex: '1 1 0%',
-			borderRight: '1px solid rgb(218, 225, 233)',
-			borderLeft: '1px solid rgb(218, 225, 233)',
-			backgroundColor: 'white',
 		},
 	}
 	
@@ -220,34 +237,6 @@ const getStyles = (theme) => {
 		sendAddressInputField: {
 			padding: '6px',
 			width: '283px'
-		},
-	}
-	
-	const detailsFooter = {
-		detailsFooter: {
-			display: 'flex',
-			flexDirection: 'row',
-			flex: '0 0 50px',
-			// backgroundColor: 'red',
-			justifyContent: 'flex-start',
-			alignItems: 'center',
-			padding: '0px 16px 0px 24px',
-			borderTop: '1px solid rgb(218, 225, 233)',
-		},
-		accountsTitle: {
-			fontWeight: 'bold',
-			padding: '0px 10px',
-			marginLeft: 'auto',
-			cursor: 'default'
-		},
-	}
-	
-	const detailsWrapper = {
-		detailsWrapper: {
-			display: 'flex',
-			flexDirection: 'column',
-			flex: '1 1 auto',
-			// backgroundColor: 'yellow',
 		},
 	}
 	
@@ -398,10 +387,9 @@ const getStyles = (theme) => {
 		...walletHeader,
 		...sectionWrapper,
 		...coinSection,
-		...detailsWrapper,
-		...detailsHeader,
-		...displayBody,
-		...detailsFooter,
+		...displayHeader,
+		...displayContainer,
+		...displayFooter,
 		...accountSection,
 		...addressSection,
 		...sendView,

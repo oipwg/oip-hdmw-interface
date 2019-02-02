@@ -13,6 +13,7 @@ const __ = (...classes) => {
 class Settings extends React.Component {
 	constructor(props) {
 		super(props);
+		console.log('Settings.constructor')
 		
 		this.defaultNetworkApiUrls = props.Settings.coinNetworkApiUrls
 		
@@ -22,7 +23,7 @@ class Settings extends React.Component {
 	}
 	
 	componentDidMount() {
-		console.log('Settings.componentDidMount()')
+		console.log('Settings.componentDidMount')
 	}
 	
 	componentDidUpdate(prevProps, prevState) {
@@ -41,7 +42,6 @@ class Settings extends React.Component {
 			}
 		}
 		if (prevProps.Settings.toggleTestnetCoins !== this.props.Settings.toggleTestnetCoins) {
-			this.props.Wallet.addTestnetCoins(this.props.Settings.toggleTestnetCoins)
 			this.setState({
 				coinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls()
 			})
@@ -80,9 +80,9 @@ class Settings extends React.Component {
 			return false
 		}
 	}
-	
+	//toDo move all mapping of coins to redux
 	render() {
-		console.log('Settings.render()')
+		console.log('Settings.render')
 		const {classes, actions, Settings, Wallet} = this.props
 		
 		return (
@@ -97,10 +97,9 @@ class Settings extends React.Component {
 								className={classes.settingCheckboxLeft}
 								type='checkbox'
 								name="coinSetting"
-								value="showTestnetCoins"
 								checked={Settings.toggleTestnetCoins}
 								onChange={() => {
-									actions.toggleTestnetCoins()
+									actions.toggleTestnetCoins(!Settings.toggleTestnetCoins)
 								}}/>
 							<span>Testnet coins</span>
 						</div>
