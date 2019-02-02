@@ -1,5 +1,8 @@
 import React from "react";
+import {withStyles} from "@material-ui/core";
 import moment from 'moment';
+
+import styles from '../../../styles/views/dumb/Transactions'
 
 class Transactions extends React.Component {
 	constructor(props) {
@@ -63,4 +66,4 @@ class Transactions extends React.Component {
 	}
 }
 
-export default Transactions
+export default withStyles(Transactions)

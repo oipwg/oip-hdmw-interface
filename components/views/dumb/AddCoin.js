@@ -2,7 +2,7 @@ import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 
 //styles
-import styles from '../../styles/AddCoin'
+import styles from '../../../styles/views/dumb/AddCoin'
 
 class AddCoin extends React.Component {
 	constructor(props) {

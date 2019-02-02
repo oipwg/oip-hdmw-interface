@@ -1,4 +1,7 @@
 import React from "react";
+import {withStyles} from "@material-ui/core";
+
+import styles from '../../../styles/views/dumb/Accounts'
 
 const Accounts = (props) => {
 	// console.log('Accounts()')
@@ -38,4 +41,4 @@ const Accounts = (props) => {
 	)
 }
 
-export default Accounts
+export default withStyles(styles)(Accounts)

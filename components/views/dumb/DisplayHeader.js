@@ -1,4 +1,7 @@
 import React from 'react'
+import {withStyles} from "@material-ui/core";
+
+import styles from '../../../styles/views/dumb/DisplayHeader'
 
 function DisplayHeader(props) {
 	const {classes, setActiveView, activeView} = props
@@ -23,4 +26,4 @@ function DisplayHeader(props) {
 	</div>
 }
 
-export default DisplayHeader
+export default withStyles(styles)(DisplayHeader)

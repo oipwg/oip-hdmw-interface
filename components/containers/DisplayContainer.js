@@ -2,25 +2,30 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-import {withStyles} from "@material-ui/core";
-import InterfaceStyles from '../../styles/WalletInterface'
+import DisplayWrapper from "../views/wrappers/DisplayWrapper";
+import RenderAddresses from "../views/dumb/Addresses"
+import RenderSendView from '../views/dumb/Send'
+import RenderTransactionView from '../views/dumb/Transactions'
+import RenderSettings from '../views/dumb/Settings'
 
-import RenderAddressSection from "../views/Addresses"
-import RenderSendView from '../views/Send'
-import RenderSettingsView from '../views/Settings'
-import RenderTransactionView from '../views/Transactions'
-import DisplayInterface from "../views/DisplayInterface";
-
-//action
+//Interface actions
 import {setActiveView, increaseAddressCount} from '../../redux/actions/Interface/creators'
+//Settings actions/thunks
+import {setCoinNetworkApis, toggleTestnetCoins, displayBalances} from "../../redux/actions/Settings/creators";
+import {displayCoin} from '../../redux/actions/Settings/thunks'
 
 class DisplayContainer extends React.Component {
 	getDisplayBody = (props) => {
-		const {classes, Interface, Wallet, increaseAddressCount} = props
+		const {Interface, Wallet, Settings} = props
 		
 		switch (this.props.Interface.activeView) {
 			case 'addresses':
-				return RenderAddressSection({classes, Interface, Wallet, increaseAddressCount})
+				return <RenderAddresses
+					Interface={Interface}
+					Wallet={Wallet}
+					increaseAddressCount={this.props.increaseAddressCount}
+				/>
+			
 			// case 'transactions':
 			// 	return <RenderTransactionView
 			// 		{/*{...props} */}
@@ -31,20 +36,23 @@ class DisplayContainer extends React.Component {
 			// 	/>
 			// case 'add_coin':
 			// // return <RenderAddCoinView actions={actions} Interface={Interface}/>
-			// case 'settings':
-			// 	return <RenderSettingsView
-			// 		// actions={actions}
-			// 		// Interface={Interface}
-			// 		// Settings={Settings}
-			// 		// Wallet={Wallet}
-			// 	/>
+			case 'settings':
+				return <RenderSettings
+					Interface={Interface}
+					Wallet={Wallet}
+					Settings={Settings}
+					setCoinNetworkApis={this.props.setCoinNetworkApis}
+					toggleTestnetCoins={this.props.toggleTestnetCoins}
+					addDisplayCoin={this.props.displayCoin}
+					displayBalances={this.props.displayBalances}
+				/>
 			default:
 				return 'Invalid Display View'
 		}
 	}
+	
 	render() {
-		return <DisplayInterface
-			classes={this.props.classes}
+		return <DisplayWrapper
 			setActiveView={this.props.setActiveView}
 			activeView={this.props.Interface.activeView}
 			DisplayBody={this.getDisplayBody(this.props)}
@@ -54,7 +62,11 @@ class DisplayContainer extends React.Component {
 
 const mapDispatchToProps = {
 	setActiveView,
-	increaseAddressCount
+	increaseAddressCount,
+	setCoinNetworkApis,
+	displayBalances,
+	displayCoin,
+	toggleTestnetCoins
 }
 
 const mapStateToProps = (state) => {
@@ -66,8 +78,6 @@ const mapStateToProps = (state) => {
 }
 
 DisplayContainer.propTypes = {
-	//jss
-	classes: PropTypes.object.isRequired,
 	//store
 	Interface: PropTypes.object.isRequired,
 	Settings: PropTypes.object.isRequired,
@@ -75,9 +85,10 @@ DisplayContainer.propTypes = {
 	//actions
 	setActiveView: PropTypes.func.isRequired,
 	increaseAddressCount: PropTypes.func.isRequired,
+	setCoinNetworkApis: PropTypes.func.isRequired,
+	toggleTestnetCoins: PropTypes.func.isRequired,
+	displayCoin: PropTypes.func.isRequired,
+	displayBalances: PropTypes.func.isRequired,
 };
 
-let component = withStyles(InterfaceStyles)(DisplayContainer) //jss-css
-component = connect(mapStateToProps, mapDispatchToProps)(component) //redux
-
-export default component
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayContainer)

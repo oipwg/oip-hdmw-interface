@@ -1,6 +1,9 @@
 import React from 'react'
 import _ from 'lodash'
 import {Refresh} from "@material-ui/icons";
+import {withStyles} from "@material-ui/core";
+
+import styles from '../../../styles/views/dumb/InterfaceHeader'
 
 const calculateFiatBalance = (balances, exchangeRates) => {
 	let totalBalance = 0
@@ -20,8 +23,8 @@ const calculateFiatBalance = (balances, exchangeRates) => {
 	return totalBalance
 }
 
-function WalletHeader({exchangeRates, balances, classes, updateBalances, Wallet}) {
-	return <div className={classes.walletHeader}>
+function InterfaceHeader({exchangeRates, balances, classes, updateBalances, Wallet}) {
+	return <div className={classes.interfaceHeader}>
 		<div className={classes.balanceContainer}>
 			<h4 style={{margin: '0px'}}>
 				<span>Balance: </span>
@@ -39,4 +42,4 @@ function WalletHeader({exchangeRates, balances, classes, updateBalances, Wallet}
 
 }
 
-export default WalletHeader
+export default withStyles(styles)(InterfaceHeader)

@@ -1,14 +1,23 @@
 import React from 'react'
 import ClipboardJS from 'clipboard'
+import {withStyles} from "@material-ui/core";
+
 import {FileCopy} from "@material-ui/icons";
-import notifier from '../../lib/notifier'
+import notifier from '../../../lib/notifier'
+
+import styles from '../../../styles/views/dumb/Addresses'
 
 const Addresses = (props) => {
 	// console.log('Addresses()')
-	const {classes, Interface, actions, Wallet, increaseAddressCount} = props
+	const {classes, Interface, Wallet, increaseAddressCount} = props
 	
 	const activeCoin = Interface.activeCoin
 	const coinProperties = Interface[activeCoin]
+	
+	//this is just to let the InterfaceContainer mount fully without breaking
+	if (!coinProperties) {
+		return null
+	}
 	
 	let addresses = []
 	let Coin = Wallet.getCoin(activeCoin)
@@ -48,4 +57,4 @@ const Addresses = (props) => {
 	)
 }
 
-export default Addresses
+export default withStyles(styles)(Addresses)

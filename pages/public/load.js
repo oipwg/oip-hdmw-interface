@@ -18,8 +18,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 //hocs
 import withLayout from '../../lib/withLayout'
 //styles
-import LoadFormStyles from '../../styles/Load'
-import LoadWarningModalStyles from '../../styles/LoadWarningModal'
+import LoadFormStyles from '../../styles/loadPage/Load'
+import LoadWarningModalStyles from '../../styles/loadPage/LoadWarningModal'
 //actions
 import {setMnemonic} from '../../redux/actions/HDMW/creators'
 

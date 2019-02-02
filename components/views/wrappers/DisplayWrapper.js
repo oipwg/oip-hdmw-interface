@@ -1,14 +1,16 @@
 import React from 'react'
+import {withStyles} from "@material-ui/core";
 
-import DisplayHeader from './DisplayHeader'
-import DisplayFooter from './DisplayFooter'
+import DisplayHeader from '../dumb/DisplayHeader'
+import DisplayFooter from '../dumb/DisplayFooter'
 
-function DisplayInterface(props) {
+import styles from '../../../styles/views/wrappers/DisplayWrapper'
+
+function DisplayWrapper(props) {
 	const {classes, DisplayBody, setActiveView, activeView} = props
 	
 	return <div className={classes.displayContainer}>
 		<DisplayHeader
-			classes={classes}
 			setActiveView={setActiveView}
 			activeView={activeView}
 		/>
@@ -19,10 +21,8 @@ function DisplayInterface(props) {
 				</div>
 			</div>
 		</div>
-		<DisplayFooter
-			classes={classes}
-		/>
+		<DisplayFooter/>
 	</div>
 }
 
-export default DisplayInterface
+export default withStyles(styles)(DisplayWrapper)

@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 
 //styles
-import styles from '../../styles/Settings'
-import notifier from '../../lib/notifier'
+import styles from '../../../styles/views/dumb/Settings'
+import notifier from '../../../lib/notifier'
+import {setCoinNetworkApis} from "../../../redux/actions/Settings/creators";
 
 //easily concat jss classes. Two underscores to not get confused with lodash
 const __ = (...classes) => {
@@ -41,6 +43,7 @@ class Settings extends React.Component {
 				})
 			}
 		}
+		//todo: meh to this code
 		if (prevProps.Settings.toggleTestnetCoins !== this.props.Settings.toggleTestnetCoins) {
 			this.setState({
 				coinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls()
@@ -57,7 +60,7 @@ class Settings extends React.Component {
 	}
 	
 	handleApiUrlSubmit = () => {
-		this.props.actions.setCoinNetworkApis(this.state.coinNetworkApiUrls)
+		this.props.setCoinNetworkApis(this.state.coinNetworkApiUrls)
 	}
 	
 	handleApiUrlReset = () => {
@@ -67,7 +70,7 @@ class Settings extends React.Component {
 			coinNetworkApiUrls: this.defaultNetworkApiUrls
 		})
 		//dispatch
-		this.props.actions.setCoinNetworkApis(this.defaultNetworkApiUrls)
+		this.props.setCoinNetworkApis(this.defaultNetworkApiUrls)
 	}
 	
 	saveSettings = () => {
@@ -83,7 +86,7 @@ class Settings extends React.Component {
 	//toDo move all mapping of coins to redux
 	render() {
 		console.log('Settings.render')
-		const {classes, actions, Settings, Wallet} = this.props
+		const {classes, Settings, Wallet, Interface} = this.props
 		
 		return (
 			<div className={classes.settingsWrapper}>
@@ -99,7 +102,7 @@ class Settings extends React.Component {
 								name="coinSetting"
 								checked={Settings.toggleTestnetCoins}
 								onChange={() => {
-									actions.toggleTestnetCoins(!Settings.toggleTestnetCoins)
+									this.props.toggleTestnetCoins(!Settings.toggleTestnetCoins)
 								}}/>
 							<span>Testnet coins</span>
 						</div>
@@ -111,7 +114,7 @@ class Settings extends React.Component {
 								value="displayBalances"
 								checked={Settings.displayBalances}
 								onChange={() => {
-									actions.displayBalances()
+									this.props.displayBalances()
 								}}/>
 							<span>Balances</span>
 						</div>
@@ -123,9 +126,9 @@ class Settings extends React.Component {
 										type='checkbox'
 										name="displayCoin"
 										value="displayCoin"
-										checked={Settings.displayCoins.includes(coin)}
+										checked={Interface.displayCoins.includes(coin)}
 										onChange={() => {
-											actions.displayCoin(coin, !Settings.displayCoins.includes(coin))
+											this.props.addDisplayCoin(coin, !Interface.displayCoins.includes(coin))
 										}}/>
 									<span className={classes.display_CoinName}>{coin}</span>
 								</label>
@@ -137,7 +140,7 @@ class Settings extends React.Component {
 						<div className={classes.settingHeader}>
 							<h3 style={{margin: '0'}}>APIs</h3>
 						</div>
-						{Object.keys(Wallet.getCoins()).map( (coin, i) => {
+						{Interface.displayCoins.map( (coin, i) => {
 							return (
 								<div key={i} className={__(classes.settingRow, classes.marginTB3)}>
 									<span
@@ -181,5 +184,20 @@ class Settings extends React.Component {
 		)
 	}
 }
+
+Settings.propTypes = {
+	//jss
+	classes: PropTypes.object.isRequired,
+	//store
+	Interface: PropTypes.object.isRequired,
+	Settings: PropTypes.object.isRequired,
+	//wallet
+	Wallet: PropTypes.object.isRequired,
+	//actions
+	setCoinNetworkApis: PropTypes.func.isRequired,
+	addDisplayCoin: PropTypes.func.isRequired,
+	displayBalances: PropTypes.func.isRequired,
+	toggleTestnetCoins: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(Settings)

@@ -1,10 +1,10 @@
-import {Wallet} from 'oip-hdmw'
 import * as actions from '../actions/Settings/creators'
 
 const initialState = {
 	toggleTestnetCoins: false,
 	displayBalances: true,
-	coinNetworkApiUrls: Wallet.getDefaultNetworkApiUrls(),
+	coinNetworkApiUrls: {},
+	defaultCoinNetworkApis: {},
 	refreshLimit: 15000, // 15 seconds
 }
 
@@ -24,6 +24,11 @@ const Settings = (state = initialState, action) => {
 			return {
 				...state,
 				coinNetworkApiUrls: {...state.coinNetworkApiUrls, ...action.coinNetworkApis}
+			}
+		case actions.SET_DEFAULT_COIN_NETWORK_APIS:
+			return {
+				...state,
+				defaultCoinNetworkApiUrls: {...state.coinNetworkApiUrls, ...action.coinNetworkApis}
 			}
 		case actions.LOAD_FROM_LOCAL_STORAGE:
 			return {

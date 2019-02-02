@@ -3,29 +3,8 @@ import * as actions from '../actions/Interface/creators'
 const Interface = (state = {
 	activeCoin: 'bitcoin',
 	activeView: 'addresses',
-	displayCoins: ['bitcoin', 'flo', 'litecoin'],
-	
-	bitcoin: {
-		addresses: 1,
-		accounts: 1,
-		activeAccount: 0,
-		activeChain: 0,
-		activeAddress: 0,
-	},
-	flo: {
-		addresses: 1,
-		accounts: 1,
-		activeAccount: 0,
-		activeChain: 0,
-		activeAddress: 0,
-	},
-	litecoin: {
-		addresses: 1,
-		accounts: 1,
-		activeAccount: 0,
-		activeChain: 0,
-		activeAddress: 0,
-	},
+	displayCoins: [],
+	coins: {},
 }, action) => {
 	switch (action.type) {
 		case actions.SET_ACTIVE_VIEW:

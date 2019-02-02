@@ -1,4 +1,5 @@
-import {addDisplayCoin, removeDisplayCoin, loadFromLocalStorage, toggleTestnetCoins} from "./creators";
+import {loadFromLocalStorage, setCoinNetworkApis, setDefaultCoinNetworkApis} from "./creators";
+import {addDisplayCoin, removeDisplayCoin} from '../Interface/creators'
 
 export const displayCoin = (coin, bool = true) => dispatch => {
 	if (bool) {
@@ -6,6 +7,12 @@ export const displayCoin = (coin, bool = true) => dispatch => {
 	} else {
 		dispatch(removeDisplayCoin(coin))
 	}
+}
+
+export const initializeCoinNetworkApiUrls = (wallet) => dispatch => {
+	let networks = wallet.getNetworkApiUrls()
+	dispatch(setCoinNetworkApis(networks))
+	dispatch(setDefaultCoinNetworkApis(networks))
 }
 
 export const loadSettingsFromLocalStorage = () => dispatch => {

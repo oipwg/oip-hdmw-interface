@@ -1,15 +1,15 @@
 import React from 'react'
 import withLayout from '../lib/withLayout';
-import WalletContainer from '../components/containers/WalletContainer'
+import Interface from '../components/containers/InterfaceContainer'
 
 class Index extends React.Component {
 	constructor(props) {
 		super(props)
 		console.log("Index.constructor")
+		//load from localStorage
 	}
 	componentDidMount() {
 		console.log('Index.componentDidMount')
-		// props.loadSettingsFromLocalStorage()
 	}
 	componentDidUpdate(prevProps) {
 		console.log('Index.componentDidUpdate')
@@ -17,9 +17,7 @@ class Index extends React.Component {
 	
 	render() {
 		console.log('Index.render')
-		return (
-			<WalletContainer />
-		)
+		return <Interface />
 	}
 }
 

@@ -1,8 +1,11 @@
 import React from 'react'
+import {withStyles} from "@material-ui/core";
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+
+import styles from '../../../styles/views/dumb/Send'
 
 class SendView extends React.Component {
 	constructor(props) {
@@ -107,4 +110,4 @@ class SendView extends React.Component {
 	
 }
 
-export default SendView
+export default withStyles(styles)(SendView)
