@@ -16,11 +16,11 @@ export const createInitialCoinStates = (wallet) => (dispatch, getState) => {
 		}
 		if (!match) {
 			coinObject[coin] = {
-				addresses: 1,
-				accounts: 1,
-				activeAccount: 0,
-				activeChain: 0,
-				activeAddress: 0,
+				addressCount: 1,
+				accountsCount: 1,
+				activeAccountIndex: 0,
+				activeChainIndex: 0,
+				activeAddressIndex: 0,
 			}
 		}
 	}

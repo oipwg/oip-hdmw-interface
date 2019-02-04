@@ -13,18 +13,18 @@ const Addresses = (props) => {
 	const {classes, Interface, increaseAddressCount} = props
 	
 	const activeCoin = Interface.activeCoin
-	const coinProperties = Interface[activeCoin]
+	const coinState = Interface.coins[activeCoin]
 	
 	//this is just to let the InterfaceContainer mount fully without breaking
-	if (!coinProperties) {
+	if (!coinState) {
 		return null
 	}
 	
 	let addresses = []
 	let Coin = props.Wallet.getCoin(activeCoin)
-	let Account = Coin.getAccount(coinProperties.activeAccount)
-	for (let i = 0; i < coinProperties.addresses; i++) {
-		addresses.push(Account.getAddress(coinProperties.activeChain, i))
+	let Account = Coin.getAccount(coinState.activeAccountIndex)
+	for (let i = 0; i < coinState.addressCount; i++) {
+		addresses.push(Account.getAddress(coinState.activeChainIndex, i))
 	}
 	
 	new ClipboardJS('.copy-to-clipboard')

@@ -44,7 +44,7 @@ const Interface = (state = {
 		case actions.SET_INITIAL_COIN_STATES:
 			return {
 				...state,
-				...action.coinObject,
+				coins: {...state.coins, ...action.coinObject}
 			}
 		case actions.ADD_DISPLAY_COIN:
 			return {
