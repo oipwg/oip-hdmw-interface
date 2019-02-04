@@ -62,9 +62,9 @@ export const addCoinToRedux = (coin, wallet) => dispatch => {
 	let networks = wallet.networks
 	let coinNetwork = networks[coin]
 	if (coinNetwork) {
-		if (coinNetwork.url) {
-			dispatch(setCoinNetworkApis({[coin]: coinNetwork.url}))
-			dispatch(setDefaultCoinNetworkApis({[coin]: coinNetwork.url}))
+		if (coinNetwork.explorer) {
+			dispatch(setCoinNetworkApis({[coin]: coinNetwork.explorer.url}))
+			dispatch(setDefaultCoinNetworkApis({[coin]: coinNetwork.explorer.url}))
 		}
 	}
 }
