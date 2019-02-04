@@ -30,7 +30,7 @@ class InterfaceContainer extends React.Component {
 		//if custom networks add coins --ToDo much later
 		
 		//if custom coin api urls, set
-		if (_.isEmpty(this.props.Settings.coinNetworkApiUrls)) {
+		if (_.isEmpty(this.props.Settings.coinNetworkApiUrls)) { //toDo: test
 			//set coin network apis from wallet with defaults
 			this.props.initializeCoinNetworkApiUrls(this.Wallet)
 		} else {
@@ -39,7 +39,6 @@ class InterfaceContainer extends React.Component {
 		}
 		
 		//initialize interface
-		//else run this anyways in case they missed something
 		this.props.createInitialCoinStates(this.Wallet)
 		//if custom coin states, override initial states
 		//todo: override initial coin states if custom Interface settings
@@ -50,10 +49,6 @@ class InterfaceContainer extends React.Component {
 	
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		console.log('WalletContainer.componentDidUpdate')
-		
-		if (prevProps.Settings.toggleTestnetCoins !== this.props.Settings.toggleTestnetCoins) {
-			this.Wallet.addTestnetCoins(this.props.Settings.toggleTestnetCoins)
-		}
 	}
 	
 	render() {

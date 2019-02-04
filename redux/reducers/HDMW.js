@@ -4,7 +4,7 @@ const HDMW = (state = {
 	mnemonic: undefined,
 	balances: {},
 	exchangeRates: {},
-	lastUpdate: {}, //for coin balances
+	lastUpdate: {},
 }, action) => {
 	switch (action.type) {
 		case actions.SET_MNEMONIC:

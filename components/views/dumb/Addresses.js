@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ClipboardJS from 'clipboard'
 import {withStyles} from "@material-ui/core";
 
@@ -9,7 +10,7 @@ import styles from '../../../styles/views/dumb/Addresses'
 
 const Addresses = (props) => {
 	// console.log('Addresses()')
-	const {classes, Interface, Wallet, increaseAddressCount} = props
+	const {classes, Interface, increaseAddressCount} = props
 	
 	const activeCoin = Interface.activeCoin
 	const coinProperties = Interface[activeCoin]
@@ -20,7 +21,7 @@ const Addresses = (props) => {
 	}
 	
 	let addresses = []
-	let Coin = Wallet.getCoin(activeCoin)
+	let Coin = props.Wallet.getCoin(activeCoin)
 	let Account = Coin.getAccount(coinProperties.activeAccount)
 	for (let i = 0; i < coinProperties.addresses; i++) {
 		addresses.push(Account.getAddress(coinProperties.activeChain, i))
@@ -30,31 +31,40 @@ const Addresses = (props) => {
 	console.log("Addresses.render()")
 	return (
 		<div className={classes.addressContainer}>
-				{addresses.map((addr, i) => (
-					<div key={i} className={classes.addressRow}>
-						<div className={classes.addressInfo}>
-							<span className={classes.addressIndex}>/{i}  </span>
-							<span id={`id-${i}`} className={classes.publicAddress}>{addr.getPublicAddress()}</span>
-						</div>
-						<FileCopy
-							className={`copy-to-clipboard ${classes.copyToClipBoard}`}
-							data-clipboard-target={`#id-${i}`}
-							onClick={() => {
-								let sel = window.getSelection()
-								sel.empty()
-								notifier('copied to clipboard')
-							}}/>
+			{addresses.map((addr, i) => (
+				<div key={i} className={classes.addressRow}>
+					<div className={classes.addressInfo}>
+						<span className={classes.addressIndex}>/{i}  </span>
+						<span id={`id-${i}`} className={classes.publicAddress}>{addr.getPublicAddress()}</span>
 					</div>
-				))}
-				<div className={classes.showExtraAddressContainer}>
+					<FileCopy
+						className={`copy-to-clipboard ${classes.copyToClipBoard}`}
+						data-clipboard-target={`#id-${i}`}
+						onClick={() => {
+							let sel = window.getSelection()
+							sel.empty()
+							notifier('copied to clipboard')
+						}}/>
+				</div>
+			))}
+			<div className={classes.showExtraAddressContainer}>
 					<span
 						className={classes.showExtraAddress}
-						onClick={() => {increaseAddressCount()}}>
+						onClick={() => {
+							increaseAddressCount()
+						}}>
 						+ Show new address
 					</span>
-				</div>
+			</div>
 		</div>
 	)
+}
+
+Addresses.propTypes = {
+	Interface: PropTypes.object.isRequired,
+	Wallet: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired,
+	increaseAddressCount: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(Addresses)

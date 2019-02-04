@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import PropTypes from 'prop-types'
 import {Refresh} from "@material-ui/icons";
 import {withStyles} from "@material-ui/core";
 
@@ -14,7 +15,7 @@ const calculateFiatBalance = (balances, exchangeRates) => {
 			if (coinB === coinX) {
 				if (_.isNumber(balances[coinB]) && _.isNumber(exchangeRates[coinB])) {
 					totalBalance += (balances[coinB]) * exchangeRates[coinB]
-				}  else {
+				} else {
 					return 'error'
 				}
 			}
@@ -39,7 +40,14 @@ function InterfaceHeader({exchangeRates, balances, classes, updateBalances, Wall
 			className={classes.refreshBalanceIcon}
 		/>
 	</div>
+}
 
+InterfaceHeader.propTypes = {
+	Wallet: PropTypes.object.isRequired,
+	balances: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired,
+	exchangeRates: PropTypes.object.isRequired,
+	updateBalances: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(InterfaceHeader)

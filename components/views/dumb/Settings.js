@@ -86,7 +86,7 @@ class Settings extends React.Component {
 	//toDo move all mapping of coins to redux
 	render() {
 		console.log('Settings.render')
-		const {classes, Settings, Wallet, Interface} = this.props
+		const {classes, Settings, Interface} = this.props
 		
 		return (
 			<div className={classes.settingsWrapper}>
@@ -119,7 +119,7 @@ class Settings extends React.Component {
 							<span>Balances</span>
 						</div>
 						<div className={__(classes.settingRow, classes.flexWrap)}>
-							{Object.keys(Wallet.getCoins()).map((coin, i ) => {
+							{Object.keys(this.props.Wallet.getCoins()).map((coin, i ) => {
 								return <label key={i}>
 									<input
 										className={classes.settingCheckboxLeft}
