@@ -5,7 +5,6 @@ import {withStyles} from '@material-ui/core/styles';
 //styles
 import styles from '../../../styles/views/dumb/Settings'
 import notifier from '../../../lib/notifier'
-import {setCoinNetworkApis} from "../../../redux/actions/Settings/creators";
 
 //easily concat jss classes. Two underscores to not get confused with lodash
 const __ = (...classes) => {
@@ -43,11 +42,17 @@ class Settings extends React.Component {
 				})
 			}
 		}
-		//todo: meh to this code
-		if (prevProps.Settings.includeTestnetCoins !== this.props.Settings.includeTestnetCoins) {
-			this.setState({
-				coinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls()
-			})
+	
+		if (prevProps.Interface.displayCoins !== this.props.Interface.displayCoins) {
+			let apis = this.state.coinNetworkApiUrls
+			let tmpObj = {}
+			for (let coin of this.props.Interface.displayCoins) {
+				if (this.props.Wallet.networks[coin]) {
+					let apiUrl = this.props.Wallet.networks[coin].explorer.url
+					tmpObj[coin] = apiUrl
+				}
+			}
+			this.setState({coinNetworkApiUrls: {...apis, ...tmpObj}})
 		}
 	}
 	
@@ -64,12 +69,6 @@ class Settings extends React.Component {
 	}
 	
 	handleApiUrlReset = () => {
-		//this is needed so that when the prevProps are default and the current props are default,
-		//but the state is out of sync, we sync it up
-		this.setState({
-			coinNetworkApiUrls: this.defaultNetworkApiUrls
-		})
-		//dispatch
 		this.props.setCoinNetworkApis(this.defaultNetworkApiUrls)
 	}
 	
