@@ -2,6 +2,7 @@ import * as actions from '../actions/Settings/creators'
 
 const initialState = {
 	includeTestnetCoins: false,
+	testnetAdded: false,
 	displayBalances: true,
 	coinNetworkApiUrls: {},
 	defaultCoinNetworkApiUrls: {},
@@ -34,6 +35,11 @@ const Settings = (state = initialState, action) => {
 			return {
 				...state,
 				...action.settingsObject
+			}
+		case actions.TESTNET_ADDED:
+			return {
+				...state,
+				testnetAdded: true
 			}
 		default:
 			return state

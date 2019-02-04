@@ -75,6 +75,8 @@ class Settings extends React.Component {
 	
 	saveSettings = () => {
 		let settings = this.props.Settings
+		//remove flag state
+		delete settings.testnetAdded
 		try {
 			localStorage.setItem('hdmw_settings', JSON.stringify(settings))
 			notifier('Settings saved!')

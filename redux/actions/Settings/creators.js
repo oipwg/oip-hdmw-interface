@@ -26,5 +26,9 @@ export const LOAD_FROM_LOCAL_STORAGE = 'LOAD_FROM_LOCAL_STORAGE'
 export const loadFromLocalStorage = (settingsObject) => ({
 	type: LOAD_FROM_LOCAL_STORAGE,
 	settingsObject
-	
+})
+
+export const TESTNET_ADDED = 'TESTNET_ADDED'
+export const testnetAdded = () => ({
+	type: TESTNET_ADDED
 })

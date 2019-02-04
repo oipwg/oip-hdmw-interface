@@ -1,16 +1,25 @@
-import {loadFromLocalStorage, setCoinNetworkApis, setDefaultCoinNetworkApis, includeTestnetCoins} from "./creators";
+import {loadFromLocalStorage, setCoinNetworkApis, setDefaultCoinNetworkApis, includeTestnetCoins, testnetAdded} from "./creators";
 import {addDisplayCoin, removeDisplayCoin} from '../Interface/creators'
-import {createInitialCoinStates} from "../Interface/thunks";
+import {addCoinToRedux} from "../Interface/thunks";
 
-export const toggleTestnetCoins = (bool, wallet) => dispatch => {
+export const toggleTestnetCoins = (bool, wallet) => (dispatch, getState) => {
 	dispatch(includeTestnetCoins(bool))
 	if (bool) {
 		wallet.addTestnetCoins(bool) //add testnet coins
-		dispatch(createInitialCoinStates(wallet)) //create initial coin states if needed
+		//if coins haven't been previously added
 		let coins = Object.keys(wallet.getCoins())
-		for (let coin of coins) {
-			if (coin.includes('_testnet')) {
-				dispatch(displayCoin(coin)) //add to display
+		if (!getState().Settings.testnetAdded) {
+			for (let coin of coins) {
+				if (coin.includes('_testnet')) {
+					dispatch(addCoinToRedux(coin, wallet)) //add to display
+				}
+			}
+			dispatch(testnetAdded())
+		} else {
+			for (let coin of coins) {
+				if (coin.includes('_testnet')) {
+					dispatch(addDisplayCoin(coin)) //add to display
+				}
 			}
 		}
 	} else {
