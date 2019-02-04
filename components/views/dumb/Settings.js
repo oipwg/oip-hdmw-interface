@@ -44,7 +44,7 @@ class Settings extends React.Component {
 			}
 		}
 		//todo: meh to this code
-		if (prevProps.Settings.toggleTestnetCoins !== this.props.Settings.toggleTestnetCoins) {
+		if (prevProps.Settings.includeTestnetCoins !== this.props.Settings.includeTestnetCoins) {
 			this.setState({
 				coinNetworkApiUrls: this.props.Wallet.getNetworkApiUrls()
 			})
@@ -100,9 +100,9 @@ class Settings extends React.Component {
 								className={classes.settingCheckboxLeft}
 								type='checkbox'
 								name="coinSetting"
-								checked={Settings.toggleTestnetCoins}
+								checked={Settings.includeTestnetCoins}
 								onChange={() => {
-									this.props.toggleTestnetCoins(!Settings.toggleTestnetCoins)
+									this.props.toggleTestnetCoins(!Settings.includeTestnetCoins, this.props.Wallet)
 								}}/>
 							<span>Testnet coins</span>
 						</div>

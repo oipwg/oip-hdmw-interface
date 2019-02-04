@@ -1,5 +1,36 @@
-import {loadFromLocalStorage, setCoinNetworkApis, setDefaultCoinNetworkApis} from "./creators";
+import {loadFromLocalStorage, setCoinNetworkApis, setDefaultCoinNetworkApis, includeTestnetCoins} from "./creators";
 import {addDisplayCoin, removeDisplayCoin} from '../Interface/creators'
+
+export const toggleTestnetCoins = (bool, wallet) => dispatch => {
+	dispatch(includeTestnetCoins(bool))
+	if (bool) {
+		wallet.addTestnetCoins(bool) //add testnet coins
+		let coins = Object.keys(wallet.getCoins())
+		for (let coin of coins) {
+			if (coin.includes('_testnet')) {
+				dispatch(displayCoin(coin))
+			}
+		}
+	} else {
+		let coins = Object.keys(wallet.getCoins())
+		for (let coin of coins) {
+			if (coin.includes('_testnet')) {
+				dispatch(displayCoin(coin, false))
+			}
+		}
+		wallet.addTestnetCoins(bool) //remove testnet coins
+	}
+	
+	//if true
+	//add coins to wallet
+	
+	//add coins to display array
+	
+	//if false, remove coins from wallet
+	//remove coins from display array
+	
+	//set state variable
+}
 
 export const displayCoin = (coin, bool = true) => dispatch => {
 	if (bool) {
@@ -26,5 +57,4 @@ export const loadSettingsFromLocalStorage = () => dispatch => {
 		}
  	}
 	dispatch(loadFromLocalStorage(parsedSettings))
-	
 }

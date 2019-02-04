@@ -1,7 +1,7 @@
 import * as actions from '../actions/Settings/creators'
 
 const initialState = {
-	toggleTestnetCoins: false,
+	includeTestnetCoins: false,
 	displayBalances: true,
 	coinNetworkApiUrls: {},
 	defaultCoinNetworkApis: {},
@@ -10,10 +10,10 @@ const initialState = {
 
 const Settings = (state = initialState, action) => {
 	switch (action.type) {
-		case actions.TOGGLE_TESTNET_COINS:
+		case actions.INCLUDE_TESTNET_COINS:
 			return {
 				...state,
-				toggleTestnetCoins: !state.toggleTestnetCoins
+				includeTestnetCoins: action.bool
 			}
 		case actions.DISPLAY_BALANCES:
 			return {

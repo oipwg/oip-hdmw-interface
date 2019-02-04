@@ -11,8 +11,8 @@ import RenderSettings from '../views/dumb/Settings'
 //Interface actions
 import {setActiveView, increaseAddressCount} from '../../redux/actions/Interface/creators'
 //Settings actions/thunks
-import {setCoinNetworkApis, toggleTestnetCoins, displayBalances} from "../../redux/actions/Settings/creators";
-import {displayCoin} from '../../redux/actions/Settings/thunks'
+import {setCoinNetworkApis, displayBalances} from "../../redux/actions/Settings/creators";
+import {displayCoin, toggleTestnetCoins} from '../../redux/actions/Settings/thunks'
 
 class DisplayContainer extends React.Component {
 	getDisplayBody = (props) => {

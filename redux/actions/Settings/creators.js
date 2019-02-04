@@ -1,7 +1,8 @@
 //actions
-export const TOGGLE_TESTNET_COINS = "TOGGLE_TESTNET_COINS"
-export const toggleTestnetCoins = () => ({
-	type: TOGGLE_TESTNET_COINS,
+export const INCLUDE_TESTNET_COINS = "INCLUDE_TESTNET_COINS"
+export const includeTestnetCoins = (bool) => ({
+	type: INCLUDE_TESTNET_COINS,
+	bool
 })
 
 export const DISPLAY_BALANCES = 'DISPLAY_BALANCES'
