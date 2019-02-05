@@ -50,6 +50,10 @@ class InterfaceContainer extends React.Component {
 		//if custom coin states, override initial states
 		//todo: override initial coin states if custom Interface settings
 		
+		if (!this.props.Settings.displayCoins.includes(this.props.Interface.activeCoin)) {
+			this.props.setActiveCoin(this.props.Settings.displayCoins[0] || 'flo')
+		}
+		
 		//fetch balances for all coins available
 		// this.props.updateBalances(this.Wallet) //toDo: uncomment
 	}
@@ -58,6 +62,12 @@ class InterfaceContainer extends React.Component {
 		console.log('InterfaceContainer.componentDidUpdate')
 		if (prevProps.Settings.explorerUrls !== this.props.Settings.explorerUrls) {
 			this.Wallet.setExplorerUrls(this.props.Settings.explorerUrls)
+		}
+		
+		if (prevProps.Settings.displayCoins !== this.props.Settings.displayCoins) {
+			if (!this.props.Settings.displayCoins.includes(this.props.Interface.activeCoin)) {
+				this.props.setActiveCoin(this.props.Settings.displayCoins[0] || 'flo')
+			}
 		}
 	}
 	
