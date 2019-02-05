@@ -49,7 +49,6 @@ const mapStateToProps = (state) => {
 	return {
 		Interface: state.Interface,
 		Settings: state.Settings,
-		HDMW: state.HDMW,
 	}
 }
 
