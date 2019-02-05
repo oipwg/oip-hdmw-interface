@@ -1,32 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import notifier from '../../../lib/notifier'
 
 import DisplaySettings from '../dumb/DisplaySettings'
 //styles
 import styles from '../../../styles/views/dumb/Settings'
 import APISettings from "../dumb/APISettings";
-
-//easily concat jss classes. Two underscores to not get confused with lodash
-const __ = (...classes) => {
-	return classes.join(' ')
-}
+import SaveSettings from "../dumb/SaveSettings";
 
 class SettingsWrapper extends React.Component {
-	saveSettings = () => {
-		const {Settings} = this.props
-		
-		//remove flag state
-		delete Settings.testnetAdded
-		try {
-			localStorage.setItem('settings', JSON.stringify(Settings))
-			notifier('Settings saved!')
-		} catch (err) {
-			notifier(`Error: ${err}`)
-			return false
-		}
-	}
 	render() {
 		console.log('Settings.render')
 		const {classes} = this.props
@@ -54,17 +36,10 @@ class SettingsWrapper extends React.Component {
 						defaultExplorerUrls={this.props.defaultExplorerUrls}
 					/>
 					<div className={classes.sectionDivider}/>
-					<div className={classes.settingContainer}>
-						<div className={classes.settingHeader}>
-							<h3 style={{margin: '0'}}>Save Settings</h3>
-						</div>
-						<div className={classes.settingRow}>
-							<input
-								onClick={this.saveSettings}
-								value={'Save'}
-								type={'submit'}/>
-						</div>
-					</div>
+					<SaveSettings
+						classes={classes}
+						Settings={this.props.Settings}
+					/>
 				</div>
 			</div>
 		)
