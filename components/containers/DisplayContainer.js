@@ -4,25 +4,25 @@ import {connect} from 'react-redux'
 
 import DisplayWrapper from "../views/wrappers/DisplayWrapper";
 import RenderAddresses from "../views/dumb/Addresses"
+import SettingsContainer from './SettingsContainer'
 import RenderSendView from '../views/dumb/Send'
 import RenderTransactionView from '../views/dumb/Transactions'
-import RenderSettings from '../views/dumb/Settings'
 
 //Interface actions
 import {setActiveView, increaseAddressCount} from '../../redux/actions/Interface/creators'
 //Settings actions/thunks
-import {setCoinNetworkApis, displayBalances} from "../../redux/actions/Settings/creators";
+import {setExplorerUrls, displayBalances} from "../../redux/actions/Settings/creators";
 import {displayCoin, toggleTestnetCoins} from '../../redux/actions/Settings/thunks'
 
 class DisplayContainer extends React.Component {
 	getDisplayBody = (props) => {
-		const {Interface, Wallet, Settings} = props
+		const {Interface} = props
 		
 		switch (this.props.Interface.activeView) {
 			case 'addresses':
 				return <RenderAddresses
 					Interface={Interface}
-					Wallet={Wallet}
+					Wallet={this.props.Wallet}
 					increaseAddressCount={this.props.increaseAddressCount}
 				/>
 			
@@ -37,15 +37,7 @@ class DisplayContainer extends React.Component {
 			// case 'add_coin':
 			// // return <RenderAddCoinView actions={actions} Interface={Interface}/>
 			case 'settings':
-				return <RenderSettings
-					Interface={Interface}
-					Wallet={Wallet}
-					Settings={Settings}
-					setCoinNetworkApis={this.props.setCoinNetworkApis}
-					toggleTestnetCoins={this.props.toggleTestnetCoins}
-					addDisplayCoin={this.props.displayCoin}
-					displayBalances={this.props.displayBalances}
-				/>
+				return <SettingsContainer Wallet={this.props.Wallet}/>
 			default:
 				return 'Invalid Display View'
 		}
@@ -63,7 +55,7 @@ class DisplayContainer extends React.Component {
 const mapDispatchToProps = {
 	setActiveView,
 	increaseAddressCount,
-	setCoinNetworkApis,
+	setExplorerUrls,
 	displayBalances,
 	displayCoin,
 	toggleTestnetCoins
@@ -85,10 +77,8 @@ DisplayContainer.propTypes = {
 	//actions
 	setActiveView: PropTypes.func.isRequired,
 	increaseAddressCount: PropTypes.func.isRequired,
-	setCoinNetworkApis: PropTypes.func.isRequired,
-	toggleTestnetCoins: PropTypes.func.isRequired,
-	displayCoin: PropTypes.func.isRequired,
-	displayBalances: PropTypes.func.isRequired,
+	//wallet
+	Wallet: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayContainer)

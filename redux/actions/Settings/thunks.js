@@ -1,4 +1,4 @@
-import {loadFromLocalStorage, setCoinNetworkApis, setDefaultCoinNetworkApis, includeTestnetCoins, testnetAdded} from "./creators";
+import {loadFromLocalStorage, setExplorerUrls, setDefaultExplorerUrls, includeTestnetCoins, testnetAdded} from "./creators";
 import {addDisplayCoin, removeDisplayCoin} from '../Interface/creators'
 import {addCoinToRedux} from "../Interface/thunks";
 
@@ -41,10 +41,10 @@ export const displayCoin = (coin, bool = true) => dispatch => {
 	}
 }
 
-export const initializeCoinNetworkApiUrls = (wallet) => dispatch => {
-	let networks = wallet.getNetworkApiUrls()
-	dispatch(setCoinNetworkApis(networks))
-	dispatch(setDefaultCoinNetworkApis(networks))
+export const initializeExplorerUrls = (wallet) => dispatch => {
+	let networks = wallet.getExplorerUrls()
+	dispatch(setExplorerUrls(networks))
+	dispatch(setDefaultExplorerUrls(networks))
 }
 
 export const loadSettingsFromLocalStorage = () => dispatch => {

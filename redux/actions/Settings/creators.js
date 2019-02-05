@@ -10,16 +10,16 @@ export const displayBalances = () => ({
 	type: DISPLAY_BALANCES
 })
 
-export const SET_COIN_NETWORK_APIS = 'SET_COIN_NETWORK_APIS'
-export const setCoinNetworkApis = (coinNetworkApis) => ({
-	type: SET_COIN_NETWORK_APIS,
-	coinNetworkApis
+export const SET_EXPLORER_URLS = 'SET_EXPLORER_URLS'
+export const setExplorerUrls = (explorerUrls) => ({
+	type: SET_EXPLORER_URLS,
+	explorerUrls
 })
 
-export const SET_DEFAULT_COIN_NETWORK_APIS = 'SET_DEFAULT_COIN_NETWORK_APIS'
-export const setDefaultCoinNetworkApis = (coinNetworkApis) => ({
-	type: SET_DEFAULT_COIN_NETWORK_APIS,
-	coinNetworkApis
+export const SET_DEFAULT_EXPLORER_URLS = 'SET_DEFAULT_EXPLORER_URLS'
+export const setDefaultExplorerUrls = (explorerUrls) => ({
+	type: SET_DEFAULT_EXPLORER_URLS,
+	explorerUrls
 })
 
 export const LOAD_FROM_LOCAL_STORAGE = 'LOAD_FROM_LOCAL_STORAGE'

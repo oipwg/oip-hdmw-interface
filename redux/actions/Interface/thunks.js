@@ -1,5 +1,5 @@
 import {setInitialCoinStates, addDisplayCoin} from "./creators";
-import {setCoinNetworkApis, setDefaultCoinNetworkApis} from "../Settings/creators";
+import {setExplorerUrls, setDefaultExplorerUrls} from "../Settings/creators";
 
 // thunks
 export const createInitialCoinStates = (wallet) => (dispatch, getState) => {
@@ -63,8 +63,8 @@ export const addCoinToRedux = (coin, wallet) => dispatch => {
 	let coinNetwork = networks[coin]
 	if (coinNetwork) {
 		if (coinNetwork.explorer) {
-			dispatch(setCoinNetworkApis({[coin]: coinNetwork.explorer.url}))
-			dispatch(setDefaultCoinNetworkApis({[coin]: coinNetwork.explorer.url}))
+			dispatch(setExplorerUrls({[coin]: coinNetwork.explorer.url}))
+			dispatch(setDefaultExplorerUrls({[coin]: coinNetwork.explorer.url}))
 		}
 	}
 }

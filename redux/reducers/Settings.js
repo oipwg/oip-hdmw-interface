@@ -4,8 +4,8 @@ const initialState = {
 	includeTestnetCoins: false,
 	testnetAdded: false,
 	displayBalances: true,
-	coinNetworkApiUrls: {},
-	defaultCoinNetworkApiUrls: {},
+	explorerUrls: {},
+	defaultExplorerUrls: {},
 	refreshLimit: 15000, // 15 seconds
 }
 
@@ -21,15 +21,15 @@ const Settings = (state = initialState, action) => {
 				...state,
 				displayBalances: !state.displayBalances
 			}
-		case actions.SET_COIN_NETWORK_APIS:
+		case actions.SET_EXPLORER_URLS:
 			return {
 				...state,
-				coinNetworkApiUrls: {...state.coinNetworkApiUrls, ...action.coinNetworkApis}
+				explorerUrls: {...state.explorerUrls, ...action.explorerUrls}
 			}
-		case actions.SET_DEFAULT_COIN_NETWORK_APIS:
+		case actions.SET_DEFAULT_EXPLORER_URLS:
 			return {
 				...state,
-				defaultCoinNetworkApiUrls: {...state.defaultCoinNetworkApiUrls, ...action.coinNetworkApis}
+				defaultExplorerUrls: {...state.defaultExplorerUrls, ...action.explorerUrls}
 			}
 		case actions.LOAD_FROM_LOCAL_STORAGE:
 			return {

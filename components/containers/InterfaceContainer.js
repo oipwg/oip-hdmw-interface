@@ -6,14 +6,14 @@ import _ from 'lodash'
 import {setActiveCoin} from '../../redux/actions/Interface/creators'
 import {createInitialCoinStates} from '../../redux/actions/Interface/thunks'
 import {updateBalances} from '../../redux/actions/HDMW/thunks'
-import {initializeCoinNetworkApiUrls} from '../../redux/actions/Settings/thunks'
+import {initializeExplorerUrls} from '../../redux/actions/Settings/thunks'
 
 import InterfaceWrapper from "../views/wrappers/InterfaceWrapper";
 
 class InterfaceContainer extends React.Component {
 	constructor(props) {
 		super(props)
-		console.log('WalletContainer.constructor')
+		console.log('InterfaceContainer.constructor')
 		
 		//loadFromLocalStorage
 		this.Wallet = props.HDMW.mnemonic ? new Wallet(props.HDMW.mnemonic, {discover: false}) : undefined
@@ -21,7 +21,7 @@ class InterfaceContainer extends React.Component {
 	}
 	
 	componentDidMount() {
-		console.log('WalletContainer.componentDidMount')
+		console.log('InterfaceContainer.componentDidMount')
 		//initialize wallet
 		if (this.props.Settings.toggleTestnetCoins) {
 			this.Wallet.addTestnetCoins()
@@ -30,12 +30,12 @@ class InterfaceContainer extends React.Component {
 		//if custom networks add coins --ToDo much later
 		
 		//if custom coin api urls, set
-		if (_.isEmpty(this.props.Settings.coinNetworkApiUrls)) { //toDo: test
+		if (_.isEmpty(this.props.Settings.explorerUrls)) { //toDo: test
 			//set coin network apis from wallet with defaults
-			this.props.initializeCoinNetworkApiUrls(this.Wallet)
+			this.props.initializeExplorerUrls(this.Wallet)
 		} else {
 			//set wallet with coinNetworkApis
-			this.Wallet.setNetworkApis(this.props.Settings.coinNetworkApiUrls)
+			this.Wallet.setExplorerUrls(this.props.Settings.explorerUrls)
 		}
 		
 		//initialize interface
@@ -48,7 +48,10 @@ class InterfaceContainer extends React.Component {
 	}
 	
 	componentDidUpdate(prevProps, prevState, snapshot) {
-		console.log('WalletContainer.componentDidUpdate')
+		console.log('InterfaceContainer.componentDidUpdate')
+		if (prevProps.Settings.explorerUrls !== this.props.Settings.explorerUrls) {
+			this.Wallet.setExplorerUrls(this.props.Settings.explorerUrls)
+		}
 	}
 	
 	render() {
@@ -75,7 +78,7 @@ class InterfaceContainer extends React.Component {
 const mapDispatchToProps = {
 	setActiveCoin,
 	updateBalances,
-	initializeCoinNetworkApiUrls,
+	initializeExplorerUrls,
 	createInitialCoinStates,
 }
 
@@ -94,7 +97,7 @@ InterfaceContainer.propTypes = {
 	HDMW: PropTypes.object.isRequired,
 	//actions
 	setActiveCoin: PropTypes.func.isRequired,
-	initializeCoinNetworkApiUrls: PropTypes.func.isRequired,
+	initializeExplorerUrls: PropTypes.func.isRequired,
 	createInitialCoinStates: PropTypes.func.isRequired,
 };
 
