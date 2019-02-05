@@ -5,14 +5,11 @@ import {connect} from 'react-redux'
 import DisplayWrapper from "../views/wrappers/DisplayWrapper";
 import RenderAddresses from "../views/dumb/Addresses"
 import SettingsContainer from './SettingsContainer'
+import TransactionsContainer from './TransactionsContainer'
 import RenderSendView from '../views/dumb/Send'
-import RenderTransactionView from '../views/dumb/Transactions'
 
 //Interface actions
 import {setActiveView, increaseAddressCount} from '../../redux/actions/Interface/creators'
-//Settings actions/thunks
-import {setExplorerUrls, displayBalances} from "../../redux/actions/Settings/creators";
-import {displayCoin, toggleTestnetCoins} from '../../redux/actions/Settings/thunks'
 
 class DisplayContainer extends React.Component {
 	getDisplayBody = (props) => {
@@ -25,10 +22,8 @@ class DisplayContainer extends React.Component {
 					Wallet={this.props.Wallet}
 					increaseAddressCount={this.props.increaseAddressCount}
 				/>
-			// case 'transactions':
-			// 	return <RenderTransactionView
-			// 		{/*{...props} */}
-			// 	/>
+			case 'transactions':
+				return <TransactionsContainer Wallet={this.props.Wallet}/>
 			// case 'send':
 			// 	return <RenderSendView
 			// 		{/*{...props}*/}
