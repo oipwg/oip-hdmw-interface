@@ -77,6 +77,24 @@ class InterfaceContainer extends React.Component {
 				this.props.setActiveCoin(this.props.Settings.displayCoins[0] || 'flo')
 			}
 		}
+		
+		if (this.props.Settings.displayCoins.length > prevProps.Settings.displayCoins.length) {
+			//update balances when added coin
+			let addedCoins = []
+			for (let coin of this.props.Settings.displayCoins) {
+				let match = false
+				for (let oldCoin of prevProps.Settings.displayCoins) {
+					if (coin === oldCoin) {
+						match = true
+						break
+					}
+				}
+				if (!match) {
+					addedCoins.push(coin)
+				}
+			}
+			this.props.updateBalances(this.Wallet, addedCoins)
+		}
 	}
 	
 	render() {
