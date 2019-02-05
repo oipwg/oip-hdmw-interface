@@ -55,25 +55,17 @@ class DisplayContainer extends React.Component {
 const mapDispatchToProps = {
 	setActiveView,
 	increaseAddressCount,
-	setExplorerUrls,
-	displayBalances,
-	displayCoin,
-	toggleTestnetCoins
 }
 
 const mapStateToProps = (state) => {
 	return {
 		Interface: state.Interface,
-		Settings: state.Settings,
-		HDMW: state.HDMW,
 	}
 }
 
 DisplayContainer.propTypes = {
 	//store
 	Interface: PropTypes.object.isRequired,
-	Settings: PropTypes.object.isRequired,
-	HDMW: PropTypes.object.isRequired,
 	//actions
 	setActiveView: PropTypes.func.isRequired,
 	increaseAddressCount: PropTypes.func.isRequired,

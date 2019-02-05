@@ -6,7 +6,7 @@ import _ from 'lodash'
 import {setActiveCoin} from '../../redux/actions/Interface/creators'
 import {createInitialCoinStates} from '../../redux/actions/Interface/thunks'
 import {updateBalances} from '../../redux/actions/HDMW/thunks'
-import {initializeExplorerUrls} from '../../redux/actions/Settings/thunks'
+import {initializeExplorerUrls, displayCoin} from '../../redux/actions/Settings/thunks'
 
 import InterfaceWrapper from "../views/wrappers/InterfaceWrapper";
 
@@ -22,8 +22,9 @@ class InterfaceContainer extends React.Component {
 	
 	componentDidMount() {
 		console.log('InterfaceContainer.componentDidMount')
+		console.log('this.props.Settings.includeTestnetCoins', this.props.Settings.includeTestnetCoins)
 		//initialize wallet
-		if (this.props.Settings.toggleTestnetCoins) {
+		if (this.props.Settings.includeTestnetCoins) {
 			this.Wallet.addTestnetCoins()
 		}
 		
@@ -40,6 +41,12 @@ class InterfaceContainer extends React.Component {
 		
 		//initialize interface
 		this.props.createInitialCoinStates(this.Wallet)
+		//if display coins hasn't already been set, set them
+		if (this.props.Settings.displayCoins.length === 0) {
+			for (let coin in this.props.Interface.coins) {
+				this.props.displayCoin(coin)
+			}
+		}
 		//if custom coin states, override initial states
 		//todo: override initial coin states if custom Interface settings
 		
@@ -63,7 +70,7 @@ class InterfaceContainer extends React.Component {
 			Wallet={this.Wallet}
 			//states
 			activeCoin={Interface.activeCoin}
-			displayCoins={Interface.displayCoins}
+			displayCoins={Settings.displayCoins}
 			balances={HDMW.balances}
 			totalBalance={HDMW.totalBalance}
 			exchangeRates={HDMW.exchangeRates}
@@ -80,6 +87,7 @@ const mapDispatchToProps = {
 	updateBalances,
 	initializeExplorerUrls,
 	createInitialCoinStates,
+	displayCoin
 }
 
 const mapStateToProps = (state) => {
@@ -99,6 +107,7 @@ InterfaceContainer.propTypes = {
 	setActiveCoin: PropTypes.func.isRequired,
 	initializeExplorerUrls: PropTypes.func.isRequired,
 	createInitialCoinStates: PropTypes.func.isRequired,
+	displayCoin: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InterfaceContainer)

@@ -6,6 +6,7 @@ const initialState = {
 	displayBalances: true,
 	explorerUrls: {},
 	defaultExplorerUrls: {},
+	displayCoins: [],
 	refreshLimit: 15000, // 15 seconds
 }
 
@@ -31,15 +32,25 @@ const Settings = (state = initialState, action) => {
 				...state,
 				defaultExplorerUrls: {...state.defaultExplorerUrls, ...action.explorerUrls}
 			}
-		case actions.LOAD_FROM_LOCAL_STORAGE:
+		case actions.LOAD_SETTINGS:
 			return {
 				...state,
-				...action.settingsObject
+				...action.parsedSettings,
 			}
 		case actions.TESTNET_ADDED:
 			return {
 				...state,
 				testnetAdded: true
+			}
+		case actions.ADD_DISPLAY_COIN:
+			return {
+				...state,
+				displayCoins: addUniqueItemToArray(state.displayCoins, action.displayCoin)
+			}
+		case actions.REMOVE_DISPLAY_COIN:
+			return {
+				...state,
+				displayCoins: removeItemFromArray(state.displayCoins, action.displayCoin)
 			}
 		default:
 			return state
@@ -47,3 +58,18 @@ const Settings = (state = initialState, action) => {
 }
 
 export default Settings
+
+const removeItemFromArray = (originalArray, itemToRemove) => originalArray.filter(item => item !== itemToRemove)
+const addUniqueItemToArray = (array, item) => {
+	let match = false
+	for (let i of array) {
+		if (item === i) {
+			match = true
+		}
+	}
+	if (!match) {
+		return [...array, item]
+	} else {
+		return [...array] //just to ensure 0 mutation
+	}
+}

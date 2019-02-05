@@ -1,6 +1,6 @@
-import {loadFromLocalStorage, setExplorerUrls, setDefaultExplorerUrls, includeTestnetCoins, testnetAdded} from "./creators";
-import {addDisplayCoin, removeDisplayCoin} from '../Interface/creators'
+import {loadSettings, setExplorerUrls, setDefaultExplorerUrls, includeTestnetCoins, testnetAdded, addDisplayCoin, removeDisplayCoin} from "./creators";
 import {addCoinToRedux} from "../Interface/thunks";
+import {loadInterface} from "../Interface/creators";
 
 export const toggleTestnetCoins = (bool, wallet) => (dispatch, getState) => {
 	dispatch(includeTestnetCoins(bool))
@@ -47,15 +47,30 @@ export const initializeExplorerUrls = (wallet) => dispatch => {
 	dispatch(setDefaultExplorerUrls(networks))
 }
 
-export const loadSettingsFromLocalStorage = () => dispatch => {
-	let parsedSettings
-	if (window && window.localStorage) {
+export const initialLoad = () => dispatch => {
+	if (process.browser) {
+		let settings
 		try {
-			let hdmw_settings = localStorage.getItem('hdmw_settings')
-			parsedSettings = JSON.parse(hdmw_settings)
+			settings = localStorage.getItem('settings')
 		} catch (err) {
 			return false
 		}
+		if (settings) {
+			let parsedSettings
+			parsedSettings = JSON.parse(settings)
+			dispatch(loadSettings(parsedSettings))
+		}
+		
+		let interface_settings
+		try {
+			interface_settings = localStorage.getItem('interface')
+		} catch (err) {
+			return false
+		}
+		
+		if (interface_settings) {
+			let parsedInterfaceSettings = JSON.parse(interface_settings)
+			dispatch(loadInterface(parsedInterfaceSettings))
+		}
  	}
-	dispatch(loadFromLocalStorage(parsedSettings))
 }

@@ -2,11 +2,12 @@ import React from 'react'
 import withLayout from '../lib/withLayout';
 import Interface from '../components/containers/InterfaceContainer'
 
+import {initialLoad} from "../redux/actions/Settings/thunks";
+
 class Index extends React.Component {
 	constructor(props) {
 		super(props)
 		console.log("Index.constructor")
-		//load from localStorage
 	}
 	componentDidMount() {
 		console.log('Index.componentDidMount')
@@ -27,7 +28,9 @@ Index.getInitialProps = ({reduxStore, res}) => {
 	const {HDMW} = state
 	if (res && !HDMW.mnemonic) {
 		res.redirect('/load')
+		return {}
 	}
+	reduxStore.dispatch(initialLoad())
 	
 	return {}
 }

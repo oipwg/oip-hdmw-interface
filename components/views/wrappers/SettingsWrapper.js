@@ -15,11 +15,12 @@ const __ = (...classes) => {
 
 class SettingsWrapper extends React.Component {
 	saveSettings = () => {
-		let settings = this.props.Settings
+		const {Settings} = this.props
+		
 		//remove flag state
-		delete settings.testnetAdded
+		delete Settings.testnetAdded
 		try {
-			localStorage.setItem('hdmw_settings', JSON.stringify(settings))
+			localStorage.setItem('settings', JSON.stringify(Settings))
 			notifier('Settings saved!')
 		} catch (err) {
 			notifier(`Error: ${err}`)
@@ -35,7 +36,7 @@ class SettingsWrapper extends React.Component {
 				<div className={classes.settingsContainer}>
 					<DisplaySettings
 						Settings={this.props.Settings}
-						displayCoins={this.props.Interface.displayCoins}
+						displayCoins={this.props.Settings.displayCoins}
 						displayCoin={this.props.displayCoin}
 						toggleBalances={this.props.displayBalances}
 						displayBalances={this.props.Settings.displayBalances}
@@ -46,7 +47,7 @@ class SettingsWrapper extends React.Component {
 					/>
 					<div className={classes.sectionDivider}/>
 					<APISettings
-						displayCoins={this.props.Interface.displayCoins}
+						displayCoins={this.props.Settings.displayCoins}
 						explorerUrls={this.props.Settings.explorerUrls}
 						classes={classes}
 						setExplorerUrls={this.props.setExplorerUrls}

@@ -22,13 +22,25 @@ export const setDefaultExplorerUrls = (explorerUrls) => ({
 	explorerUrls
 })
 
-export const LOAD_FROM_LOCAL_STORAGE = 'LOAD_FROM_LOCAL_STORAGE'
-export const loadFromLocalStorage = (settingsObject) => ({
-	type: LOAD_FROM_LOCAL_STORAGE,
-	settingsObject
+export const LOAD_SETTINGS = 'LOAD_SETTINGS'
+export const loadSettings = (parsedSettings) => ({
+	type: LOAD_SETTINGS,
+	parsedSettings
 })
 
 export const TESTNET_ADDED = 'TESTNET_ADDED'
 export const testnetAdded = () => ({
 	type: TESTNET_ADDED
+})
+
+export const ADD_DISPLAY_COIN = 'ADD_DISPLAY_COIN'
+export const addDisplayCoin = (displayCoin) => ({
+	type: ADD_DISPLAY_COIN,
+	displayCoin
+})
+
+export const REMOVE_DISPLAY_COIN = 'REMOVE_DISPLAY_COIN'
+export const removeDisplayCoin = (displayCoin) => ({
+	type: REMOVE_DISPLAY_COIN,
+	displayCoin
 })

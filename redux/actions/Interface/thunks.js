@@ -1,5 +1,5 @@
-import {setInitialCoinStates, addDisplayCoin} from "./creators";
-import {setExplorerUrls, setDefaultExplorerUrls} from "../Settings/creators";
+import {setInitialCoinStates} from "./creators";
+import {setExplorerUrls, setDefaultExplorerUrls, addDisplayCoin} from "../Settings/creators";
 
 // thunks
 export const createInitialCoinStates = (wallet) => (dispatch, getState) => {
@@ -28,9 +28,6 @@ export const createInitialCoinStates = (wallet) => (dispatch, getState) => {
 	
 	if (Object.keys(coinObject).length > 0) {
 		dispatch(setInitialCoinStates(coinObject))
-		for (let coin of Object.keys(coinObject)) {
-			dispatch(addDisplayCoin(coin))
-		}
 	}
 }
 

@@ -49,14 +49,8 @@ export const setInitialCoinStates = (coinObject) => {
 	}
 }
 
-export const ADD_DISPLAY_COIN = 'ADD_DISPLAY_COIN'
-export const addDisplayCoin = (displayCoin) => ({
-	type: ADD_DISPLAY_COIN,
-	displayCoin
-})
-
-export const REMOVE_DISPLAY_COIN = 'REMOVE_DISPLAY_COIN'
-export const removeDisplayCoin = (displayCoin) => ({
-	type: REMOVE_DISPLAY_COIN,
-	displayCoin
+export const LOAD_INTERFACE = 'LOAD_INTERFACE'
+export const loadInterface = (parsedInterfaceState) => ({
+	type: LOAD_INTERFACE,
+	parsedInterfaceState
 })

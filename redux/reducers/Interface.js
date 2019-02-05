@@ -3,7 +3,6 @@ import * as actions from '../actions/Interface/creators'
 const Interface = (state = {
 	activeCoin: 'bitcoin',
 	activeView: 'addresses',
-	displayCoins: [],
 	coins: {},
 }, action) => {
 	switch (action.type) {
@@ -46,15 +45,11 @@ const Interface = (state = {
 				...state,
 				coins: {...state.coins, ...action.coinObject}
 			}
-		case actions.ADD_DISPLAY_COIN:
+		
+		case actions.LOAD_INTERFACE:
 			return {
 				...state,
-				displayCoins: addUniqueItemToArray(state.displayCoins, action.displayCoin)
-			}
-		case actions.REMOVE_DISPLAY_COIN:
-			return {
-				...state,
-				displayCoins: removeItemFromArray(state.displayCoins, action.displayCoin)
+				...action.parsedInterfaceState
 			}
 		default:
 			return state
@@ -62,18 +57,3 @@ const Interface = (state = {
 }
 
 export default Interface
-
-const removeItemFromArray = (originalArray, itemToRemove) => originalArray.filter(item => item !== itemToRemove)
-const addUniqueItemToArray = (array, item) => {
-	let match = false
-	for (let i of array) {
-		if (item === i) {
-			match = true
-		}
-	}
-	if (!match) {
-		return [...array, item]
-	} else {
-		return [...array] //just to ensure 0 mutation
-	}
-}
