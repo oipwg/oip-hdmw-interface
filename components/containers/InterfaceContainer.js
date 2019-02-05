@@ -118,6 +118,7 @@ InterfaceContainer.propTypes = {
 	initializeExplorerUrls: PropTypes.func.isRequired,
 	createInitialCoinStates: PropTypes.func.isRequired,
 	displayCoin: PropTypes.func.isRequired,
+	updateBalances: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InterfaceContainer)
