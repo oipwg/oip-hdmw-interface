@@ -25,7 +25,6 @@ class DisplayContainer extends React.Component {
 					Wallet={this.props.Wallet}
 					increaseAddressCount={this.props.increaseAddressCount}
 				/>
-			
 			// case 'transactions':
 			// 	return <RenderTransactionView
 			// 		{/*{...props} */}
