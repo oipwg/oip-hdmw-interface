@@ -28,10 +28,15 @@ export const updateBalances = (wallet, coins) => async (dispatch) => {
 			coinsToFetchBalances.push(coin)
 		}
 	}
+	
 	let balances = await wallet.getCoinBalances({coins: coinsToFetchBalances})
+
 	dispatch(setCoinBalances(balances))
 	
-	dispatch(updateExchangeRates(wallet, _coins)) // toDo: move into new func?
+	_coins = _coins.filter(coin => !coin.includes('_testnet'))
+	if (_coins.length !== 0) {
+		dispatch(updateExchangeRates(wallet, _coins)) // toDo: move into new func?
+	}
 }
 
 export const shouldUpdate = name => (undefined, getState) => {
