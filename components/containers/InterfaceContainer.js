@@ -41,21 +41,29 @@ class InterfaceContainer extends React.Component {
 		
 		//initialize interface
 		this.props.createInitialCoinStates(this.Wallet)
-		//if display coins hasn't already been set, set them
+		
+		//if display coins haven't already been set, set them to default wallet coins
 		if (this.props.Settings.displayCoins.length === 0) {
-			for (let coin in this.props.Interface.coins) {
+			for (let coin of Object.keys(this.Wallet.getCoins())) {
 				this.props.displayCoin(coin)
 			}
 		}
+		
 		//if custom coin states, override initial states
 		//todo: override initial coin states if custom Interface settings
 		
 		if (!this.props.Settings.displayCoins.includes(this.props.Interface.activeCoin)) {
-			this.props.setActiveCoin(this.props.Settings.displayCoins[0] || 'flo')
+			if (this.props.Settings.displayCoins.length > 0) {
+				this.props.setActiveCoin(this.props.Settings.displayCoins[0])
+			}
 		}
 		
-		//fetch balances for all coins available
-		// this.props.updateBalances(this.Wallet) //toDo: uncomment
+		//fetch balances for all only the displayed coins if available, else all default coins
+		if (this.props.Settings.displayCoins.length > 0) {
+			this.props.updateBalances(this.Wallet, this.props.Settings.displayCoins)
+		} else {
+			this.props.updateBalances(this.Wallet)
+		}
 	}
 	
 	componentDidUpdate(prevProps, prevState, snapshot) {
