@@ -24,7 +24,7 @@ const calculateFiatBalance = (balances, exchangeRates) => {
 	return totalBalance
 }
 
-function InterfaceHeader({exchangeRates, balances, classes, updateBalances, Wallet}) {
+function InterfaceHeader({exchangeRates, balances, classes, updateBalances, Wallet, displayCoins}) {
 	return <div className={classes.interfaceHeader}>
 		<div className={classes.balanceContainer}>
 			<h4 style={{margin: '0px'}}>
@@ -35,7 +35,7 @@ function InterfaceHeader({exchangeRates, balances, classes, updateBalances, Wall
 		
 		<Refresh
 			onClick={() => {
-				updateBalances(Wallet)
+				updateBalances(Wallet, displayCoins)
 			}}
 			className={classes.refreshBalanceIcon}
 		/>
@@ -47,6 +47,7 @@ InterfaceHeader.propTypes = {
 	balances: PropTypes.object.isRequired,
 	classes: PropTypes.object.isRequired,
 	exchangeRates: PropTypes.object.isRequired,
+	displayCoins: PropTypes.array.isRequired,
 	updateBalances: PropTypes.func.isRequired,
 }
 
