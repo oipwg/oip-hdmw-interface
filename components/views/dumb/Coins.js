@@ -29,10 +29,15 @@ const Coins = (props) => {
 					balance = 'error'
 				}
 				let ticker = props.networks[coin].ticker
-				let fiat = balance * props.exchangeRates[coin]
+				
+				let displayFiat = `~= $${balance * props.exchangeRates[coin]}`
 				if (!_.isNumber(props.exchangeRates[coin])) {
-					fiat = 'error'
+					displayFiat = 'error'
 				}
+				if (coin.includes('_testnet')) {
+					displayFiat = null
+				}
+				
 				return (
 					<div
 						key={i}
@@ -46,7 +51,7 @@ const Coins = (props) => {
 						<div className={classes.coinInfoWrapper}>
 							<h4 className={classes.coinName}>{_.toUpper(coin)}</h4>
 							{props.displayBalances ? (
-									<span>{balance} {ticker} ~= ${fiat}</span>
+									<span>{balance} {ticker} {displayFiat}</span>
 								)
 								: null}
 						</div>
