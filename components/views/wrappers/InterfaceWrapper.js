@@ -29,6 +29,7 @@ function InterfaceWrapper(props) {
 						balances={balances}
 						updateBalances={updateBalances}
 						Wallet={Wallet}
+						displayCoins={displayCoins}
 					/>
 					<div className={classes.contentWrapper}>
 						<Coins
