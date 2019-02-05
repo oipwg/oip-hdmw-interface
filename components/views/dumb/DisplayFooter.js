@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {withStyles} from "@material-ui/core";
 
 import styles from '../../../styles/views/dumb/DisplayFooter'
@@ -10,4 +11,7 @@ function DisplayFooter(props) {
 	</div>
 }
 
+DisplayFooter.propTypes = {
+	classes: PropTypes.object.isRequired,
+}
 export default withStyles(styles)(DisplayFooter)

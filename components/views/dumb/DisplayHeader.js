@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {withStyles} from "@material-ui/core";
 
 import styles from '../../../styles/views/dumb/DisplayHeader'
@@ -24,6 +25,14 @@ function DisplayHeader(props) {
 			className={classes.viewLink}>Settings
 		</span>
 	</div>
+}
+
+DisplayHeader.propTypes = {
+	classes: PropTypes.object.isRequired,
+	//actions
+	setActiveView: PropTypes.func.isRequired,
+	//state
+	activeView: PropTypes.string.isRequired,
 }
 
 export default withStyles(styles)(DisplayHeader)

@@ -20,7 +20,6 @@ const Coins = (props) => {
 	console.log('Coins.render()')
 	const coins = Object.keys(props.Wallet.getCoins()).filter(coin => props.displayCoins.includes(coin))
 	return <div className={classes.coinsContainer}>
-		
 		<div className={classes.coinsList}>
 			{coins.map((coin, i) => {
 				
@@ -61,20 +60,23 @@ const Coins = (props) => {
 			{/*onClick={() => {actions.setDisplayView('add_coin')}}*/}
 			{/*style={{margin: '0px', cursor: 'pointer'}}>ADD COIN</h5>*/}
 		</div>
-	
 	</div>
 }
 
 Coins.propTypes = {
+	//styles
 	classes: PropTypes.object.isRequired,
 	theme: PropTypes.object.isRequired,
+	//wallet
 	Wallet: PropTypes.object.isRequired,
+	//state
 	activeCoin: PropTypes.string.isRequired,
 	displayBalances: PropTypes.bool.isRequired,
 	exchangeRates: PropTypes.object.isRequired,
 	balances: PropTypes.object.isRequired,
-	setActiveCoin: PropTypes.func.isRequired,
 	networks: PropTypes.object.isRequired,
+	//actions
+	setActiveCoin: PropTypes.func.isRequired,
 }
 
 export default withTheme()(withStyles(styles)(Coins));

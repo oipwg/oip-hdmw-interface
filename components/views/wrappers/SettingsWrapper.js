@@ -17,7 +17,6 @@ class SettingsWrapper extends React.Component {
 			<div className={classes.settingsWrapper}>
 				<div className={classes.settingsContainer}>
 					<DisplaySettings
-						Settings={this.props.Settings}
 						displayCoins={this.props.Settings.displayCoins}
 						displayCoin={this.props.displayCoin}
 						toggleBalances={this.props.displayBalances}

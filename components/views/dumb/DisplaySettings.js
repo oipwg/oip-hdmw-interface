@@ -57,14 +57,18 @@ class DisplaySettings extends React.Component {
 }
 
 DisplaySettings.propTypes = {
-	displayBalances: PropTypes.bool.isRequired,
+	//wallet
+	Wallet: PropTypes.object.isRequired,
+	//classes
+	classes: PropTypes.object.isRequired,
+	//actions
 	toggleBalances: PropTypes.func.isRequired,
 	toggleTestnetCoins: PropTypes.func.isRequired,
-	includeTestnetCoins: PropTypes.bool.isRequired,
-	displayCoins: PropTypes.array.isRequired,
 	displayCoin: PropTypes.func.isRequired,
-	Wallet: PropTypes.object.isRequired,
-	classes: PropTypes.object.isRequired,
+	//state
+	displayCoins: PropTypes.array.isRequired,
+	displayBalances: PropTypes.bool.isRequired,
+	includeTestnetCoins: PropTypes.bool.isRequired,
 }
 
 export default DisplaySettings
