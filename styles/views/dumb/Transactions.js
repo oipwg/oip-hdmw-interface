@@ -14,22 +14,40 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'space-between',
-		maxHeight: '70px',
-		cursor: 'pointer',
-		flex: '0 0 70px',
-		padding: '20px',
+		maxHeight: '88px',
+		flex: '0 0 88px',
+		padding: '10px',
+		fontSize: '12px',
 		borderBottom: '1px solid rgb(218, 225, 233)',
 	},
 	transactionsHeader: {
 		display: 'flex',
 		flexDirection: 'row',
-		flex: '0 1 50px',
+		flex: '0 0 50px',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		padding: '5px 15px',
 		borderBottom: '1px solid rgb(218, 225, 233)'
 	},
+	transactionDateContainer: {
+	
+	},
+	transactionId: {
+		color: 'rgb(218, 225, 233)',
+	},
+	floDataTitle: {
+		color: 'blue',
+	},
+	floDataText: {
+	
+	},
+	reactLoaderContainer: {
+		display: 'flex',
+		flexDirection: 'row',
+		flex: '1 1 auto',
+		alignItems: 'center',
+		justifyContent: 'center',
+	}
 })
 
 export default styles

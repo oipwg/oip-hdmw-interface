@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ClipboardJS from 'clipboard'
 import {withStyles} from "@material-ui/core";
+import ReactLoader from '../../shared/ReactLoader'
 
 import {FileCopy} from "@material-ui/icons";
 import notifier from '../../../lib/notifier'
@@ -9,19 +10,21 @@ import notifier from '../../../lib/notifier'
 import styles from '../../../styles/views/dumb/Addresses'
 
 const Addresses = (props) => {
-	// console.log('Addresses()')
+	console.log('Addresses Mount')
 	const {classes, Interface, increaseAddressCount} = props
 	
 	const activeCoin = Interface.activeCoin
 	const coinState = Interface.coins[activeCoin]
 	
-	//this is just to let the InterfaceContainer mount fully without breaking
-	if (!coinState) {
-		return null
+	let addresses = []
+	
+	let Coin = props.Wallet.getCoin(activeCoin)
+	
+	//give time for Interface to mount
+	if (!Coin || !coinState) {
+		return ReactLoader({type: 'BarLoader'})//
 	}
 	
-	let addresses = []
-	let Coin = props.Wallet.getCoin(activeCoin)
 	let Account = Coin.getAccount(coinState.activeAccountIndex)
 	for (let i = 0; i < coinState.addressCount; i++) {
 		addresses.push(Account.getAddress(coinState.activeChainIndex, i))

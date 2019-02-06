@@ -53,7 +53,8 @@ class TransactionsContainer extends React.Component {
 	setUsedAddresses = async (Wallet, activeCoin, coinState) => {
 		let COIN = Wallet.getCoin(activeCoin)
 		if (!COIN) {
-			throw new Error(`Missing coin: ${Wallet.getCoin(activeCoin)}`)
+			console.error(Wallet)
+			return
 		}
 		let ACCOUNT = COIN.getAccount(coinState.activeAccountIndex)
 		ACCOUNT = await ACCOUNT.discoverChains()
@@ -82,6 +83,7 @@ class TransactionsContainer extends React.Component {
 			coinState={this.props.coinState}
 			Wallet={this.props.Wallet}
 			transactions={this.state.transactions}
+			usedPubAddresses={this.state.usedAddresses.map(addr => addr.getPublicAddress())}
 		/>
 	}
 }

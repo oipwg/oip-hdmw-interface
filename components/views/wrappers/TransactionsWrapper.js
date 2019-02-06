@@ -4,6 +4,7 @@ import {withStyles} from "@material-ui/core";
 
 import TransactionsHeader from '../dumb/TransactionsHeader'
 import Transactions from '../dumb/Transactions'
+import ReactLoader from '../../shared/ReactLoader'
 
 import styles from '../../../styles/views/dumb/Transactions'
 
@@ -14,13 +15,17 @@ function TransactionsWrapper(props) {
 		<TransactionsHeader
 			classes={classes}
 		/>
-		<Transactions
+		{transactions && transactions.length > 0 ? <Transactions
 			classes={classes}
 			transactions={transactions}
 			Wallet={Wallet}
 			activeCoin={activeCoin}
 			coinState={coinState}
-		/>
+			usedPubAddresses={props.usedPubAddresses}
+		/> : <div className={classes.reactLoaderContainer}>
+			{ReactLoader()}
+		</div>
+		}
 	</div>
 }
 
@@ -29,6 +34,7 @@ TransactionsWrapper.propTypes = {
 	activeCoin: PropTypes.string.isRequired,
 	coinState: PropTypes.object.isRequired,
 	Wallet: PropTypes.object.isRequired,
+	usedPubAddresses: PropTypes.array.isRequired,
 }
 
 export default withStyles(styles)(TransactionsWrapper)
