@@ -14,7 +14,7 @@ const styles = theme => ({
 		borderBottom: '1px solid rgb(218, 225, 233)'
 	},
 	refreshTransactions: {
-	
+		cursor: 'pointer',
 	},
 	transactionsListContainer: {
 		display: 'flex',
@@ -50,8 +50,19 @@ const styles = theme => ({
 	floDataTitle: {
 		color: 'blue',
 	},
-	floDataText: {},
+	floDataContainer: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	floDataText: {
 	
+	},
+	flexRowMiddle: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
 	reactLoaderContainer: {
 		display: 'flex',
 		flexDirection: 'row',

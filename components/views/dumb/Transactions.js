@@ -6,12 +6,12 @@ import _ from 'lodash'
 const calculateAmount = (vin, vout, usedPubAddresses) => {
 	let vinData = []
 	for (let vi of vin) {
-		vinData.push({address: vi.addr, value: vi.value})
+		vinData.push({address: vi.addr, valueSat: vi.valueSat})
 	}
 	
 	let voutData = []
 	for (let vo of vout) {
-		const value = vo.value
+		const value = vo.value*1e8 //convert to satoshi
 		let addresses = []
 		
 		let addressesInVout = vo.scriptPubKey.addresses
@@ -25,7 +25,7 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 	let moneySentFromMe = 0
 	for (let vind of vinData) {
 		if (usedPubAddresses.includes(vind.address)) {
-			moneySentFromMe += Number(vind.value)
+			moneySentFromMe += Number(vind.valueSat)
 		}
 	}
 	
@@ -34,12 +34,13 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 		for (let addr of voutd.addresses) {
 			if (usedPubAddresses.includes(addr)) {
 				moneySentToMe += Number(voutd.value)
-				break
 			}
 		}
 	}
 	
-	let amount = moneySentToMe - moneySentFromMe
+	
+	let amount = (moneySentToMe) - (moneySentFromMe)
+	amount /= 1e8
 	let type = amount > 0 ? 'Received' : 'Sent'
 	
 	return {amount, type}
@@ -54,8 +55,12 @@ function Transactions(props) {
 			const {amount, type} = calculateAmount(tx.vin, tx.vout, usedPubAddresses)
 			return <div key={tx.txid} className={classes.transactionRow}>
 				<div className={classes.txFloDataContainer}>
-					<div>{tx.txid}</div>
-					<div>floData:   {tx.floData}</div>
+					<div className={classes.flexRowMiddle}>
+						{tx.txid}
+					</div>
+					<div className={classes.floDataContainer}>
+						<span>floData:   {tx.floData}</span>
+					</div>
 				</div>
 				<div className={classes.txTimeAmountContainer}>
 					<div className={classes.transactionDateContainer}>
