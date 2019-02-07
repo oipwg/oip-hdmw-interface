@@ -6,7 +6,7 @@ import DisplayWrapper from "../views/wrappers/DisplayWrapper";
 import RenderAddresses from "../views/dumb/Addresses"
 import SettingsContainer from './SettingsContainer'
 import TransactionsContainer from './TransactionsContainer'
-import RenderSendView from '../views/dumb/Send'
+import CreateTXContainer from './CreateTXContainer'
 
 //Interface actions
 import {setActiveView, increaseAddressCount} from '../../redux/actions/Interface/creators'
@@ -24,10 +24,8 @@ class DisplayContainer extends React.Component {
 				/>
 			case 'transactions':
 				return <TransactionsContainer Wallet={this.props.Wallet}/>
-			// case 'send':
-			// 	return <RenderSendView
-			// 		{/*{...props}*/}
-			// 	/>
+			case 'send':
+				return <CreateTXContainer Wallet={this.props.Wallet}/>
 			// case 'add_coin':
 			// // return <RenderAddCoinView actions={actions} Interface={Interface}/>
 			case 'settings':
