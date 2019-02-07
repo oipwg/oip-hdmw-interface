@@ -22,3 +22,19 @@ export const setCoinBalances = (balances) => ({
 	type: SET_COIN_BALANCES,
 	balances
 })
+
+export const SET_TRANSACTIONS = 'SET_TRANSACTIONS'
+export const setTransactions = (transactions, coin, account) => ({
+	type: SET_TRANSACTIONS,
+	transactions,
+	coin,
+	account
+})
+
+export const SET_USED_PUB_ADDRESSES = 'SET_USED_PUB_ADDRESSES'
+export const setUsedPubAddresses = (usedPubAddresses, coin, account) => ({
+	type: SET_USED_PUB_ADDRESSES,
+	usedPubAddresses,
+	coin,
+	account
+})

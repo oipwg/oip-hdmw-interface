@@ -8,10 +8,13 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'row',
 		flex: '0 0 50px',
-		justifyContent: 'space-between',
+		justifyContent: 'flex-end',
 		alignItems: 'center',
 		padding: '5px 15px',
 		borderBottom: '1px solid rgb(218, 225, 233)'
+	},
+	refreshTransactions: {
+	
 	},
 	transactionsListContainer: {
 		display: 'flex',
@@ -40,18 +43,14 @@ const styles = theme => ({
 		padding: '20px',
 		alignItems: 'flex-end',
 	},
-	transactionDateContainer: {
-	
-	},
+	transactionDateContainer: {},
 	transactionId: {
 		color: 'rgb(218, 225, 233)',
 	},
 	floDataTitle: {
 		color: 'blue',
 	},
-	floDataText: {
-	
-	},
+	floDataText: {},
 	
 	reactLoaderContainer: {
 		display: 'flex',

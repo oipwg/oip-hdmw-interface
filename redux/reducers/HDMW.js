@@ -1,4 +1,5 @@
 import * as actions from '../actions/HDMW/creators'
+import _ from 'lodash'
 
 const HDMW = (state = {
 	mnemonic: undefined,
@@ -36,6 +37,18 @@ const HDMW = (state = {
 				...state,
 				balances: {...state.balances, ...action.balances},
 				lastUpdate: {...state.lastUpdate, ...updateObject}
+			}
+		}
+		case actions.SET_TRANSACTIONS: {
+			return {
+				...state,
+				[`txs_${action.coin}_${action.account}`]: action.transactions
+			}
+		}
+		case actions.SET_USED_PUB_ADDRESSES: {
+			return {
+				...state,
+				[`upa_${action.coin}_${action.account}`]: action.usedPubAddresses
 			}
 		}
 		default:

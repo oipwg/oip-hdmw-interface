@@ -47,11 +47,11 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 
 function Transactions(props) {
 	console.log("Transactions.render")
-	const {classes} = props
+	let {classes, transactions, usedPubAddresses} = props
 	
 	return <div className={classes.transactionsListContainer}>
-		{props.transactions.map(tx => {
-			const {amount, type} = calculateAmount(tx.vin, tx.vout, props.usedPubAddresses)
+		{transactions.map(tx => {
+			const {amount, type} = calculateAmount(tx.vin, tx.vout, usedPubAddresses)
 			return <div key={tx.txid} className={classes.transactionRow}>
 				<div className={classes.txFloDataContainer}>
 					<div>{tx.txid}</div>

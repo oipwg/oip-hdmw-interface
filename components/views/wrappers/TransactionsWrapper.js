@@ -14,14 +14,15 @@ function TransactionsWrapper(props) {
 	return <div className={classes.transactionsContainer}>
 		<TransactionsHeader
 			classes={classes}
+			refreshTransactions={props.refreshTransactions}
 		/>
 		{transactions && transactions.length > 0 ? <Transactions
 			classes={classes}
-			transactions={transactions}
+			transactions={transactions || []}
 			Wallet={Wallet}
 			activeCoin={activeCoin}
 			coinState={coinState}
-			usedPubAddresses={props.usedPubAddresses}
+			usedPubAddresses={props.usedPubAddresses || []}
 		/> : <div className={classes.reactLoaderContainer}>
 			{ReactLoader()}
 		</div>
@@ -35,6 +36,7 @@ TransactionsWrapper.propTypes = {
 	coinState: PropTypes.object.isRequired,
 	Wallet: PropTypes.object.isRequired,
 	usedPubAddresses: PropTypes.array.isRequired,
+	refreshTransactions: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(TransactionsWrapper)
