@@ -1,38 +1,32 @@
 const styles = theme => ({
-	sendContainer: {
+	createTXContainer: {
 		display: 'flex',
 		flexDirection: 'column',
 		flex: '1 1 auto',
-		padding: '20px 50px',
 	},
-	sendHeader: {
+	createTXHeader: {
 		display: 'flex',
 		flexDirection: 'row',
-		flex: '0 1 50px',
-		color: theme.palette.primary.light,
-		justifyContent: 'flex-start',
 		alignItems: 'center',
-	},
-	sendHeaderText: {
-		fontSize: '24px',
-		fontWeight: 'bold',
+		flex: '0 0 50px',
 	},
 	sendBody: {
 		display: 'flex',
 		flexDirection: 'column',
 		flex: '1 1 auto',
+		padding: '20px 50px',
 	},
 	sendCoinSelection: {
 		display: 'flex',
 		flexDirection: 'row',
 	},
-	sendAddressRow: {
+	fieldRow: {
 		display: 'flex',
 		flexDirection: 'row',
 		flex: '0 1 50px',
 		alignItems: 'center',
 	},
-	sendTitle: {
+	fieldTitle: {
 		color: theme.palette.primary.light,
 		marginRight: '15px',
 		fontWeight: 'bold',
@@ -41,18 +35,6 @@ const styles = theme => ({
 	sendInputField: {
 		width: '60%',
 	},
-	sendAmountRow: {
-		display: 'flex',
-		flexDirection: 'row',
-		flex: '0 1 50px',
-		alignItems: 'center',
-	},
-	sendButtonRow: {
-		display: 'flex',
-		flexDirection: 'row',
-		flex: '0 1 50px',
-		alignItems: 'center',
-	},
 	sendButton: {
 		backgroundColor: 'black',
 		color: 'white',
@@ -60,10 +42,15 @@ const styles = theme => ({
 	},
 	sendAmountInputField: {
 		padding: '6px',
-		
+	},
+	floDataInputField: {
+		width: '80%',
+		padding: '6px',
 	},
 	sendAddressInputField: {
 		padding: '6px',
 		width: '283px'
 	},
 })
+
+export default styles
