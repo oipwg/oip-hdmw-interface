@@ -4,6 +4,15 @@ const styles = theme => ({
 		flexDirection: 'column',
 		flex: '1 1 auto',
 	},
+	transactionsHeader: {
+		display: 'flex',
+		flexDirection: 'row',
+		flex: '0 0 50px',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		padding: '5px 15px',
+		borderBottom: '1px solid rgb(218, 225, 233)'
+	},
 	transactionsListContainer: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -14,20 +23,22 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
+		justifyContent: 'space-between',
 		maxHeight: '88px',
 		flex: '0 0 88px',
 		padding: '10px',
 		fontSize: '12px',
 		borderBottom: '1px solid rgb(218, 225, 233)',
 	},
-	transactionsHeader: {
+	txFloDataContainer: {
 		display: 'flex',
-		flexDirection: 'row',
-		flex: '0 0 50px',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		padding: '5px 15px',
-		borderBottom: '1px solid rgb(218, 225, 233)'
+		flexDirection: 'column',
+	},
+	txTimeAmountContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		padding: '20px',
+		alignItems: 'flex-end',
 	},
 	transactionDateContainer: {
 	
@@ -41,6 +52,7 @@ const styles = theme => ({
 	floDataText: {
 	
 	},
+	
 	reactLoaderContainer: {
 		display: 'flex',
 		flexDirection: 'row',

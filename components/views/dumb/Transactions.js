@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import moment from 'moment';
+import _ from 'lodash'
 
 const calculateAmount = (vin, vout, usedPubAddresses) => {
 	let vinData = []
@@ -38,7 +39,6 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 		}
 	}
 	
-	console.log('totals: ', moneySentFromMe, moneySentToMe)
 	let amount = moneySentToMe - moneySentFromMe
 	let type = amount > 0 ? 'Received' : 'Sent'
 	
@@ -53,16 +53,17 @@ function Transactions(props) {
 		{props.transactions.map(tx => {
 			const {amount, type} = calculateAmount(tx.vin, tx.vout, props.usedPubAddresses)
 			return <div key={tx.txid} className={classes.transactionRow}>
-				<div>{tx.txid}</div>
-				
-				<div className={classes.transactionDateContainer}>
-					{moment().utc(tx.txid).format('MMM D, YYYY')}
+				<div className={classes.txFloDataContainer}>
+					<div>{tx.txid}</div>
+					<div>floData:   {tx.floData}</div>
 				</div>
-				
-				<div>{tx.floData}</div>
-				
-				<div>
-					{type}:{amount}
+				<div className={classes.txTimeAmountContainer}>
+					<div className={classes.transactionDateContainer}>
+						{moment().utc(tx.time).format('MMM D, YYYY')}
+					</div>
+					<div>
+						{_.upperCase(type)}: {amount}
+					</div>
 				</div>
 			</div>
 		})}
