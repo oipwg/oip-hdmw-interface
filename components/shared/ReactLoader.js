@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
 
 import {
@@ -12,14 +12,12 @@ import {
 } from 'react-spinners';
 
 function ReactLoader(props) {
-	const [loading, toggleLoader] = useState(true)
-	
 	let config = {
 		type: 'ClipLoader',
 		sizeUnit: 'px',
 		size: 50,
 		color: '#123abc',
-		loading
+		loading,
 	}
 	config = {...config, ...props}
 	
