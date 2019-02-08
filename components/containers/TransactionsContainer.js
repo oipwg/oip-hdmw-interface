@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
@@ -8,20 +8,17 @@ import {getTransactions} from "../../redux/actions/HDMW/thunks";
 function TransactionsContainer(props) {
 	const {activeCoin, coinState, HDMW, Wallet} = props
 	
-	const [explorer, setExplorer] = useState(Wallet.getNetworks()[activeCoin].explorer)
-	
-	function getTransactions(Wallet) {
-		props.getTransactions(Wallet, explorer)
-	}
-	
-	function getExplorer() {
-		setExplorer(Wallet.getNetworks()[activeCoin].explorer)
-	}
-
 	useEffect(() => {
-		getExplorer()
 		getTransactions(props.Wallet)
 	}, [props.activeCoin])
+	
+	function getExplorer() {
+		return Wallet.getNetworks()[activeCoin].explorer
+	}
+	
+	function getTransactions(Wallet) {
+		props.getTransactions(Wallet, getExplorer())
+	}
 	
 	console.log("TransactionsContainer.render")
 	return <TransactionsWrapper
