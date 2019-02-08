@@ -27,7 +27,7 @@ function TransactionsContainer(props) {
 		Wallet={Wallet}
 		transactions={HDMW[`txs_${activeCoin}_${coinState.activeAccountIndex}`] || []}
 		usedPubAddresses={HDMW[`upa_${activeCoin}_${coinState.activeAccountIndex}`] || []}
-		refreshTransactions={() => this.getTransactions(Wallet, activeCoin)}
+		refreshTransactions={() => getTransactions(Wallet)}
 	/>
 }
 
