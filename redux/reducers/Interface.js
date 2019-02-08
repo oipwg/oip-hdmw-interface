@@ -18,27 +18,56 @@ const Interface = (state = {
 		case actions.SET_ACTIVE_ACCOUNT_INDEX:
 			return {
 				...state,
-				[state.activeCoin]: {...state[state.activeCoin], activeAccount: action.index},
+				coins: {
+					...state.coins,
+					[state.activeCoin]: {
+						...state.coins[state.activeCoin],
+						activeAccountIndex: action.index
+					}
+				},
 			}
 		case actions.SET_ACTIVE_CHAIN_INDEX:
 			return {
 				...state,
-				[state.activeCoin]: {...state[state.activeCoin], activeChain: action.index}
+				coins: {
+					...state.coins,
+					[state.activeCoin]: {
+						...state.coins[state.activeCoin],
+						activeChainIndex: action.index
+					}
+				},
 			}
 		case actions.SET_ACTIVE_ADDRESS_INDEX:
 			return {
 				...state,
-				[state.activeCoin]: {...state[state.activeCoin], activeAddress: action.index}
+				coins: {
+					...state.coins,
+					[state.activeCoin]: {
+						...state.coins[state.activeCoin],
+						activeAddressIndex: action.index
+					}
+				},
 			}
 		case actions.INCREASE_ACCOUNT_COUNT:
 			return {
 				...state,
-				[state.activeCoin]: {...state[state.activeCoin], accounts: state[state.activeCoin].accounts + action.count}
+				coins: {
+					...state.coins,
+					[state.activeCoin]: {
+						...state.coins[state.activeCoin],
+						accountCount: state.coins[state.activeCoin].accountCount + action.count
+					}
+				},
 			}
 		case actions.INCREASE_ADDRESS_COUNT:
 			return {
 				...state,
-				[state.activeCoin]: {...state[state.activeCoin], addresses: state[state.activeCoin].addresses + action.count}
+				coins: {...state.coins,
+					[state.activeCoin]: {
+						...state.coins[state.activeCoin],
+						addressCount: state.coins[state.activeCoin].addressCount + action.count
+					}
+				}
 			}
 		case actions.SET_INITIAL_COIN_STATES:
 			return {
