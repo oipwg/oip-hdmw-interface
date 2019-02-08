@@ -41,8 +41,8 @@ class TransactionsContainer extends React.Component {
 			activeCoin={activeCoin}
 			coinState={coinState}
 			Wallet={Wallet}
-			transactions={HDMW[`txs_${activeCoin}_${coinState.activeAccountIndex}`]}
-			usedPubAddresses={HDMW[`upa_${activeCoin}_${coinState.activeAccountIndex}`]}
+			transactions={HDMW[`txs_${activeCoin}_${coinState.activeAccountIndex}`] || []}
+			usedPubAddresses={HDMW[`upa_${activeCoin}_${coinState.activeAccountIndex}`] || []}
 			refreshTransactions={() => this.getTransactions(Wallet, activeCoin)}
 		/>
 	}
