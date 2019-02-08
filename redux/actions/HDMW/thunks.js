@@ -77,7 +77,7 @@ export const getTransactions = (Wallet, explorer) => async (dispatch, getState) 
 		try {
 			transactions.push(await explorer.getTransaction(id))
 		} catch (err) {
-			console.error('failed to get transaction from explorer in getTransactions thunk')
+			console.error('failed to get transaction from explorer in getTransactions thunk', err, explorer)
 			return //add error handling
 		}
 	}
