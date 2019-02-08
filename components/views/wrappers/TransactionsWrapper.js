@@ -24,7 +24,7 @@ function TransactionsWrapper(props) {
 			coinState={coinState}
 			usedPubAddresses={props.usedPubAddresses}
 		/> : <div className={classes.reactLoaderContainer}>
-			{ReactLoader()}
+			{<ReactLoader />}
 		</div>
 		}
 	</div>
