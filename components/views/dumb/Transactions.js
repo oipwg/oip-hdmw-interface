@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types'
 import moment from 'moment';
 import _ from 'lodash'
+import FloDataContainer from "./FloDataContainer";
 
 const calculateAmount = (vin, vout, usedPubAddresses) => {
 	let vinData = []
@@ -11,7 +12,7 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 	
 	let voutData = []
 	for (let vo of vout) {
-		const value = vo.value*1e8 //convert to satoshi
+		const value = vo.value * 1e8 //convert to satoshi
 		let addresses = []
 		
 		let addressesInVout = vo.scriptPubKey.addresses
@@ -58,9 +59,7 @@ function Transactions(props) {
 					<div className={classes.flexRowMiddle}>
 						{tx.txid}
 					</div>
-					<div className={classes.floDataContainer}>
-						<span>floData:   {tx.floData}</span>
-					</div>
+					<FloDataContainer classes={classes} floData={tx.floData} />
 				</div>
 				<div className={classes.txTimeAmountContainer}>
 					<div className={classes.transactionDateContainer}>

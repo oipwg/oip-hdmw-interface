@@ -95,6 +95,7 @@ function LoadForm(props) {
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="email">Mnemonic</InputLabel>
 						<Input id="mnemonic" name="mnemonic" autoComplete="mnemonic" autoFocus
+						       // type={'password'}
 						       value={mnemonic}
 						       onChange={(e) => setMnemonic(e.target.value)}
 						/>

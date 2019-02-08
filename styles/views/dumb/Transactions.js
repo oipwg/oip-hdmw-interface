@@ -17,9 +17,6 @@ const styles = theme => ({
 		cursor: 'pointer',
 	},
 	transactionsListContainer: {
-		display: 'flex',
-		flexDirection: 'column',
-		flex: '1 1 auto',
 		overflowY: 'auto'
 	},
 	transactionRow: {
@@ -27,8 +24,8 @@ const styles = theme => ({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		maxHeight: '88px',
 		flex: '0 0 88px',
+		minHeight: '88px',
 		padding: '10px',
 		fontSize: '12px',
 		borderBottom: '1px solid rgb(218, 225, 233)',
@@ -50,14 +47,20 @@ const styles = theme => ({
 	floDataTitle: {
 		color: 'blue',
 	},
-	floDataContainer: {
+	showMoreLess: {},
+	textOverflowContainer: {
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
-	floDataText: {
-	
+	floDataContainer: {
+		width: '600px',
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
+		wordBreak: 'break-word',
 	},
+	floDataText: {},
 	flexRowMiddle: {
 		display: 'flex',
 		flexDirection: 'row',
