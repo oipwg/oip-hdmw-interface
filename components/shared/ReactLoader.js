@@ -17,7 +17,7 @@ function ReactLoader(props) {
 		sizeUnit: 'px',
 		size: 50,
 		color: '#123abc',
-		loading,
+		loading: true,
 	}
 	config = {...config, ...props}
 	
