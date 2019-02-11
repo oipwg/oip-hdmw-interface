@@ -1,11 +1,27 @@
 import * as actions from '../actions/HDMW/creators'
-import _ from 'lodash'
+import {COIN_ASYNC_STATE_SUCCESS} from "../actions/HDMW/creators";
 
 const HDMW = (state = {
 	mnemonic: undefined,
 	balances: {},
 	exchangeRates: {},
 	lastUpdate: {},
+	balanceAsyncState: {
+		success: false,
+		error: false,
+		fetching: false,
+	},
+	transactionAsyncState: {
+		success: false,
+		error: false,
+		fetching: false,
+	},
+	sendPaymentAsyncState: {
+		success: false,
+		error: false,
+		fetching: false,
+	},
+	coinAsyncState: {}
 }, action) => {
 	switch (action.type) {
 		case actions.SET_MNEMONIC:
@@ -49,6 +65,93 @@ const HDMW = (state = {
 			return {
 				...state,
 				[`upa_${action.coin}_${action.account}`]: action.usedPubAddresses
+			}
+		}
+		case actions.BALANCES_FETCHING:
+			return {
+				...state,
+				balanceAsyncState: {...state.balanceAsyncState, fetching: true, success: false, error: false}
+			}
+		case actions.BALANCES_SUCCESS:
+			return {
+				...state,
+				balanceAsyncState: {...state.balanceAsyncState, fetching: false, success: true, error: false}
+			}
+		case actions.BALANCES_ERROR:
+			return {
+				...state,
+				balanceAsyncState: {...state.balanceAsyncState, fetching: false, success: false, error: true}
+			}
+		case actions.TRANSACTIONS_FETCHING:
+			return {
+				...state,
+				transactionAsyncState: {...state.transactionAsyncState, fetching: true, success: false, error: false}
+			}
+		case actions.TRANSACTIONS_ERROR:
+			return {
+				...state,
+				transactionAsyncState: {...state.transactionAsyncState, fetching: false, success: true, error: false}
+			}
+		case actions.TRANSACTIONS_SUCCESS:
+			return {
+				...state,
+				transactionAsyncState: {...state.transactionAsyncState, fetching: false, success: false, error: true}
+			}
+		case actions.SEND_PAYMENT_FETCHING:
+			return {
+				...state,
+				sendPaymentAsyncState: {...state.sendPaymentAsyncState, fetching: true, success: false, error: false}
+			}
+		case actions.SEND_PAYMENT_ERROR:
+			return {
+				...state,
+				sendPaymentAsyncState: {...state.sendPaymentAsyncState, fetching: false, success: true, error: false}
+			}
+		case actions.SEND_PAYMENT_SUCCESS:
+			return {
+				...state,
+				sendPaymentAsyncState: {...state.sendPaymentAsyncState, fetching: false, success: false, error: true}
+			}
+		case actions.COIN_BALANCE_FETCHING: {
+			return {
+				...state,
+				coinAsyncState: {
+					...state.coinAsyncState,
+					[action.coin]: {
+						...state.coinAsyncState[action.coin],
+						fetching: true,
+						success: false,
+						error: false,
+					}
+				}
+			}
+		}
+		case actions.COIN_ASYNC_STATE_ERROR: {
+			return {
+				...state,
+				coinAsyncState: {
+					...state.coinAsyncState,
+					[action.coin]: {
+						...state.coinAsyncState[action.coin],
+						fetching: false,
+						success: false,
+						error: true,
+					}
+				}
+			}
+		}
+		case actions.COIN_ASYNC_STATE_SUCCESS: {
+			return {
+				...state,
+				coinAsyncState: {
+					...state.coinAsyncState,
+					[action.coin]: {
+						...state.coinAsyncState[action.coin],
+						fetching: false,
+						success: true,
+						error: false,
+					}
+				}
 			}
 		}
 		default:

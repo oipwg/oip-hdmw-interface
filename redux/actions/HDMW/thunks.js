@@ -1,9 +1,35 @@
-import {setCoinBalance, setCoinBalances, setExchangeRates, setUsedPubAddresses, setTransactions} from "./creators";
+import {
+	setCoinBalance,
+	setCoinBalances,
+	setExchangeRates,
+	setUsedPubAddresses,
+	setTransactions,
+	balancesError,
+	balancesFetching,
+	balancesSuccess,
+	transactionsError,
+	transactionsFetching,
+	transactionsSuccess,
+	sendPaymentError,
+	sendPaymentFetching,
+	sendPaymentSuccess,
+	coinBalanceError,
+	coinBalanceSuccess,
+	coinBalanceFetching
+} from "./creators";
 
-export const updateCoinBalance = (coin, wallet, force = false) => async (dispatch, getState) => {
+export const updateCoinBalance = (coin, wallet, force = false) => async (dispatch) => {
 	if (dispatch(shouldUpdate(coin)) || force) {
-		let balance = await wallet.getCoinBalances({coins: [coin]})
+		dispatch(coinBalanceFetching(coin))
+		
+		let balance
+		try {
+			balance = await wallet.getCoinBalances({coins: [coin]})
+		} catch (err) {
+			dispatch(coinBalanceError(coin))
+		}
 		dispatch(setCoinBalance(coin, balance))
+		dispatch(coinBalanceSuccess(coin))
 	}
 }
 
@@ -28,10 +54,15 @@ export const updateBalances = (wallet, coins) => async (dispatch) => {
 			coinsToFetchBalances.push(coin)
 		}
 	}
-	
-	let balances = await wallet.getCoinBalances({coins: coinsToFetchBalances})
-
+	dispatch(balancesFetching())
+	let balances
+	try {
+		balances = await wallet.getCoinBalances({coins: coinsToFetchBalances})
+	} catch (err) {
+		dispatch(balancesError())
+	}
 	dispatch(setCoinBalances(balances))
+	dispatch(balancesSuccess())
 	
 	_coins = _coins.filter(coin => !coin.includes('_testnet'))
 	if (_coins.length !== 0) {
@@ -55,11 +86,19 @@ export const getTransactions = (Wallet, explorer) => async (dispatch, getState) 
 	let COIN = Wallet.getCoin(activeCoin)
 	
 	if (!activeCoin || !coinState || !COIN) {
+		dispatch(transactionsError())
 		console.error('missing variable in getTransactions thunk', activeCoin, coinState, COIN)
-		return //add error handling
+		return
 	}
 	let ACCOUNT = COIN.getAccount(coinState.activeAccountIndex)
-	ACCOUNT = await ACCOUNT.discoverChains()
+	
+	try {
+		ACCOUNT = await ACCOUNT.discoverChains()
+	} catch (err) {
+		dispatch(transactionsError())
+		console.error(`Failed to discover chains on account in thunk`)
+		return
+	}
 	
 	let usedAddresses = await ACCOUNT.getUsedAddresses()
 	
@@ -72,16 +111,20 @@ export const getTransactions = (Wallet, explorer) => async (dispatch, getState) 
 		}
 	}
 	
+	dispatch(transactionsFetching())
 	let transactions = []
 	for (let id of transactionIds) {
 		try {
 			transactions.push(await explorer.getTransaction(id))
 		} catch (err) {
+			dispatch(transactionsError())
 			console.error('failed to get transaction from explorer in getTransactions thunk', err, explorer)
-			return //add error handling
+			return
 		}
 	}
 	
 	dispatch(setUsedPubAddresses(usedPubAddresses, activeCoin, coinState.activeAccountIndex))
 	dispatch(setTransactions(transactions, activeCoin, coinState.activeAccountIndex))
+	
+	dispatch(transactionsSuccess())
 }

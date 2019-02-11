@@ -38,3 +38,66 @@ export const setUsedPubAddresses = (usedPubAddresses, coin, account) => ({
 	coin,
 	account
 })
+
+export const BALANCES_FETCHING = 'BALANCES_FETCHING'
+export const balancesFetching = () => ({
+	type: BALANCES_FETCHING
+})
+
+export const BALANCES_ERROR = 'BALANCES_ERROR'
+export const balancesError = () => ({
+	type: BALANCES_ERROR
+})
+
+export const BALANCES_SUCCESS = 'BALANCES_SUCCESS'
+export const balancesSuccess = () => ({
+	type: BALANCES_SUCCESS
+})
+
+export const TRANSACTIONS_FETCHING = 'TRANSACTIONS_FETCHING'
+export const transactionsFetching = () => ({
+	type: TRANSACTIONS_FETCHING
+})
+
+export const TRANSACTIONS_ERROR = 'TRANSACTIONS_ERROR'
+export const transactionsError = () => ({
+	type: TRANSACTIONS_ERROR
+})
+
+export const TRANSACTIONS_SUCCESS = 'TRANSACTIONS_SUCCESS'
+export const transactionsSuccess = () => ({
+	type: TRANSACTIONS_SUCCESS
+})
+
+export const SEND_PAYMENT_FETCHING = 'SEND_PAYMENT_FETCHING'
+export const sendPaymentFetching = () => ({
+	type: SEND_PAYMENT_FETCHING
+})
+
+export const SEND_PAYMENT_ERROR = 'SEND_PAYMENT_ERROR'
+export const sendPaymentError = () => ({
+	type: SEND_PAYMENT_ERROR
+})
+
+export const SEND_PAYMENT_SUCCESS = 'SEND_PAYMENT_SUCCESS'
+export const sendPaymentSuccess = () => ({
+	type: SEND_PAYMENT_SUCCESS
+})
+
+export const COIN_BALANCE_FETCHING = 'COIN_BALANCE_FETCHING'
+export const coinBalanceFetching = (coin) => ({
+	type: COIN_BALANCE_FETCHING,
+	coin,
+})
+
+export const COIN_ASYNC_STATE_ERROR = 'COIN_ASYNC_STATE_ERROR'
+export const coinBalanceError = (coin) => ({
+	type: COIN_ASYNC_STATE_ERROR,
+	coin,
+})
+
+export const COIN_ASYNC_STATE_SUCCESS = 'COIN_ASYNC_STATE_SUCCESS'
+export const coinBalanceSuccess = (coin) => ({
+	type: COIN_ASYNC_STATE_SUCCESS,
+	coin,
+})
