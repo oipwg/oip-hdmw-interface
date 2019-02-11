@@ -25,7 +25,7 @@ const styles = theme => ({
 		height: '100%',
 		maxHeight: '100%',
 		flex: '1 1 0%',
-		overflow: 'hidden',
+		// overflow: 'hidden',
 	},
 	contentWrapper: {
 		maxHeight: '100%',

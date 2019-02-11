@@ -18,7 +18,8 @@ function InterfaceWrapper(props) {
 		exchangeRates,
 		Wallet,
 		displayCoins,
-		displayBalances
+		displayBalances,
+		balanceAsyncState
 	} = props
 	return (
 		<div className={classes.interfaceContainer}>
@@ -30,6 +31,7 @@ function InterfaceWrapper(props) {
 						updateBalances={updateBalances}
 						Wallet={Wallet}
 						displayCoins={displayCoins}
+						balanceAsyncState={balanceAsyncState}
 					/>
 					<div className={classes.contentWrapper}>
 						<Coins

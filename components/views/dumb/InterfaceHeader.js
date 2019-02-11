@@ -1,36 +1,63 @@
 import React from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
-import {Refresh} from "@material-ui/icons";
+import {Refresh, Warning} from "@material-ui/icons";
 import {withStyles} from "@material-ui/core";
 
 import styles from '../../../styles/views/dumb/InterfaceHeader'
 
 const calculateFiatBalance = (balances, exchangeRates) => {
-	let totalBalance = 0
+	let balance = 0, errors = []
 	for (let coinB in balances) {
 		if (coinB.includes('_testnet'))
 			continue
 		for (let coinX in exchangeRates) {
 			if (coinB === coinX) {
 				if (_.isNumber(balances[coinB]) && _.isNumber(exchangeRates[coinB])) {
-					totalBalance += (balances[coinB]) * exchangeRates[coinB]
+					balance += (balances[coinB]) * exchangeRates[coinB]
 				} else {
-					return 'error'
+					errors.push(coinB)
 				}
 			}
 		}
 	}
-	return totalBalance
+	return {balance, errors}
 }
 
-function InterfaceHeader({exchangeRates, balances, classes, updateBalances, Wallet, displayCoins}) {
+function InterfaceHeader({balanceAsyncState, exchangeRates, balances, classes, updateBalances, Wallet, displayCoins}) {
+	
+	const {balance, errors} = calculateFiatBalance(balances, exchangeRates)
+	
+	const getDisplayText = () => {
+		let balanceText, balanceColor
+		if (balanceAsyncState.fetching) {
+			balanceText = 'LOADING'
+			balanceColor = 'blue'
+		} else if (balanceAsyncState.error) {
+			balanceText = 'ERROR'
+			balanceColor = 'red'
+		} else {
+			balanceText = `$${balance}`
+			balanceColor = 'green'
+		}
+		return {balanceText, balanceColor}
+	}
+	
+	const {balanceText, balanceColor} = getDisplayText()
+	
 	return <div className={classes.interfaceHeader}>
 		<div className={classes.balanceContainer}>
 			<h4 style={{margin: '0px'}}>
 				<span>Balance: </span>
-				<span>${calculateFiatBalance(balances, exchangeRates)}</span>
 			</h4>
+			<div className={classes.balanceData}>
+				<span style={{color: balanceColor}} className={classes.balanceDisplayText}>{balanceText}</span>
+				{errors.map((message, i ) => {
+					return <div key={i} className={classes.tooltip}> <Warning color={'error'} fontSize={'small'} />
+						<span className={classes.tooltiptext}>Failed to fetch balance for: {message}</span>
+					</div>
+				})}
+			</div>
 		</div>
 		
 		<Refresh

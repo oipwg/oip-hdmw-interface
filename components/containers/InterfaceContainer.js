@@ -110,6 +110,7 @@ class InterfaceContainer extends React.Component {
 			balances={HDMW.balances}
 			totalBalance={HDMW.totalBalance}
 			exchangeRates={HDMW.exchangeRates}
+			balanceAsyncState={HDMW.balanceAsyncState}
 			displayBalances={Settings.displayBalances}
 			//actions
 			setActiveCoin={setActiveCoin}
