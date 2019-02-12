@@ -69,6 +69,11 @@ export const transactionsSuccess = () => ({
 	type: TRANSACTIONS_SUCCESS
 })
 
+export const CLEAR_TX_ASYNC_STATE = 'CLEAR_TX_ASYNC_STATE'
+export const clearTxAsyncState = () => ({
+	type: CLEAR_TX_ASYNC_STATE
+})
+
 export const SEND_PAYMENT_FETCHING = 'SEND_PAYMENT_FETCHING'
 export const sendPaymentFetching = () => ({
 	type: SEND_PAYMENT_FETCHING

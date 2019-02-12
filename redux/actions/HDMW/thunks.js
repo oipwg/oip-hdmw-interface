@@ -127,4 +127,5 @@ export const getTransactions = (Wallet, explorer) => async (dispatch, getState) 
 	dispatch(setTransactions(transactions, activeCoin, coinState.activeAccountIndex))
 	
 	dispatch(transactionsSuccess())
+	return transactions
 }

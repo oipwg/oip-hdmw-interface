@@ -1,5 +1,4 @@
 import * as actions from '../actions/HDMW/creators'
-import {COIN_ASYNC_STATE_SUCCESS} from "../actions/HDMW/creators";
 
 const HDMW = (state = {
 	mnemonic: undefined,
@@ -85,17 +84,22 @@ const HDMW = (state = {
 		case actions.TRANSACTIONS_FETCHING:
 			return {
 				...state,
-				transactionAsyncState: {...state.transactionAsyncState, fetching: true, success: false, error: false}
+				transactionAsyncState: {fetching: true, success: false, error: false}
 			}
 		case actions.TRANSACTIONS_ERROR:
 			return {
 				...state,
-				transactionAsyncState: {...state.transactionAsyncState, fetching: false, success: true, error: false}
+				transactionAsyncState: {etching: false, success: false, error: true}
 			}
 		case actions.TRANSACTIONS_SUCCESS:
 			return {
 				...state,
-				transactionAsyncState: {...state.transactionAsyncState, fetching: false, success: false, error: true}
+				transactionAsyncState: {fetching: false, success: true, error: false}
+			}
+		case actions.CLEAR_TX_ASYNC_STATE:
+			return {
+				...state,
+				transactionAsyncState: {fetching: false, success: false, error: false}
 			}
 		case actions.SEND_PAYMENT_FETCHING:
 			return {

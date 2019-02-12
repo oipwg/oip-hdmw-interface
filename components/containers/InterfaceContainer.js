@@ -9,6 +9,7 @@ import {updateBalances} from '../../redux/actions/HDMW/thunks'
 import {initializeExplorerUrls, displayCoin} from '../../redux/actions/Settings/thunks'
 
 import InterfaceWrapper from "../views/wrappers/InterfaceWrapper";
+import {clearTxAsyncState} from "../../redux/actions/HDMW/creators";
 
 function getNewArrayItems(initArray, newArray) {
 	let itemsAdded = []
@@ -80,6 +81,10 @@ function InterfaceContainer(props) {
 		
 	}, [props.Settings.displayCoins])
 	
+	useEffect(() => {
+		props.clearTxAsyncState()
+	}, [props.Interface.activeCoin])
+	
 	return <InterfaceWrapper
 		//hdmw
 		Wallet={getWallet()}
@@ -104,6 +109,7 @@ const mapDispatchToProps = {
 	initializeExplorerUrls,
 	createInitialCoinStates,
 	displayCoin,
+	clearTxAsyncState
 }
 
 const mapStateToProps = (state) => {
@@ -125,6 +131,7 @@ InterfaceContainer.propTypes = {
 	createInitialCoinStates: PropTypes.func.isRequired,
 	displayCoin: PropTypes.func.isRequired,
 	updateBalances: PropTypes.func.isRequired,
+	clearTxAsyncState: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InterfaceContainer)

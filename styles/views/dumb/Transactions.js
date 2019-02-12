@@ -8,10 +8,15 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'row',
 		flex: '0 0 50px',
-		justifyContent: 'flex-end',
+		justifyContent: 'space-between',
 		alignItems: 'center',
 		padding: '5px 15px',
 		borderBottom: '1px solid rgb(218, 225, 233)'
+	},
+	txAsyncData: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
 	},
 	refreshTransactions: {
 		cursor: 'pointer',
