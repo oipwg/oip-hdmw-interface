@@ -22,7 +22,7 @@ const Addresses = (props) => {
 	
 	//give time for Interface to mount
 	if (!Coin || !coinState) {
-		return ReactLoader({type: 'BarLoader'})//
+		return null
 	}
 	
 	let Account = Coin.getAccount(coinState.activeAccountIndex)
