@@ -3,12 +3,14 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'column',
 		flex: '1 1 auto',
+		padding: '20px',
 	},
 	createTXHeader: {
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
 		flex: '0 0 50px',
+		padding: '10px 20px',
 	},
 	sendBody: {
 		display: 'flex',
