@@ -89,6 +89,11 @@ export const sendPaymentSuccess = () => ({
 	type: SEND_PAYMENT_SUCCESS
 })
 
+export const CLEAR_SEND_PAYMENT_ASYNC_STATE = 'CLEAR_SEND_PAYMENT_ASYNC_STATE'
+export const clearSendPaymentAsyncState = () => ({
+	type: CLEAR_SEND_PAYMENT_ASYNC_STATE
+})
+
 export const COIN_BALANCE_FETCHING = 'COIN_BALANCE_FETCHING'
 export const coinBalanceFetching = (coin) => ({
 	type: COIN_BALANCE_FETCHING,

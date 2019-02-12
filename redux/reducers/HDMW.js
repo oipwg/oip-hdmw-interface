@@ -116,6 +116,11 @@ const HDMW = (state = {
 				...state,
 				sendPaymentAsyncState: {fetching: false, success: true, error: false}
 			}
+		case actions.CLEAR_SEND_PAYMENT_ASYNC_STATE:
+			return {
+				...state,
+				sendPaymentAsyncState: {fetching: false, success: false, error: false}
+			}
 		case actions.COIN_BALANCE_FETCHING: {
 			return {
 				...state,
