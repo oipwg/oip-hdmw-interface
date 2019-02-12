@@ -69,17 +69,17 @@ const HDMW = (state = {
 		case actions.BALANCES_FETCHING:
 			return {
 				...state,
-				balanceAsyncState: {...state.balanceAsyncState, fetching: true, success: false, error: false}
+				balanceAsyncState: {fetching: true, success: false, error: false}
 			}
 		case actions.BALANCES_SUCCESS:
 			return {
 				...state,
-				balanceAsyncState: {...state.balanceAsyncState, fetching: false, success: true, error: false}
+				balanceAsyncState: {fetching: false, success: true, error: false}
 			}
 		case actions.BALANCES_ERROR:
 			return {
 				...state,
-				balanceAsyncState: {...state.balanceAsyncState, fetching: false, success: false, error: true}
+				balanceAsyncState: {fetching: false, success: false, error: true}
 			}
 		case actions.TRANSACTIONS_FETCHING:
 			return {
@@ -104,17 +104,17 @@ const HDMW = (state = {
 		case actions.SEND_PAYMENT_FETCHING:
 			return {
 				...state,
-				sendPaymentAsyncState: {...state.sendPaymentAsyncState, fetching: true, success: false, error: false}
+				sendPaymentAsyncState: {fetching: true, success: false, error: false}
 			}
 		case actions.SEND_PAYMENT_ERROR:
 			return {
 				...state,
-				sendPaymentAsyncState: {...state.sendPaymentAsyncState, fetching: false, success: true, error: false}
+				sendPaymentAsyncState: {fetching: false, success: false, error: true}
 			}
 		case actions.SEND_PAYMENT_SUCCESS:
 			return {
 				...state,
-				sendPaymentAsyncState: {...state.sendPaymentAsyncState, fetching: false, success: false, error: true}
+				sendPaymentAsyncState: {fetching: false, success: true, error: false}
 			}
 		case actions.COIN_BALANCE_FETCHING: {
 			return {
