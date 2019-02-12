@@ -7,7 +7,7 @@ import logger from './logs'
 import getRootUrl from '../lib/api/getRootUrl'
 
 const dev = process.env.NODE_ENV !== 'production'
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 7000;
 const ROOT_URL = getRootUrl()
 
 const app = next({ dev });
