@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -13,6 +13,16 @@ function CreateTX(props) {
 	const [amount, updateAmount] = useState(0)
 	const [floData, updateFloData] = useState('')
 	const [checkedCoin, updateCheckedCoin] = useState(props.activeCoin)
+	useEffect(() => {
+		props.clearSendPaymentAsyncState()
+		updateAddress('')
+		updateAmount('')
+		updateFloData('')
+	}, [checkedCoin])
+	
+	useEffect(() => {
+		updateCheckedCoin(props.activeCoin)
+	}, [props.activeCoin])
 	
 	return (
 		<div className={classes.sendBody}>
@@ -97,6 +107,7 @@ CreateTX.propTypes = {
 	Wallet: PropTypes.object.isRequired,
 	activeCoin: PropTypes.string.isRequired,
 	classes: PropTypes.object.isRequired,
+	clearSendPaymentAsyncState: PropTypes.func.isRequired,
 }
 
 export default CreateTX

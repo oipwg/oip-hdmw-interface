@@ -9,7 +9,7 @@ import {updateBalances} from '../../redux/actions/HDMW/thunks'
 import {initializeExplorerUrls, displayCoin} from '../../redux/actions/Settings/thunks'
 
 import InterfaceWrapper from "../views/wrappers/InterfaceWrapper";
-import {clearTxAsyncState} from "../../redux/actions/HDMW/creators";
+import {clearSendPaymentAsyncState, clearTxAsyncState} from "../../redux/actions/HDMW/creators";
 
 function getNewArrayItems(initArray, newArray) {
 	let itemsAdded = []
@@ -83,6 +83,7 @@ function InterfaceContainer(props) {
 	
 	useEffect(() => {
 		props.clearTxAsyncState()
+		props.clearSendPaymentAsyncState()
 	}, [props.Interface.activeCoin])
 	
 	return <InterfaceWrapper
@@ -109,7 +110,8 @@ const mapDispatchToProps = {
 	initializeExplorerUrls,
 	createInitialCoinStates,
 	displayCoin,
-	clearTxAsyncState
+	clearTxAsyncState,
+	clearSendPaymentAsyncState
 }
 
 const mapStateToProps = (state) => {
@@ -132,6 +134,7 @@ InterfaceContainer.propTypes = {
 	displayCoin: PropTypes.func.isRequired,
 	updateBalances: PropTypes.func.isRequired,
 	clearTxAsyncState: PropTypes.func.isRequired,
+	clearSendPaymentAsyncState: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InterfaceContainer)
