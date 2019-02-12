@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ClipboardJS from 'clipboard'
 import {withStyles} from "@material-ui/core";
-import ReactLoader from '../../shared/ReactLoader'
 
 import {FileCopy} from "@material-ui/icons";
 import notifier from '../../../lib/notifier'
