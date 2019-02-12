@@ -11,6 +11,7 @@ function CreateTXHeader(props) {
 
 CreateTXHeader.propTypes = {
 	classes: PropTypes.object.isRequired,
+	
 }
 
 export default CreateTXHeader

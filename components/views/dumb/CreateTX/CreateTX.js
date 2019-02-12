@@ -64,19 +64,21 @@ function CreateTX(props) {
 					}}
 				/>
 			</div>
-			<div className={classes.fieldRow}>
-				<span className={classes.fieldTitle}>floData</span>
-				<input
-					className={classes.floDataInputField}
-					required
-					name={'floData'}
-					type='text'
-					value={floData}
-					onChange={(e) => {
-						updateFloData(e.target.value)
-					}}
-				/>
-			</div>
+			{checkedCoin === 'flo' || checkedCoin === 'flo_testnet' ? (
+				<div className={classes.fieldRow}>
+					<span className={classes.fieldTitle}>floData</span>
+					<input
+						className={classes.floDataInputField}
+						required
+						name={'floData'}
+						type='text'
+						value={floData}
+						onChange={(e) => {
+							updateFloData(e.target.value)
+						}}
+					/>
+				</div>
+			) : (null)}
 			<div className={classes.fieldRow}>
 				<Button
 					color={'primary'}
