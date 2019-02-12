@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect, useState, useRef} from "react";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
-import {Wallet} from "oip-hdmw";
+import {Wallet as _WALLET} from "oip-hdmw";
 import _ from 'lodash'
 import {setActiveCoin} from '../../redux/actions/Interface/creators'
 import {createInitialCoinStates} from '../../redux/actions/Interface/thunks'
@@ -10,113 +10,92 @@ import {initializeExplorerUrls, displayCoin} from '../../redux/actions/Settings/
 
 import InterfaceWrapper from "../views/wrappers/InterfaceWrapper";
 
-class InterfaceContainer extends React.Component {
-	constructor(props) {
-		super(props)
-		console.log('InterfaceContainer.constructor')
-		
-		//loadFromLocalStorage
-		this.Wallet = props.HDMW.mnemonic ? new Wallet(props.HDMW.mnemonic, {discover: false}) : undefined
-		
+function getNewArrayItems(initArray, newArray) {
+	let itemsAdded = []
+	for (let newItem of newArray) {
+		let match = false
+		for (let oldItem of initArray) {
+			if (newItem === oldItem) {
+				match = true
+				break
+			}
+		}
+		if (!match) {
+			itemsAdded.push(newItem)
+		}
+	}
+	return itemsAdded
+}
+
+function InterfaceContainer(props) {
+	const walletRef = useRef(null)
+	
+	function getWallet() {
+		let wallet = walletRef.current;
+		if (wallet !== null) {
+			return wallet;
+		}
+		let newWallet = new _WALLET(props.HDMW.mnemonic, {discover: false});
+		walletRef.current = newWallet;
+		return newWallet;
 	}
 	
-	componentDidMount() {
-		console.log('InterfaceContainer.componentDidMount')
-		console.log('this.props.Settings.includeTestnetCoins', this.props.Settings.includeTestnetCoins)
-		//initialize wallet
-		if (this.props.Settings.includeTestnetCoins) {
-			this.Wallet.addTestnetCoins()
+	useEffect(() => {
+		getWallet().addTestnetCoins(props.Settings.includeTestnetCoins)
+	}, []) //updates are handled in redux thunk
+	
+	useEffect(() => {
+		if (props.Settings.displayCoins.length === 0) {
+			for (let coin of Object.keys(getWallet().getCoins())) {
+				props.displayCoin(coin)
+			}
 		}
-		
-		//if custom networks add coins --ToDo much later
-		
-		//if custom coin api urls, set
-		if (_.isEmpty(this.props.Settings.explorerUrls)) { //toDo: test
-			//set coin network apis from wallet with defaults
-			this.props.initializeExplorerUrls(this.Wallet)
+	}, [])
+	
+	useEffect(() => {
+		if (_.isEmpty(props.Settings.explorerUrls)) {
+			props.initializeExplorerUrls(getWallet())
 		} else {
-			//set wallet with coinNetworkApis
-			this.Wallet.setExplorerUrls(this.props.Settings.explorerUrls)
+			getWallet().setExplorerUrls(props.Settings.explorerUrls)
 		}
-		
-		//initialize interface
-		this.props.createInitialCoinStates(this.Wallet)
-		
-		//if display coins haven't already been set, set them to default wallet coins
-		if (this.props.Settings.displayCoins.length === 0) {
-			for (let coin of Object.keys(this.Wallet.getCoins())) {
-				this.props.displayCoin(coin)
-			}
-		}
-		
-		//if custom coin states, override initial states
-		//todo: override initial coin states if custom Interface settings
-		
-		if (!this.props.Settings.displayCoins.includes(this.props.Interface.activeCoin)) {
-			if (this.props.Settings.displayCoins.length > 0) {
-				this.props.setActiveCoin(this.props.Settings.displayCoins[0])
-			}
-		}
-		
-		//fetch balances for all only the displayed coins if available, else all default coins
-		if (this.props.Settings.displayCoins.length > 0) {
-			this.props.updateBalances(this.Wallet, this.props.Settings.displayCoins)
-		} else {
-			this.props.updateBalances(this.Wallet)
-		}
-	}
+	}, [props.Settings.explorerUrls])
 	
-	componentDidUpdate(prevProps, prevState, snapshot) {
-		console.log('InterfaceContainer.componentDidUpdate')
-		if (prevProps.Settings.explorerUrls !== this.props.Settings.explorerUrls) {
-			this.Wallet.setExplorerUrls(this.props.Settings.explorerUrls)
-		}
-		
-		if (prevProps.Settings.displayCoins !== this.props.Settings.displayCoins) {
-			if (!this.props.Settings.displayCoins.includes(this.props.Interface.activeCoin)) {
-				this.props.setActiveCoin(this.props.Settings.displayCoins[0] || 'flo')
+	const [displayArray, updateDisplayArray] = useState([])
+	useEffect(() => {
+		if (!props.Settings.displayCoins.includes(props.Interface.activeCoin)) {
+			if (props.Settings.displayCoins.length > 0) {
+				props.setActiveCoin(props.Settings.displayCoins[0])
 			}
 		}
 		
-		if (this.props.Settings.displayCoins.length > prevProps.Settings.displayCoins.length) {
-			//update balances when added coin
-			let addedCoins = []
-			for (let coin of this.props.Settings.displayCoins) {
-				let match = false
-				for (let oldCoin of prevProps.Settings.displayCoins) {
-					if (coin === oldCoin) {
-						match = true
-						break
-					}
-				}
-				if (!match) {
-					addedCoins.push(coin)
-				}
-			}
-			this.props.updateBalances(this.Wallet, addedCoins)
+		if (props.Settings.displayCoins.length > displayArray.length) {
+			props.createInitialCoinStates(getWallet())
+			
+			const newItems = getNewArrayItems(displayArray, props.Settings.displayCoins)
+			props.updateBalances(getWallet(), newItems)
 		}
-	}
+		
+		//keep an internal state of display coins to compare to on re-renders
+		updateDisplayArray(props.Settings.displayCoins)
+		
+	}, [props.Settings.displayCoins])
 	
-	render() {
-		console.log('WalletContainer.render')
-		const {Interface, setActiveCoin, updateBalances, HDMW, Settings} = this.props;
-		
-		return <InterfaceWrapper
-			//hdmw
-			Wallet={this.Wallet}
-			//states
-			activeCoin={Interface.activeCoin}
-			displayCoins={Settings.displayCoins}
-			balances={HDMW.balances}
-			totalBalance={HDMW.totalBalance}
-			exchangeRates={HDMW.exchangeRates}
-			balanceAsyncState={HDMW.balanceAsyncState}
-			displayBalances={Settings.displayBalances}
-			//actions
-			setActiveCoin={setActiveCoin}
-			updateBalances={updateBalances}
-		/>
-	}
+	return <InterfaceWrapper
+		//hdmw
+		Wallet={getWallet()}
+		//states
+		activeCoin={props.Interface.activeCoin}
+		displayCoins={props.Settings.displayCoins}
+		balances={props.HDMW.balances}
+		totalBalance={props.HDMW.totalBalance}
+		exchangeRates={props.HDMW.exchangeRates}
+		balanceAsyncState={props.HDMW.balanceAsyncState}
+		displayBalances={props.Settings.displayBalances}
+		//actions
+		setActiveCoin={props.setActiveCoin}
+		updateBalances={props.updateBalances}
+	/>
+	
 }
 
 const mapDispatchToProps = {
@@ -124,7 +103,7 @@ const mapDispatchToProps = {
 	updateBalances,
 	initializeExplorerUrls,
 	createInitialCoinStates,
-	displayCoin
+	displayCoin,
 }
 
 const mapStateToProps = (state) => {
