@@ -54,12 +54,15 @@ function Transactions(props) {
 	return <div className={classes.transactionsListContainer}>
 		{transactions.map(tx => {
 			const {amount, type} = calculateAmount(tx.vin, tx.vout, usedPubAddresses)
+			const loadFloData = (props.activeCoin === 'flo' || props.activeCoin === 'flo_testnet') && (!!tx.floData || tx.floData !== '')
 			return <div key={tx.txid} className={classes.transactionRow}>
 				<div className={classes.txFloDataContainer}>
 					<div className={classes.flexRowMiddle}>
 						{tx.txid}
 					</div>
-					<FloDataContainer classes={classes} floData={tx.floData} />
+					{loadFloData ? (
+						<FloDataContainer classes={classes} floData={tx.floData} />
+					): (null) }
 				</div>
 				<div className={classes.txTimeAmountContainer}>
 					<div className={classes.transactionDateContainer}>
