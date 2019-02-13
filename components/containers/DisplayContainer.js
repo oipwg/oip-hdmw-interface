@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
@@ -11,37 +11,36 @@ import CreateTXContainer from './CreateTXContainer'
 //Interface actions
 import {setActiveView, increaseAddressCount} from '../../redux/actions/Interface/creators'
 
-class DisplayContainer extends React.Component {
-	getDisplayBody = (props) => {
-		const {Interface} = props
-		
-		switch (this.props.Interface.activeView) {
+function DisplayContainer(props) {
+	
+	const getDisplayBody = (props) => {
+		switch (props.Interface.activeView) {
 			case 'addresses':
 				return <RenderAddresses
-					Interface={Interface}
-					Wallet={this.props.Wallet}
-					increaseAddressCount={this.props.increaseAddressCount}
+					Interface={props.Interface}
+					Wallet={props.Wallet}
+					increaseAddressCount={props.increaseAddressCount}
 				/>
 			case 'transactions':
-				return <TransactionsContainer Wallet={this.props.Wallet}/>
+				return <TransactionsContainer Wallet={props.Wallet}/>
 			case 'send':
-				return <CreateTXContainer Wallet={this.props.Wallet}/>
+				return <CreateTXContainer Wallet={props.Wallet}/>
 			// case 'add_coin':
 			// // return <RenderAddCoinView actions={actions} Interface={Interface}/>
 			case 'settings':
-				return <SettingsContainer Wallet={this.props.Wallet}/>
+				return <SettingsContainer Wallet={props.Wallet}/>
 			default:
 				return 'Invalid Display View'
 		}
 	}
 	
-	render() {
-		return <DisplayWrapper
-			setActiveView={this.props.setActiveView}
-			activeView={this.props.Interface.activeView}
-			DisplayBody={this.getDisplayBody(this.props)}
-		/>
-	}
+	
+	return <DisplayWrapper
+		setActiveView={props.setActiveView}
+		activeView={props.Interface.activeView}
+		DisplayBody={getDisplayBody(props)}
+	/>
+	
 }
 
 const mapDispatchToProps = {

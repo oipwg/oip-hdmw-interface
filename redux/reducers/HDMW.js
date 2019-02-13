@@ -20,7 +20,8 @@ const HDMW = (state = {
 		error: false,
 		fetching: false,
 	},
-	coinAsyncState: {}
+	coinAsyncState: {},
+	xrAsyncState: {},
 }, action) => {
 	switch (action.type) {
 		case actions.SET_MNEMONIC:
@@ -35,10 +36,23 @@ const HDMW = (state = {
 				lastUpdate: {...state.lastUpdate, xr: Date.now()}
 			}
 		}
+		case actions.SET_EXCHANGE_RATE: {
+			return {
+				...state,
+				exchangeRates: {
+					...state.exchangeRates,
+					...action.xr
+				},
+				lastUpdate: {
+					...state.lastUpdate,
+					[`xr_${action.coin}`]: Date.now()
+				}
+			}
+		}
 		case actions.SET_COIN_BALANCE: {
 			return {
 				...state,
-				balances: {...state.balances, [action.coin]: action.balance},
+				balances: {...state.balances, ...action.balance},
 				lastUpdate: {...state.lastUpdate, [action.coin]: Date.now()}
 			}
 		}
@@ -161,6 +175,60 @@ const HDMW = (state = {
 						error: false,
 					}
 				}
+			}
+		}
+		case actions.CLEAR_COIN_ASYNC_STATE: {
+			return {
+				...state,
+				coinAsyncState: {},
+			}
+		}
+		case actions.XR_FETCHING: {
+			return {
+				...state,
+				xrAsyncState: {
+					...state.xrAsyncState,
+					[action.coin]: {
+						...state.xrAsyncState[action.coin],
+						fetching: true,
+						success: false,
+						error: false,
+					}
+				}
+			}
+		}
+		case actions.XR_ERROR: {
+			return {
+				...state,
+				xrAsyncState: {
+					...state.xrAsyncState,
+					[action.coin]: {
+						...state.xrAsyncState[action.coin],
+						fetching: false,
+						success: false,
+						error: true,
+					}
+				}
+			}
+		}
+		case actions.XR_SUCCESS: {
+			return {
+				...state,
+				xrAsyncState: {
+					...state.xrAsyncState,
+					[action.coin]: {
+						...state.xrAsyncState[action.coin],
+						fetching: false,
+						success: true,
+						error: false,
+					}
+				}
+			}
+		}
+		case actions.CLEAR_XR_ASYNC_STATE: {
+			return {
+				...state,
+				xrAsyncState: {},
 			}
 		}
 		default:

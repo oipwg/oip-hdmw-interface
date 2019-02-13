@@ -2,6 +2,7 @@ import {
 	setCoinBalance,
 	setCoinBalances,
 	setExchangeRates,
+	setExchangeRate,
 	setUsedPubAddresses,
 	setTransactions,
 	balancesError,
@@ -15,7 +16,10 @@ import {
 	sendPaymentSuccess,
 	coinBalanceError,
 	coinBalanceSuccess,
-	coinBalanceFetching
+	coinBalanceFetching,
+	xrError,
+	xrFetching,
+	xrSuccess,
 } from "./creators";
 
 export const updateCoinBalance = (coin, wallet, force = false) => async (dispatch) => {
@@ -28,8 +32,28 @@ export const updateCoinBalance = (coin, wallet, force = false) => async (dispatc
 		} catch (err) {
 			dispatch(coinBalanceError(coin))
 		}
+		dispatch(updateCoinXrRate(wallet, coin))
+		
 		dispatch(setCoinBalance(coin, balance))
 		dispatch(coinBalanceSuccess(coin))
+		
+		//return balance so we can await it before we dispatch a success
+		return balance
+	}
+}
+
+export const updateCoinXrRate = (wallet, coin) => async dispatch => {
+	if (dispatch(shouldUpdate(`xr_${coin}`))) {
+		let options = {coins: [coin]}
+		dispatch(xrFetching(coin))
+		let xr
+		try {
+			xr = await wallet.getExchangeRates(options)
+		} catch (err) {
+			dispatch(xrError(coin))
+		}
+		dispatch(setExchangeRate(coin, xr))
+		dispatch(xrSuccess(coin))
 	}
 }
 
@@ -54,20 +78,24 @@ export const updateBalances = (wallet, coins) => async (dispatch) => {
 			coinsToFetchBalances.push(coin)
 		}
 	}
-	dispatch(balancesFetching())
-	let balances
-	try {
-		balances = await wallet.getCoinBalances({coins: coinsToFetchBalances})
-	} catch (err) {
-		dispatch(balancesError())
+	let mainnetCoinExist = false
+	for (let coin of coinsToFetchBalances) {
+		if (!coin.includes('_testnet')) {
+			mainnetCoinExist = true
+			break
+		}
 	}
-	dispatch(setCoinBalances(balances))
+	if (mainnetCoinExist) {
+		dispatch(balancesFetching())
+	}
+	let promiseArray = []
+	for (let coin of coinsToFetchBalances) {
+		promiseArray.push(dispatch(updateCoinBalance(coin, wallet)))
+	}
+	for (let promise of promiseArray) {
+		await promise
+	}
 	dispatch(balancesSuccess())
-	
-	_coins = _coins.filter(coin => !coin.includes('_testnet'))
-	if (_coins.length !== 0) {
-		dispatch(updateExchangeRates(wallet, _coins)) // toDo: move into new func?
-	}
 }
 
 export const shouldUpdate = name => (undefined, getState) => {

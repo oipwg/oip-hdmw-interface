@@ -10,6 +10,13 @@ export const setExchangeRates = (xr) => ({
 	xr
 })
 
+export const SET_EXCHANGE_RATE = 'SET_EXCHANGE_RATE'
+export const setExchangeRate = (coin, xr) => ({
+	type: SET_EXCHANGE_RATE,
+	xr,
+	coin
+})
+
 export const SET_COIN_BALANCE = 'SET_COIN_BALANCE'
 export const setCoinBalance = (coin, balance) => ({
 	type: SET_COIN_BALANCE,
@@ -110,4 +117,32 @@ export const COIN_ASYNC_STATE_SUCCESS = 'COIN_ASYNC_STATE_SUCCESS'
 export const coinBalanceSuccess = (coin) => ({
 	type: COIN_ASYNC_STATE_SUCCESS,
 	coin,
+})
+
+export const CLEAR_COIN_ASYNC_STATE = 'CLEAR_COIN_ASYNC_STATE'
+export const clearCoinAsyncState = () => ({
+	type: CLEAR_COIN_ASYNC_STATE
+})
+
+export const XR_FETCHING = 'XR_FETCHING'
+export const xrFetching = (coin) => ({
+	type: XR_FETCHING,
+	coin,
+})
+
+export const XR_ERROR = 'XR_ERROR'
+export const xrError = (coin) => ({
+	type: XR_ERROR,
+	coin,
+})
+
+export const XR_SUCCESS = 'XR_SUCCESS'
+export const xrSuccess = (coin) => ({
+	type: XR_SUCCESS,
+	coin,
+})
+
+export const CLEAR_XR_ASYNC_STATE = 'CLEAR_XR_ASYNC_STATE'
+export const clearXrAsyncState = () => ({
+	type: CLEAR_XR_ASYNC_STATE
 })
