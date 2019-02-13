@@ -43,6 +43,8 @@ function InterfaceWrapper(props) {
 							displayBalances={displayBalances}
 							networks={Wallet.networks}
 							Wallet={Wallet}
+							coinAsyncState={props.coinAsyncState}
+							xrAsyncState={props.xrAsyncState}
 						/>
 						<DisplayContainer Wallet={Wallet}/>
 					</div>
@@ -66,6 +68,8 @@ InterfaceWrapper.propTypes = {
 	exchangeRates: PropTypes.object.isRequired,
 	displayCoins: PropTypes.array.isRequired,
 	displayBalances: PropTypes.bool.isRequired,
+	coinAsyncState: PropTypes.object.isRequired,
+	xrAsyncState: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(InterfaceWrapper)

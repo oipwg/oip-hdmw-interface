@@ -6,7 +6,7 @@ import {withTheme, withStyles} from '@material-ui/core/styles';
 import styles from '../../../styles/views/dumb/Coins'
 
 const Coins = (props) => {
-	const {classes} = props
+	const {classes, coinAsyncState, xrAsyncState} = props
 	
 	const selectedCoinBorder = (coin) => {
 		let border = {
@@ -17,27 +17,54 @@ const Coins = (props) => {
 		return coin === props.activeCoin ? border : {}
 	}
 	
+	const getBalanceText = (coin) => {
+		if (!coinAsyncState[coin])
+			return
+		let balanceText
+		if (coinAsyncState[coin].fetching) {
+			balanceText = <span style={{color: 'blue'}}>Balance Fetching</span>
+		} else if (coinAsyncState[coin].error) {
+			balanceText = <span style={{color: 'red'}}>Balance Error</span>
+		} else if (coinAsyncState[coin].success) {
+			if (!_.isNumber(props.balances[coin])) {
+				return <span style={{color: 'red'}}>Balance Error</span>
+			}
+			balanceText = <span style={{color: 'green'}}>{props.balances[coin]} {props.networks[coin].ticker}</span>
+		} else {
+			return null
+		}
+		return balanceText
+	}
+	
+	const getFiatText = (coin) => {
+		if (!xrAsyncState[coin] || coin.includes('_testnet'))
+			return
+		let fiatText, color
+		if (xrAsyncState[coin].fetching) {
+			fiatText = 'Fetching Exchange Rate'
+			color = 'blue'
+		} else if (xrAsyncState[coin].error) {
+			fiatText = 'Error fetching exchange rate'
+			color = 'red'
+		} else if (xrAsyncState[coin].success) {
+			if (!_.isNumber(props.balances[coin]) || !_.isNumber(props.exchangeRates[coin])) {
+				fiatText = 'Error'
+				color = 'red'
+			} else {
+				fiatText = `$${props.balances[coin] * props.exchangeRates[coin]}`
+				color = 'grey'
+			}
+		} else {
+			fiatText = null
+		}
+		return <span style={{color, marginLeft: '5px'}}>{fiatText}</span>
+	}
+	
 	console.log('Coins.render()')
 	const coins = Object.keys(props.Wallet.getCoins()).filter(coin => props.displayCoins.includes(coin))
 	return <div className={classes.coinsContainer}>
 		<div className={classes.coinsList}>
 			{coins.map((coin, i) => {
-				
-				//toDo: add real error handling
-				let balance = props.balances[coin]
-				if (!_.isNumber(balance)) {
-					balance = 'error'
-				}
-				let ticker = props.networks[coin].ticker
-				
-				let displayFiat = `~= $${balance * props.exchangeRates[coin]}`
-				if (!_.isNumber(props.exchangeRates[coin])) {
-					displayFiat = 'error'
-				}
-				if (coin.includes('_testnet')) {
-					displayFiat = null
-				}
-				
 				return (
 					<div
 						key={i}
@@ -50,10 +77,16 @@ const Coins = (props) => {
 					>
 						<div className={classes.coinInfoWrapper}>
 							<h4 className={classes.coinName}>{_.toUpper(coin)}</h4>
-							{props.displayBalances ? (
-									<span>{balance} {ticker} {displayFiat}</span>
-								)
-								: null}
+							<div className={classes.coinBalanceRCol}>
+								{props.displayBalances ? (
+										getBalanceText(coin)
+									)
+									: null}
+								{props.displayBalances ? (
+										getFiatText(coin)
+									)
+									: null}
+							</div>
 						</div>
 					</div>
 				)
@@ -80,6 +113,8 @@ Coins.propTypes = {
 	exchangeRates: PropTypes.object.isRequired,
 	balances: PropTypes.object.isRequired,
 	networks: PropTypes.object.isRequired,
+	coinAsyncState: PropTypes.object.isRequired,
+	xrAsyncState: PropTypes.object.isRequired,
 	//actions
 	setActiveCoin: PropTypes.func.isRequired,
 }

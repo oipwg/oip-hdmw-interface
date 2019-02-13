@@ -100,6 +100,8 @@ function InterfaceContainer(props) {
 		//actions
 		setActiveCoin={props.setActiveCoin}
 		updateBalances={props.updateBalances}
+		coinAsyncState={props.HDMW.coinAsyncState}
+		xrAsyncState={props.HDMW.xrAsyncState}
 	/>
 	
 }

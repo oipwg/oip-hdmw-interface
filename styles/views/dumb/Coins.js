@@ -34,6 +34,11 @@ const styles = theme => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
+	coinBalanceRCol: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
 	coinName: {
 		margin: '5px 0px',
 	},

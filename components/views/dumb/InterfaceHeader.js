@@ -16,12 +16,6 @@ const calculateFiatBalance = (balances, exchangeRates) => {
 				if (_.isNumber(balances[coinB]) && _.isNumber(exchangeRates[coinB])) {
 					balance += (balances[coinB]) * exchangeRates[coinB]
 				} else {
-					console.log('pushing coin error: ',
-						coinB, balances[coinB], exchangeRates[coinB],
-						_.isNumber(balances[coinB]), _.isNumber(exchangeRates[coinB]),
-						balances,
-						exchangeRates
-					)
 					errors.push(coinB)
 				}
 			}

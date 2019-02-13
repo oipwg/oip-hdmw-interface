@@ -46,14 +46,17 @@ export const updateCoinXrRate = (wallet, coin) => async dispatch => {
 	if (dispatch(shouldUpdate(`xr_${coin}`))) {
 		let options = {coins: [coin]}
 		dispatch(xrFetching(coin))
-		let xr
-		try {
-			xr = await wallet.getExchangeRates(options)
-		} catch (err) {
+		
+		wallet.getExchangeRates(options)
+		.then(xr => {
+			dispatch(setExchangeRate(coin, xr))
+			dispatch(xrSuccess(coin))
+			}
+		)
+		
+		.catch(() => {
 			dispatch(xrError(coin))
-		}
-		dispatch(setExchangeRate(coin, xr))
-		dispatch(xrSuccess(coin))
+		})
 	}
 }
 
