@@ -55,7 +55,7 @@ const Addresses = (props) => {
 						onClick={() => {
 							increaseAddressCount()
 						}}>
-						+ Show new address
+						+ Show next address
 					</span>
 			</div>
 		</div>
