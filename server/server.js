@@ -1,13 +1,15 @@
 import express from 'express'
-import next from 'next';
+import next from 'next'
+import path from 'path'
 import helmet from 'helmet'
 require('dotenv').config()
 
 import logger from './logs'
-import getRootUrl from '../lib/api/getRootUrl'
+const {getRootUrl} = require(path.resolve('./', 'lib/api/getRootUrl'))
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 7000;
+
 const ROOT_URL = getRootUrl()
 
 const app = next({ dev });
@@ -21,6 +23,9 @@ const URL_MAP = {
 app.prepare().then(() => {
 	const server = express()
 	server.use(helmet())
+	if (!dev) {
+		server.set('trust proxy', 1);
+	}
 	
 	server.get('*', (req, res) => {
 		const url = URL_MAP[req.path];
