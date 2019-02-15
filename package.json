@@ -8,7 +8,8 @@
     "build": "npm run build:next && npm run build:server",
     "build:next": "next build",
     "build:server": "babel server -d compiled/server && cp -R static compiled",
-    "start": "NODE_ENV=production node compiled/server/server.js"
+    "start": "NODE_ENV=production node compiled/server/server.js",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "dependencies": {
     "@emotion/core": "latest",
@@ -50,5 +51,6 @@
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",
     "redux-logger": "^3.0.6"
-  }
+  },
+  "heroku-run-build-script": true
 }
