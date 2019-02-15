@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "./node_modules/.bin/nodemon.js server/server.js --watch server --exec babel-node",
     "build": "npm run build:next && npm run build:server",
-    "build:next": "next build",
+    "build:next": "next build && cat ./node_modules/.bin/babel",
     "build:server": "./node_modules/.bin/babel server -d compiled/server",
     "start": "NODE_ENV=production node compiled/server/server.js",
     "heroku-postbuild": "yarn build && cat compiled/server/server.js"
