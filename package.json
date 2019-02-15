@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "node ./node_modules/nodemon/bin/nodemon.js server/server.js --watch server --exec babel-node",
+    "dev": "./node_modules/.bin/nodemon.js server/server.js --watch server --exec babel-node",
     "build": "npm run build:next && npm run build:server",
     "build:next": "next build",
-    "build:server": "babel server -d compiled/server",
+    "build:server": "./node_modules/.bin/babel server -d compiled/server",
     "start": "NODE_ENV=production node compiled/server/server.js",
     "heroku-postbuild": "yarn build && cat compiled/server/server.js"
   },
@@ -54,7 +54,7 @@
   },
   "heroku-run-build-script": true,
   "engines": {
-    "node": "10.14.2",
-    "yarn": "1.12.3"
+    "node": "^10.14.2",
+    "yarn": "^1.12.3"
   }
 }
