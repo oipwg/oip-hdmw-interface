@@ -54,6 +54,7 @@
   },
   "heroku-run-build-script": true,
   "engines": {
-    "node": "10.14.2"
+    "node": "10.14.2",
+    "yarn": "1.12.3"
   }
 }
