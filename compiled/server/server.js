@@ -31,6 +31,11 @@ var URL_MAP = {
 app.prepare().then(function () {
   var server = (0, _express.default)();
   server.use((0, _helmet.default)());
+
+  if (!dev) {
+    server.set('trust proxy', 1);
+  }
+
   server.get('*', function (req, res) {
     var url = URL_MAP[req.path];
 
