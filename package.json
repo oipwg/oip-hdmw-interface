@@ -9,7 +9,7 @@
     "build:next": "next build",
     "build:server": "babel server -d compiled/server && cp -R static compiled",
     "start": "NODE_ENV=production node compiled/server/server.js",
-    "heroku-postbuild": "echo Skip build on Heroku"
+    "heroku-postbuild": "yarn build"
   },
   "dependencies": {
     "@emotion/core": "latest",
