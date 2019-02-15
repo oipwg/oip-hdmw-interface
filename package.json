@@ -5,11 +5,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "./node_modules/.bin/nodemon.js server/server.js --watch server --exec babel-node",
-    "build": "npm run build:next && npm run build:server",
-    "build:next": "next build && cat ./node_modules/.bin/babel",
+    "build": "yarn build:next && yarn build:server",
+    "build:next": "next build",
     "build:server": "./node_modules/.bin/babel server -d compiled/server",
     "start": "NODE_ENV=production node compiled/server/server.js",
-    "heroku-postbuild": "yarn build && cat compiled/server/server.js"
+    "heroku-postbuild": "yarn build:next"
   },
   "dependencies": {
     "@babel/cli": "^7.2.3",
