@@ -52,5 +52,8 @@
     "nodemon": "^1.18.9",
     "redux-logger": "^3.0.6"
   },
-  "heroku-run-build-script": true
+  "heroku-run-build-script": true,
+  "engines": {
+    "node": "10.14.2"
+  }
 }
