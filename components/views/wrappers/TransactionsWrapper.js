@@ -14,10 +14,10 @@ function TransactionsWrapper(props) {
 		<TransactionsHeader
 			classes={classes}
 			refreshTransactions={props.refreshTransactions}
-			transactionsLen={transactions.length}
+			transactionsLen={Object.keys(transactions).length}
 			transactionsAsyncState={props.transactionAsyncState}
 		/>
-		{transactions && transactions.length > 0 ? <Transactions
+		{transactions && Object.keys(transactions).length > 0 ? <Transactions
 			classes={classes}
 			transactions={transactions}
 			Wallet={Wallet}
@@ -39,6 +39,7 @@ TransactionsWrapper.propTypes = {
 	usedPubAddresses: PropTypes.array.isRequired,
 	refreshTransactions: PropTypes.func.isRequired,
 	transactionAsyncState: PropTypes.object.isRequired,
+	transactions: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(TransactionsWrapper)

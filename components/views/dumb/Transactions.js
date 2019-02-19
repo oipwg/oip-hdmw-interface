@@ -51,10 +51,18 @@ function Transactions(props) {
 	console.log("Transactions.render")
 	let {classes, transactions, usedPubAddresses} = props
 	
+	const orderedTransactions = []
+	for (let txid in transactions) {
+		orderedTransactions.push([txid, transactions[txid].time])
+	}
+	orderedTransactions.sort((a, b) => b[1] - a[1])
+	
 	return <div className={classes.transactionsListContainer}>
-		{transactions.map(tx => {
+		{orderedTransactions.map((orderedTx) => {
+			let tx = transactions[orderedTx[0]]
 			const {amount, type} = calculateAmount(tx.vin, tx.vout, usedPubAddresses)
 			const loadFloData = (props.activeCoin === 'flo' || props.activeCoin === 'flo_testnet') && (!!tx.floData || tx.floData !== '')
+			
 			return <div key={tx.txid} className={classes.transactionRow}>
 				<div className={classes.txFloDataContainer}>
 					<div className={classes.flexRowMiddle}>
@@ -66,7 +74,7 @@ function Transactions(props) {
 				</div>
 				<div className={classes.txTimeAmountContainer}>
 					<div className={classes.transactionDateContainer}>
-						{moment().utc(tx.time).format('MMM D, YYYY')}
+						{moment.unix(tx.time).format('MMM D, YYYY')}
 					</div>
 					<div>
 						{_.upperCase(type)}: {amount}
@@ -79,7 +87,7 @@ function Transactions(props) {
 
 Transactions.propTypes = {
 	classes: PropTypes.object.isRequired,
-	transactions: PropTypes.array.isRequired,
+	transactions: PropTypes.object.isRequired,
 	usedPubAddresses: PropTypes.array.isRequired,
 }
 

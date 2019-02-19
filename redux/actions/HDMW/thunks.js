@@ -143,10 +143,10 @@ export const getTransactions = (Wallet, explorer) => async (dispatch, getState) 
 	}
 	
 	dispatch(transactionsFetching())
-	let transactions = []
+	let transactions = {}
 	for (let id of transactionIds) {
 		try {
-			transactions.push(await explorer.getTransaction(id))
+			transactions[id] = await explorer.getTransaction(id)
 		} catch (err) {
 			dispatch(transactionsError())
 			console.error('failed to get transaction from explorer in getTransactions thunk', err, explorer)

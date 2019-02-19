@@ -24,10 +24,10 @@ function TransactionsContainer(props) {
 	async function getTransactions(Wallet) {
 		const transactions = await props.getTransactions(Wallet, Wallet.getNetworks()[activeCoin].explorer)
 		if (transactions) {
-			if (transactions.length === txs.length) {
+			if (Object.keys(transactions).length === txs.length) {
 				notifier('No new transactions found')
 			} else {
-				setTxs(transactions)
+				setTxs(Object.keys(transactions))
 				if (!activeCoin.includes('_testnet')) {
 					props.updateBalances(Wallet, activeCoin)
 				}
