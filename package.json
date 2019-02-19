@@ -10,7 +10,9 @@
     "build:server": "./node_modules/.bin/babel server -d compiled/server",
     "start": "NODE_ENV=production node compiled/server/server.js",
     "heroku-postbuild": "yarn build:next",
-    "push": "git push origin master && git push oipwg master && git push heroku master"
+    "push": "git push origin master && git push oipwg master",
+    "deploy": "git push heroku master",
+    "pushAndDeply": "yarn run push && yarn run deploy"
   },
   "dependencies": {
     "@emotion/core": "latest",
