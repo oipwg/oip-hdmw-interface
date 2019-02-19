@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import Router from 'next/router'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Wallet, util} from 'oip-hdmw'
+import {Wallet} from 'oip-hdmw'
+import bip39 from 'bip39'
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Modal from '@material-ui/core/Modal'
@@ -78,7 +78,7 @@ function LoadForm(props) {
 		setMnemonic(mnemonic)
 	}
 	
-	const lockLoadButton = !util.isMnemonic(mnemonic);
+	const lockLoadButton = !bip39.validateMnemonic(mnemonic);
 	
 	return (
 		<main className={classes.main}>
