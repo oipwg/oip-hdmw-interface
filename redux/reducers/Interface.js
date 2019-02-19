@@ -69,6 +69,16 @@ const Interface = (state = {
 					}
 				}
 			}
+		case actions.SET_ADDRESS_COUNT:
+			return {
+				...state,
+				coins: {...state.coins,
+					[state.activeCoin]: {
+						...state.coins[state.activeCoin],
+						addressCount: action.count
+					}
+				}
+			}
 		case actions.SET_INITIAL_COIN_STATES:
 			return {
 				...state,

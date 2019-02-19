@@ -10,30 +10,13 @@ import styles from '../../../styles/views/dumb/Addresses'
 
 const Addresses = (props) => {
 	console.log('Addresses Mount')
-	const {classes, Interface, increaseAddressCount} = props
-	
-	const activeCoin = Interface.activeCoin
-	const coinState = Interface.coins[activeCoin]
-	
-	let addresses = []
-	
-	let Coin = props.Wallet.getCoin(activeCoin)
-	
-	//give time for Interface to mount
-	if (!Coin || !coinState) {
-		return null
-	}
-	
-	let Account = Coin.getAccount(coinState.activeAccountIndex)
-	for (let i = 0; i < coinState.addressCount; i++) {
-		addresses.push(Account.getAddress(coinState.activeChainIndex, i))
-	}
+	const {classes} = props
 	
 	new ClipboardJS('.copy-to-clipboard')
 	console.log("Addresses.render()")
 	return (
 		<div className={classes.addressContainer}>
-			{addresses.map((addr, i) => (
+			{props.addresses.map((addr, i) => (
 				<div key={i} className={classes.addressRow}>
 					<div className={classes.addressInfo}>
 						<span className={classes.addressIndex}>/{i}  </span>
@@ -53,7 +36,7 @@ const Addresses = (props) => {
 					<span
 						className={classes.showExtraAddress}
 						onClick={() => {
-							increaseAddressCount()
+							props.increaseAddressCount()
 						}}>
 						+ Show next address
 					</span>
@@ -67,6 +50,7 @@ Addresses.propTypes = {
 	Wallet: PropTypes.object.isRequired,
 	classes: PropTypes.object.isRequired,
 	increaseAddressCount: PropTypes.func.isRequired,
+	addresses: PropTypes.array.isRequired,
 }
 
 export default withStyles(styles)(Addresses)

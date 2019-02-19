@@ -40,6 +40,11 @@ export const increaseAddressCount = (i = 1) => ({
 	type: INCREASE_ADDRESS_COUNT,
 	count: i
 })
+export const SET_ADDRESS_COUNT = 'SET_ADDRESS_COUNT'
+export const setAddressCount = (count) => ({
+	type: SET_ADDRESS_COUNT,
+	count,
+})
 
 export const SET_INITIAL_COIN_STATES = 'SET_INITIAL_COIN_STATES'
 export const setInitialCoinStates = (coinObject) => {
