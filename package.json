@@ -10,12 +10,13 @@
     "build:server": "./node_modules/.bin/babel server -d compiled/server",
     "start": "NODE_ENV=production node compiled/server/server.js",
     "heroku-postbuild": "yarn build:next",
-    "push":  "git push origin master && git push oipwg master && git push heroku master"
+    "push": "git push origin master && git push oipwg master && git push heroku master"
   },
   "dependencies": {
     "@emotion/core": "latest",
     "@material-ui/core": "^3.8.2",
     "@material-ui/icons": "^3.0.2",
+    "bip39": "^2.5.0",
     "classnames": "^2.2.6",
     "clipboard": "^2.0.4",
     "dotenv": "^6.2.0",
