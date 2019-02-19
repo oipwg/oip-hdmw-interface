@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
 import DisplayWrapper from "../views/wrappers/DisplayWrapper";
-import RenderAddresses from "../views/dumb/Addresses"
+import AddressContainer from "./AddressContainer"
 import SettingsContainer from './SettingsContainer'
 import TransactionsContainer from './TransactionsContainer'
 import CreateTXContainer from './CreateTXContainer'
@@ -16,7 +16,7 @@ function DisplayContainer(props) {
 	const getDisplayBody = (props) => {
 		switch (props.Interface.activeView) {
 			case 'addresses':
-				return <RenderAddresses
+				return <AddressContainer
 					Interface={props.Interface}
 					Wallet={props.Wallet}
 					increaseAddressCount={props.increaseAddressCount}
