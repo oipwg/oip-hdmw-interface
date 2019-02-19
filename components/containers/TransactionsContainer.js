@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
 import TransactionsWrapper from '../views/wrappers/TransactionsWrapper'
-import {getTransactions} from "../../redux/actions/HDMW/thunks";
+import {getTransactions, updateBalances} from "../../redux/actions/HDMW/thunks";
 import notifier from "../../lib/notifier";
 
 function TransactionsContainer(props) {
@@ -28,7 +28,10 @@ function TransactionsContainer(props) {
 				notifier('No new transactions found')
 			} else {
 				setTxs(transactions)
-			}
+				if (!activeCoin.includes('_testnet')) {
+					props.updateBalances(Wallet, activeCoin)
+				}
+ 			}
 		}
 	}
 	
@@ -46,6 +49,7 @@ function TransactionsContainer(props) {
 
 const mapDispatchToProps = {
 	getTransactions,
+	updateBalances,
 }
 
 const mapStateToProps = (state) => {
@@ -64,6 +68,7 @@ TransactionsContainer.propTypes = {
 	getTransactions: PropTypes.func.isRequired,
 	HDMW: PropTypes.object.isRequired,
 	Interface: PropTypes.object.isRequired,
+	updateBalances: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionsContainer)

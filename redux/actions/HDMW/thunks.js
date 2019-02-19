@@ -70,7 +70,7 @@ export const updateExchangeRates = (wallet, coins) => async dispatch => {
 	}
 }
 
-export const updateBalances = (wallet, coins) => async (dispatch) => {
+export const updateBalances = (wallet, coins, force = false) => async (dispatch) => {
 	let _coins = coins ? coins : Object.keys(wallet.getCoins())
 	if (typeof _coins === 'string') {
 		_coins = [_coins]
@@ -93,7 +93,7 @@ export const updateBalances = (wallet, coins) => async (dispatch) => {
 	}
 	let promiseArray = []
 	for (let coin of coinsToFetchBalances) {
-		promiseArray.push(dispatch(updateCoinBalance(coin, wallet)))
+		promiseArray.push(dispatch(updateCoinBalance(coin, wallet, force)))
 	}
 	for (let promise of promiseArray) {
 		await promise
