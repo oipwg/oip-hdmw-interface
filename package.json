@@ -12,7 +12,7 @@
     "heroku-postbuild": "yarn build:next",
     "push": "git push origin master && git push oipwg master",
     "deploy": "git push heroku master",
-    "pushAndDeply": "yarn run push && yarn run deploy"
+    "pushAndDeply": "yarn push && yarn deploy"
   },
   "dependencies": {
     "@emotion/core": "latest",
