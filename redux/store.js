@@ -13,8 +13,8 @@ const createStoreFn = () => {
 	// Create the logger to log Actions to the console
 	let middleware = [thunkMiddleware]
 	if (process.env.NODE_ENV !== 'production') {
-		const createLogger = require('redux-logger')
-		const logger = createLogger({
+		const reduxLogger = require('redux-logger')
+		const logger = reduxLogger.createLogger({
 			collapsed: true
 		});
 		middleware.push(logger)
