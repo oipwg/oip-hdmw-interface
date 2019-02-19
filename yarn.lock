@@ -8921,7 +8921,7 @@ nodeify@^1.0.1:
     is-promise "~1.0.0"
     promise "~1.3.0"
 
-nodemon@^1.18.9:
+nodemon@^1.18.10:
   version "1.18.10"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.18.10.tgz#3ba63f64eb4c283cf3e4f75f30817e9d4f393afe"
   integrity sha512-we51yBb1TfEvZamFchRgcfLbVYgg0xlGbyXmOtbBzDwxwgewYS/YbZ5tnlnsH51+AoSTTsT3A2E/FloUbtH8cQ==

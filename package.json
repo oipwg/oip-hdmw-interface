@@ -4,12 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "./node_modules/.bin/nodemon.js server/server.js --watch server --exec babel-node",
+    "dev": "./node_modules/.bin/nodemon server/server.js --watch server --exec babel-node",
     "build": "yarn build:next && yarn build:server",
     "build:next": "next build",
     "build:server": "./node_modules/.bin/babel server -d compiled/server",
     "start": "NODE_ENV=production node compiled/server/server.js",
-    "heroku-postbuild": "yarn build:next"
+    "heroku-postbuild": "yarn build:next",
   },
   "dependencies": {
     "@emotion/core": "latest",
@@ -49,7 +49,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.0.1",
     "jest": "^23.6.0",
-    "nodemon": "^1.18.9",
+    "nodemon": "^1.18.10",
     "redux-logger": "^3.0.6"
   },
   "heroku-run-build-script": true,
