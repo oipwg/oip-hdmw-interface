@@ -59,5 +59,7 @@
     "node": ">=10.14.2",
     "yarn": ">=1.12.3"
   },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
