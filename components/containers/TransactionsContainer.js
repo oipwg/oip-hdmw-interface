@@ -8,7 +8,7 @@ import notifier from "../../lib/notifier";
 
 function TransactionsContainer(props) {
 	const {activeCoin, coinState, HDMW, Wallet} = props
-	const transactions = HDMW[`txs_${activeCoin}_${coinState.activeAccountIndex}`] || []
+	const transactions = HDMW[`txs_${activeCoin}_${coinState.activeAccountIndex}`] || {}
 	const pubAddresses = HDMW[`upa_${activeCoin}_${coinState.activeAccountIndex}`] || []
 	
 	//transactions via props
