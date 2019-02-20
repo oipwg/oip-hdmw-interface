@@ -27,13 +27,14 @@ let LoadWarning = (props) => {
 	const {open, classes, mnemonic, setLoadWarning, setMnemonic} = props
 	
 	return <Modal open={open} className={classes.modal}>
-		<Paper className={`${classes.paper}`} >
+		<Paper className={`${classes.paper}`}>
 			<Typography color="error" align={'center'} className={classes.cautionTyp}>CAUTION</Typography>
 			<Typography color="primary" align={"center"} paragraph={true} className={classes.warningTyp}>
 				This mnemonic is your KEY. DO NOT LOSE THIS. Burn it into your mind. Write it down.
 				Store it, save it, hide it, but do not forget it. It is your wallet.
 			</Typography>
-			<Typography color="error" align={'center'} paragraph={true} className={classes.mnemonicTyp}>{mnemonic}</Typography>
+			<Typography color="error" align={'center'} paragraph={true}
+			            className={classes.mnemonicTyp}>{mnemonic}</Typography>
 			<Link href='/'>
 				<Button
 					className={`${classes.continueButtons} ${classes.continueButton}`}
@@ -84,23 +85,27 @@ function LoadForm(props) {
 		<main className={classes.main}>
 			<Head>
 				<title>oip-hdmw</title>
-				<meta name="description" content="load a bip 44 hdmw (hierarchical deterministic multi-wallet) from open index protocol (OIP)"/>
+				<meta name="description"
+				      content="load a bip 44 hdmw (hierarchical deterministic multi-wallet) from open index protocol (OIP)"/>
 			</Head>
 			<Paper className={classes.paper}>
 				<Lock className={classes.lockIcon}/>
 				<Typography component="h1" variant="h5" align={'center'}>
 					Enter a Mnemonic to Load Your Wallet
 				</Typography>
-				<form className={classes.form}>
-					<FormControl margin="normal" required fullWidth>
-						<InputLabel htmlFor="email">Mnemonic</InputLabel>
-						<Input id="mnemonic" name="mnemonic" autoComplete="mnemonic" autoFocus
-						       // type={'password'}
+				<form id={'mnemonicForm'} className={classes.form}>
+					<FormControl id='form-control' margin="normal" required fullWidth>
+						<InputLabel htmlFor="mnemonic-field">Mnemonic</InputLabel>
+						<Input id="mnemonic-field"
+						       name="mnemonic"
+						       autofill
+						       autoFocus
 						       value={mnemonic}
 						       onChange={(e) => setMnemonic(e.target.value)}
 						/>
 					</FormControl>
 					<Button
+						id={'load-button'}
 						type="submit"
 						fullWidth
 						variant="contained"
@@ -115,6 +120,7 @@ function LoadForm(props) {
 						Load Wallet
 					</Button>
 					<Button
+						id={'submit-button'}
 						type="submit"
 						fullWidth
 						variant="contained"
@@ -135,7 +141,8 @@ function LoadForm(props) {
 				/>
 				<Typography align={'center'} className={classes.aboutTyp}>
 					If you don't know what a mnemonic is, or want to know more about this wallet,
-					see our <Link href='/public/about' as={'/about'} ><a className={classes.aboutLink}>About Page</a></Link>.
+					see our <Link href='/public/about' as={'/about'}><a className={classes.aboutLink}>About
+					Page</a></Link>.
 				</Typography>
 			</Paper>
 		</main>

@@ -1,4 +1,4 @@
-#####Install Yarn
+##### Install Yarn
 Install brew if you haven't already done so: 
 
  `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -6,16 +6,16 @@ Install brew if you haven't already done so:
  then run:
  `brew install yarn`
  
-#####Clone Repo
+##### Clone Repo
 `git clone https://github.com/oipwg/oip-hdmw-interface.git`
 
-#####Install Dependencies
+##### Install Dependencies
 `cd oip-hdmw-interface`
 
 `yarn install`
 
-#####Start Dev
+##### Start Dev
 `yarn dev`
 
-#####Build
+##### Build
 `yarn build`
