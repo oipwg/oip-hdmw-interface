@@ -16,11 +16,13 @@ function TransactionsContainer(props) {
 	const [txs, setTxs] = useState([])
 	
 	useEffect(() => {
-		getTransactions(props.Wallet)
+		if (Object.keys(transactions).length === 0) {
+			getTransactions(props.Wallet)
+		}
 	}, [props.activeCoin])
 	
 	
-	async function getTransactions(Wallet) {
+	const getTransactions = async (Wallet) => {
 		const transactions = await props.getTransactions(Wallet, Wallet.getNetworks()[activeCoin].explorer)
 		if (transactions) {
 			if (Object.keys(transactions).length === txs.length) {
