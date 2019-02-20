@@ -10,7 +10,6 @@ import SaveSettings from "../dumb/SaveSettings";
 
 class SettingsWrapper extends React.Component {
 	render() {
-		console.log('Settings.render')
 		const {classes} = this.props
 		
 		return (

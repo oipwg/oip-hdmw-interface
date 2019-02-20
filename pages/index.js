@@ -4,29 +4,11 @@ import Interface from '../components/containers/InterfaceContainer'
 
 import {initialLoad} from "../redux/actions/Settings/thunks";
 
-class Index extends React.Component {
-	constructor(props) {
-		super(props)
-		console.log("Index.constructor")
-	}
-	componentDidMount() {
-		console.log('Index.componentDidMount')
-	}
-	componentDidUpdate(prevProps) {
-		console.log('Index.componentDidUpdate')
-	}
-	
-	render() {
-		console.log('Index.render')
-		return <Interface />
-	}
-}
+const Index = () => <Interface />
 
 Index.getInitialProps = ({reduxStore, res}) => {
-	console.log('Index.getInitialProps')
-	const state = reduxStore.getState()
-	const {HDMW} = state
-	if (res && !HDMW.mnemonic) {
+	const reduxState = reduxStore.getState()
+	if (res && !reduxState.HDMW.mnemonic) {
 		res.redirect('/load')
 		return {}
 	}

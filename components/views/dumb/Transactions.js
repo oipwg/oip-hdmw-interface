@@ -48,7 +48,6 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 }
 
 function Transactions(props) {
-	console.log("Transactions.render")
 	let {classes, transactions, usedPubAddresses} = props
 	
 	const orderedTransactions = []

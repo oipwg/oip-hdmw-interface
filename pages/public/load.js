@@ -142,11 +142,6 @@ function LoadForm(props) {
 	);
 }
 
-LoadForm.getInitialProps = async ({reduxStore}) => {
-	console.log('LoadForm.getInitialProps')
-	return {}
-}
-
 LoadForm.propTypes = {
 	classes: PropTypes.object.isRequired,
 };

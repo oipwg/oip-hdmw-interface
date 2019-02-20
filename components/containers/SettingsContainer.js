@@ -9,20 +9,7 @@ import {setExplorerUrls, displayBalances} from "../../redux/actions/Settings/cre
 import {toggleTestnetCoins, displayCoin} from "../../redux/actions/Settings/thunks";
 
 class SettingsContainer extends React.Component {
-	constructor(props) {
-		super(props);
-		console.log('SettingsContainer.constructor')
-	}
-	
-	componentDidMount() {
-		console.log('SettingsContainer.componentDidMount')
-	}
-	
-	componentDidUpdate(prevProps, prevState) {
-		console.log('SettingsContainer.componentDidUpdate')
-	}
 	render() {
-		console.log('SettingsContainer.render')
 		return <SettingsWrapper
 			classes={this.props.classes}
 			Interface={this.props.Interface}

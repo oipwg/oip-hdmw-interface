@@ -8,7 +8,6 @@ const __ = (...classes) => {
 class APISettings extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log('APISetting Constructor')
 		
 		this.initialExplorerUrls = props.explorerUrls
 		
@@ -18,12 +17,10 @@ class APISettings extends React.Component {
 	}
 	
 	componentDidMount() {
-		console.log('APISetting.componentDidMount')
 		this.setState({explorerUrls: this.props.explorerUrls})
 	}
 	
 	componentDidUpdate(prevProps, prevState) {
-		console.log('APISetting.componentDidUpdate')
 		if (prevProps.explorerUrls !== this.props.explorerUrls) {
 			this.setState({explorerUrls: {...this.state.explorerUrls, ...this.props.explorerUrls}})
 		}
@@ -86,7 +83,6 @@ class APISettings extends React.Component {
 					<div className={classes.marginLR3}/>
 					<input
 						onClick={() => {
-							console.log('resetting explorer urls with: ', this.initialExplorerUrls)
 							this.props.setExplorerUrls(this.initialExplorerUrls)
 						}
 						}

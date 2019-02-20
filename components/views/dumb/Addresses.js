@@ -9,11 +9,9 @@ import notifier from '../../../lib/notifier'
 import styles from '../../../styles/views/dumb/Addresses'
 
 const Addresses = (props) => {
-	console.log('Addresses Mount')
 	const {classes} = props
 	
 	new ClipboardJS('.copy-to-clipboard')
-	console.log("Addresses.render()")
 	return (
 		<div className={classes.addressContainer}>
 			{props.addresses.map((addr, i) => (

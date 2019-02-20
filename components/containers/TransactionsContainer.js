@@ -16,7 +16,6 @@ function TransactionsContainer(props) {
 	const [txs, setTxs] = useState([])
 	
 	useEffect(() => {
-		console.log('using effect to get transactions')
 		getTransactions(props.Wallet)
 	}, [props.activeCoin])
 	
@@ -35,7 +34,6 @@ function TransactionsContainer(props) {
 		}
 	}
 	
-	console.log("TransactionsContainer.render")
 	return <TransactionsWrapper
 		activeCoin={activeCoin}
 		coinState={coinState}

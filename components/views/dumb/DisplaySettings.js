@@ -7,7 +7,6 @@ const __ = (...classes) => {
 
 class DisplaySettings extends React.Component {
 	render() {
-		console.log('DisplaySettings.render')
 		const {classes} = this.props
 		return (
 			<div className={classes.settingContainer}>

@@ -60,7 +60,6 @@ const Coins = (props) => {
 		return <span style={{color, marginLeft: '5px'}}>{fiatText}</span>
 	}
 	
-	console.log('Coins.render()')
 	const coins = Object.keys(props.Wallet.getCoins()).filter(coin => props.displayCoins.includes(coin))
 	return <div className={classes.coinsContainer}>
 		<div className={classes.coinsList}>
