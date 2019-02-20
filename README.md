@@ -19,3 +19,6 @@ Install brew if you haven't already done so:
 
 ##### Build
 `yarn build`
+
+##### Start Production Server
+`yarn start`
