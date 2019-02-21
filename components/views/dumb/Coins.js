@@ -51,7 +51,7 @@ const Coins = (props) => {
 				fiatText = 'Error'
 				color = 'red'
 			} else {
-				fiatText = `$${props.balances[coin] * props.exchangeRates[coin]}`
+				fiatText = `$${(props.balances[coin] * props.exchangeRates[coin]).toFixed(2)}`
 				color = 'grey'
 			}
 		} else {
