@@ -44,6 +44,7 @@ function TransactionsContainer(props) {
 		usedPubAddresses={pubAddresses}
 		refreshTransactions={() => getTransactions(props.Wallet)}
 		transactionAsyncState={HDMW.transactionAsyncState}
+		explorerUrls={props.explorerUrls}
 	/>
 }
 
@@ -58,6 +59,7 @@ const mapStateToProps = (state) => {
 		coinState: state.Interface.coins[state.Interface.activeCoin],
 		HDMW: state.HDMW,
 		Interface: state.Interface,
+		explorerUrls: state.Settings.explorerUrls
 	}
 }
 
@@ -69,6 +71,7 @@ TransactionsContainer.propTypes = {
 	HDMW: PropTypes.object.isRequired,
 	Interface: PropTypes.object.isRequired,
 	updateBalances: PropTypes.func.isRequired,
+	explorerUrls: PropTypes.object.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionsContainer)

@@ -61,11 +61,19 @@ function Transactions(props) {
 			let tx = transactions[orderedTx[0]]
 			const {amount, type} = calculateAmount(tx.vin, tx.vout, usedPubAddresses)
 			const loadFloData = (props.activeCoin === 'flo' || props.activeCoin === 'flo_testnet') && (!!tx.floData || tx.floData !== '')
+			let linkToTxOnExplorer
+			let explorer = props.explorerUrls[props.activeCoin]
+			if (explorer) {
+				let splitted = explorer.split('api')
+				if (splitted.length === 2) {
+					linkToTxOnExplorer = splitted.join(`tx/${tx.txid}`)
+				}
+			}
 			
 			return <div key={tx.txid} className={classes.transactionRow}>
 				<div className={classes.txFloDataContainer}>
 					<div className={classes.flexRowMiddle}>
-						{tx.txid}
+						<a href={linkToTxOnExplorer} target="_blank">{tx.txid}</a>
 					</div>
 					{loadFloData ? (
 						<FloDataContainer classes={classes} floData={tx.floData} />

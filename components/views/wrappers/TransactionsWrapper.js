@@ -24,6 +24,7 @@ function TransactionsWrapper(props) {
 			activeCoin={activeCoin}
 			coinState={coinState}
 			usedPubAddresses={props.usedPubAddresses}
+			explorerUrls={props.explorerUrls}
 		/> : <div className={classes.reactLoaderContainer}>
 			<span>No Transactions</span>
 		</div>
@@ -40,6 +41,7 @@ TransactionsWrapper.propTypes = {
 	refreshTransactions: PropTypes.func.isRequired,
 	transactionAsyncState: PropTypes.object.isRequired,
 	transactions: PropTypes.object.isRequired,
+	explorerUrls: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(TransactionsWrapper)
