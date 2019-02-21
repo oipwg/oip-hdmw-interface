@@ -5,6 +5,18 @@ import {withTheme, withStyles} from '@material-ui/core/styles';
 
 import styles from '../../../styles/views/dumb/Coins'
 
+const capDecimals = (num, cap) => {
+	let stringified = num.toString()
+	let splitted = stringified.split('.')
+	if (splitted[1].length > 8) {
+		let capped = splitted[1].slice(0, cap)
+		let finished = `${splitted[0]}.${capped}`
+		return parseFloat(finished)
+	} else {
+		return num
+	}
+}
+
 const Coins = (props) => {
 	const {classes, coinAsyncState, xrAsyncState} = props
 	
@@ -29,7 +41,7 @@ const Coins = (props) => {
 			if (!_.isNumber(props.balances[coin])) {
 				return <span style={{color: 'red'}}>Balance Error</span>
 			}
-			balanceText = <span style={{color: 'green'}}>{props.balances[coin]} {props.networks[coin].ticker}</span>
+			balanceText = <span style={{color: 'green'}}>{capDecimals(props.balances[coin], 8)} {props.networks[coin].ticker}</span>
 		} else {
 			return null
 		}
