@@ -2,25 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types'
 import moment from 'moment';
 
+import capDecimals from '../../../lib/util/capDecimals'
 import FloDataContainer from "./FloDataContainer";
-
-const capDecimals = (num, cap = 8, maxLen = 8) => {
-	let stringified
-	if (typeof num !== 'string') {
-		stringified = num.toString()
-	} else stringified = num
-	let splitted = stringified.split('.')
-	if (!splitted[1]) {
-		return parseFloat(splitted[0])
-	}
-	if (splitted[1].length > maxLen) {
-		let capped = splitted[1].slice(0, cap)
-		let finished = `${splitted[0]}.${capped}`
-		return parseFloat(finished)
-	} else {
-		return parseFloat(num)
-	}
-}
 
 const calculateAmount = (vin, vout, usedPubAddresses) => {
 	let vinData = []
