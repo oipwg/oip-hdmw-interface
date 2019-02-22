@@ -5,6 +5,24 @@ import {withTheme, withStyles} from '@material-ui/core/styles';
 
 import styles from '../../../styles/views/dumb/Coins'
 
+const capDecimals = (num, cap = 8, maxLen = 8) => {
+	let stringified
+	if (typeof num !== 'string') {
+		stringified = num.toString()
+	} else stringified = num
+	let splitted = stringified.split('.')
+	if (!splitted[1]) {
+		return parseFloat(splitted[0])
+	}
+	if (splitted[1].length > maxLen) {
+		let capped = splitted[1].slice(0, cap)
+		let finished = `${splitted[0]}.${capped}`
+		return parseFloat(finished)
+	} else {
+		return parseFloat(num)
+	}
+}
+
 const Coins = (props) => {
 	const {classes, coinAsyncState, xrAsyncState} = props
 	
@@ -29,7 +47,7 @@ const Coins = (props) => {
 			if (!_.isNumber(props.balances[coin])) {
 				return <span style={{color: 'red'}}>Balance Error</span>
 			}
-			balanceText = <span style={{color: 'green'}}>{props.balances[coin]} {props.networks[coin].ticker}</span>
+			balanceText = <span style={{color: 'green'}}>{capDecimals(props.balances[coin], 8)} {props.networks[coin].ticker}</span>
 		} else {
 			return null
 		}
@@ -51,7 +69,7 @@ const Coins = (props) => {
 				fiatText = 'Error'
 				color = 'red'
 			} else {
-				fiatText = `$${props.balances[coin] * props.exchangeRates[coin]}`
+				fiatText = `$${(props.balances[coin] * props.exchangeRates[coin]).toFixed(2)}`
 				color = 'grey'
 			}
 		} else {

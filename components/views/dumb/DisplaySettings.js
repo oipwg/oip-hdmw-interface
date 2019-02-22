@@ -6,6 +6,10 @@ const __ = (...classes) => {
 }
 
 class DisplaySettings extends React.Component {
+	state = {showMnemonic: false}
+	handleMnemonicToggle = () => {
+		this.setState({showMnemonic: !this.state.showMnemonic})
+	}
 	render() {
 		const {classes} = this.props
 		return (
@@ -49,6 +53,19 @@ class DisplaySettings extends React.Component {
 							<span className={classes.display_CoinName}>{coin}</span>
 						</label>
 					})}
+				</div>
+				<div className={classes.settingRow}>
+					<label>
+						<input
+							type="checkbox"
+							name="mnemonic"
+							onChange={this.handleMnemonicToggle}
+						/>
+						<span>Show Mnemonic</span>
+					</label>
+				</div>
+				<div className={classes.settingRow} style={{justifyContent: 'center', fontWeight: '500'}}>
+					<span>{this.state.showMnemonic ? this.props.Wallet.getMnemonic() : null}</span>
 				</div>
 			</div>
 		)

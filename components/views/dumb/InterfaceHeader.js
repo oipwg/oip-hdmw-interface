@@ -37,7 +37,7 @@ function InterfaceHeader({balanceAsyncState, exchangeRates, balances, classes, u
 			balanceText = 'ERROR'
 			balanceColor = 'red'
 		} else {
-			balanceText = `$${balance}`
+			balanceText = `$${balance.toFixed(2)}`
 			balanceColor = 'green'
 		}
 		return {balanceText, balanceColor}
