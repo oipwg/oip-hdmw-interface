@@ -5,15 +5,21 @@ import {withTheme, withStyles} from '@material-ui/core/styles';
 
 import styles from '../../../styles/views/dumb/Coins'
 
-const capDecimals = (num, cap) => {
-	let stringified = num.toString()
+const capDecimals = (num, cap = 8, maxLen = 8) => {
+	let stringified
+	if (typeof num !== 'string') {
+		stringified = num.toString()
+	} else stringified = num
 	let splitted = stringified.split('.')
-	if (splitted[1].length > 8) {
+	if (!splitted[1]) {
+		return parseFloat(splitted[0])
+	}
+	if (splitted[1].length > maxLen) {
 		let capped = splitted[1].slice(0, cap)
 		let finished = `${splitted[0]}.${capped}`
 		return parseFloat(finished)
 	} else {
-		return num
+		return parseFloat(num)
 	}
 }
 
