@@ -1,20 +1,4 @@
-const capDecimals = (num, cap = 8, maxLen = 8) => {
-    let stringified
-    if (typeof num !== 'string') {
-        stringified = num.toString()
-    } else stringified = num
-    let splitted = stringified.split('.')
-    if (!splitted[1]) {
-        return parseFloat(splitted[0])
-    }
-    if (splitted[1].length > maxLen) {
-        let capped = splitted[1].slice(0, cap)
-        let finished = `${splitted[0]}.${capped}`
-        return parseFloat(finished)
-    } else {
-        return parseFloat(num)
-    }
-}
+import capDecimals from '../../lib/util/capDecimals'
 
 it('cap decimals', () => {
     let num = 4.2454264262164
@@ -38,6 +22,21 @@ it('cap decimals', () => {
     num = 1
     expect(capDecimals(num)).toBe(1)
     
+    num = 0
+    expect(capDecimals(num)).toBe(0)
+    
     num = -3.1353253253
     expect(capDecimals(num)).toBe(-3.13532532)
+    
+    num = 254235.5325
+    expect(capDecimals(num, 3)).toBe(254235.5325)
+    
+    num = 32532.325325325
+    expect(capDecimals(num, 4, 3)).toBe(32532.3253)
+    
+    num = 32.321115325325
+    expect(capDecimals(num, 2, 4)).toBe(32.32)
+    
+    num = 1.123456789
+    expect(capDecimals(num, 2, 11)).toBe(1.123456789)
 })
