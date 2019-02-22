@@ -98,7 +98,8 @@ function LoadForm(props) {
 						<InputLabel htmlFor="mnemonic-field">Mnemonic</InputLabel>
 						<Input id="mnemonic-field"
 						       name="mnemonic"
-						       autofill
+						       autoComplete={'username'}
+						       type="text"
 						       autoFocus
 						       value={mnemonic}
 						       onChange={(e) => setMnemonic(e.target.value)}
