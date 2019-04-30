@@ -2,55 +2,26 @@ import React from 'react';
 import Link from 'next/link';
 import {withRouter} from 'next/router';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
+import withStyles from 'react-jss';
+
+export const HEADER_HEIGHT = '70px'
+
+// ratio which chroma.js uses to apply a color affect. here used to darken header
+const CHROMA_MULTIPLIER = 0.5
+
+// header shadow size. value indicates position in array of shadow sizes going from small to large
+const SHADOW_SIZE = 1
 
 const styles = theme => ({
 	root: {
-		height: '70px',
-		color: theme.palette.primary.main,
-		backgroundColor: 'white',
+		height: HEADER_HEIGHT,
+		backgroundColor: theme.palette.background.darken(CHROMA_MULTIPLIER),
+		color: theme.palette.text.main,
 		display: 'flex',
 		flexDirection: 'row',
-		justifyContent: 'center',
 		alignItems: 'center',
+		boxShadow: theme.shadows[SHADOW_SIZE]
 	},
-	colorDefault: {
-		backgroundColor: 'white'
-	},
-	grow: {
-		flexGrow: 1,
-	},
-	menuButton: {
-		marginLeft: -12,
-		marginRight: 20,
-	},
-	title: {
-		color: theme.palette.primary.main,
-		fontWeight: '600',
-		// display: 'none',
-		// [theme.breakpoints.up('sm')]: {
-		// 	display: 'block',
-		// },
-	},
-	loginLink: {
-		fontWeight: 'bold',
-		margin: '0px 20px 0px auto',
-	},
-	sectionDesktop: {
-		display: 'none',
-		[theme.breakpoints.up('md')]: {
-			display: 'flex',
-		},
-	},
-	sectionMobile: {
-		display: 'flex',
-		[theme.breakpoints.up('md')]: {
-			display: 'none',
-		},
-	}
 });
 
 function Header(props) {
@@ -58,20 +29,7 @@ function Header(props) {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static" color={'default'} classes={{colorDefault: classes.colorDefault}} >
-				<Toolbar >
-					<Typography  variant="h6" color="inherit" noWrap>
-						<Link prefetch href={"/public/load"} as={'/load'}>
-							<a className={classes.title}>oip hdmw</a>
-						</Link>
-					</Typography>
 
-					<div className={classes.grow}/>
-					<div className={classes.sectionMobile}>
-						{/*...*/}
-					</div>
-				</Toolbar>
-			</AppBar>
 		</div>
 	);
 }

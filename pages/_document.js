@@ -1,12 +1,12 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import JssProvider from 'react-jss/lib/JssProvider';
+import JssProvider from 'react-jss';
 import getContext from '../lib/context';
 
 class MyDocument extends Document {
 	render() {
 		return (
-			<html lang="en" style={{height: '100%'}}>
+			<html lang="en">
 			<Head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,54 +28,19 @@ class MyDocument extends Document {
 				<link href="https://fonts.googleapis.com/css?family=Hammersmith+One|Mitr|Varela" rel="stylesheet" />
 				<style>
 					{`
-               #__next {
-				  
-			  }
-			 a, a:focus {
-                font-weight: 400;
-                color: black;
-                text-decoration: none;
-                outline: none
-              }
-              a:hover, button:hover {
-                opacity: 0.75;
-                cursor: pointer
-              }
-              span {
-                cursor: default;
-              }
-              blockquote {
-                padding: 0 1em;
-                color: #555;
-                border-left: 0.25em solid #dfe2e5;
-              }
-              pre {
-                display:block;
-                overflow-x:auto;
-                padding:0.5em;
-                background:#FFF;
-                color: #000;
-                border: 1px solid #ddd;
-              }
-              code {
-                font-size: 14px;
-                background: #FFF;
-                padding: 3px 5px;
-              }
-            `}
+						html, body {
+							height: 100%;
+							margin: 0;
+							padding: 0;
+						}
+					   #__next {
+						  height: 100%;
+						  display: flex;
+					  }
+            		`}
 				</style>
 			</Head>
-			<body
-				style={{
-					height: '100%',
-					font: '16px Arial, Multi, Helvetica',
-					color: 'black',
-					margin: '0px auto',
-					fontWeight: '500',
-					lineHeight: '1.5em',
-					backgroundColor: 'rgb(244, 247, 250)',
-				}}
-			>
+			<body>
 			<Main />
 			<NextScript />
 			</body>
