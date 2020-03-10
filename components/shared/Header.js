@@ -61,7 +61,7 @@ function Header(props) {
 			<AppBar position="static" color={'default'} classes={{colorDefault: classes.colorDefault}} >
 				<Toolbar >
 					<Typography  variant="h6" color="inherit" noWrap>
-						<Link prefetch href={"/public/load"} as={'/load'}>
+						<Link href={"/public/load"} as={'/load'}>
 							<a className={classes.title}>oip hdmw</a>
 						</Link>
 					</Typography>

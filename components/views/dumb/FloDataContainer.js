@@ -16,7 +16,7 @@ function FloDataContainer({floData, classes}) {
 	const longFloData = () => {
 		return floData.length > 70
 	}
-	const toggleTextOverflow = longFloData() ? getElement() : <span>hi</span>
+	const toggleTextOverflow = longFloData() ? getElement() : null
 
 	return <div className={classes.floDataContainer} style={{whiteSpace: toggled ? 'unset' : 'nowrap'}}>
 		<p>floData: {floData}</p>

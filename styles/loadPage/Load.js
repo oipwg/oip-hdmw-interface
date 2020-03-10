@@ -18,12 +18,12 @@ const styles = theme => ({
 		padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
 	},
 	avatar: {
-		margin: theme.spacing.unit,
+		margin: theme.spacing(1),
 		backgroundColor: theme.palette.secondary.main,
 	},
 	form: {
 		width: '100%', // Fix IE 11 issue.
-		marginTop: theme.spacing.unit,
+		marginTop: theme.spacing(1),
 	},
 	submit: {
 		marginTop: theme.spacing(3),
