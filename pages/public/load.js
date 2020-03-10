@@ -4,7 +4,7 @@ import Head from 'next/head';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Wallet} from '@oipwg/hdmw'
-import bip39 from 'bip39'
+import * as bip39 from 'bip39'
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Modal from '@material-ui/core/Modal'

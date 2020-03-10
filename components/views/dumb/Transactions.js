@@ -10,27 +10,27 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 	for (let vi of vin) {
 		vinData.push({address: vi.addr, valueSat: vi.valueSat})
 	}
-	
+
 	let voutData = []
 	for (let vo of vout) {
 		const value = vo.value * 1e8 //convert to satoshi
 		let addresses = []
-		
+
 		let addressesInVout = vo.scriptPubKey.addresses
 		for (let addr of addressesInVout) {
 			addresses.push(addr)
 		}
-		
+
 		voutData.push({value, addresses})
 	}
-	
+
 	let moneySentFromMe = 0
 	for (let vind of vinData) {
 		if (usedPubAddresses.includes(vind.address)) {
 			moneySentFromMe += Number(vind.valueSat)
 		}
 	}
-	
+
 	let moneySentToMe = 0
 	for (let voutd of voutData) {
 		for (let addr of voutd.addresses) {
@@ -39,7 +39,7 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 			}
 		}
 	}
-	
+
 	let amount = (moneySentToMe) - (moneySentFromMe)
 	amount /= 1e8
 	let type = amount > 0 ? 'Received' : 'Sent'
@@ -49,18 +49,18 @@ const calculateAmount = (vin, vout, usedPubAddresses) => {
 
 function Transactions(props) {
 	let {classes, transactions, usedPubAddresses} = props
-	
+
 	const orderedTransactions = []
 	for (let txid in transactions) {
 		orderedTransactions.push([txid, transactions[txid].time])
 	}
 	orderedTransactions.sort((a, b) => b[1] - a[1])
-	
+
 	return <div className={classes.transactionsListContainer}>
 		{orderedTransactions.map((orderedTx) => {
 			let tx = transactions[orderedTx[0]]
 			const {amount, type} = calculateAmount(tx.vin, tx.vout, usedPubAddresses)
-			const loadFloData = (props.activeCoin === 'flo' || props.activeCoin === 'flo_testnet') && (!!tx.floData || tx.floData !== '')
+			const loadFloData = (props.activeCoin === 'flo' || props.activeCoin === 'floTestnet') && (!!tx.floData || tx.floData !== '')
 			let linkToTxOnExplorer
 			let explorer = props.explorerUrls[props.activeCoin]
 			if (explorer) {
@@ -69,7 +69,7 @@ function Transactions(props) {
 					linkToTxOnExplorer = splitted.join(`tx/${tx.txid}`)
 				}
 			}
-			
+
 			return <div key={tx.txid} className={classes.transactionRow}>
 				<div className={classes.txFloDataContainer}>
 					<div className={classes.flexRowMiddle}>

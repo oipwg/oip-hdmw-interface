@@ -5,7 +5,7 @@ const styles = theme => ({
 		maxWidth: '80%',
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
-		padding: theme.spacing.unit * 4,
+		padding: theme.spacing(4),
 		outline: 'none',
 		display: 'flex',
 		alignItems: 'center',
@@ -27,7 +27,7 @@ const styles = theme => ({
 	warningTyp: {
 		fontSize: '16px',
 		fontWeight: 'bold',
-		
+
 	},
 	mnemonicTyp: {
 		fontSize: '20px',
@@ -42,7 +42,7 @@ const styles = theme => ({
 	},
 	continueButton: {
 		backgroundColor: theme.palette.primary.main,
-		
+
 	},
 	cancelButton: {
 		backgroundColor: theme.palette.error.dark,

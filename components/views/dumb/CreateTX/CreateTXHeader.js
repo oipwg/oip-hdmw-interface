@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import ReactLoader from '../../../shared/ReactLoader'
+import ReactLoader from '../../../shared/ReactLoader'
 import notifier from '../../../../lib/notifier'
 
 function CreateTXHeader (props) {
@@ -12,7 +12,7 @@ function CreateTXHeader (props) {
 
   if (state.fetching) {
     text = <span style={{color: 'blue', marginRight: '5px', fontWeight: 'bold'}}>Sending</span>
-    loader = <span>loading</span> // <ReactLoader type={'BarLoader'} size={7}/>
+    loader = <ReactLoader type={'BarLoader'} size={7}/>
   } else if (state.error) {
     text = <span style={{color: 'red', fontWeight: 'bold'}}>Error</span>
     notifier(`There was an error processing transactions`)

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 
 function CreateTX(props) {
 	const {classes, Wallet, handleSendClick} = props
-	
+
 	const [address, updateAddress] = useState('')
 	const [amount, updateAmount] = useState(0)
 	const [floData, updateFloData] = useState('')
@@ -19,11 +19,11 @@ function CreateTX(props) {
 		updateAmount('')
 		updateFloData('')
 	}, [checkedCoin])
-	
+
 	useEffect(() => {
 		updateCheckedCoin(props.activeCoin)
 	}, [props.activeCoin])
-	
+
 	return (
 		<div className={classes.sendBody}>
 			<div className={classes.sendCoinSelection}>
@@ -74,7 +74,7 @@ function CreateTX(props) {
 					}}
 				/>
 			</div>
-			{checkedCoin === 'flo' || checkedCoin === 'flo_testnet' ? (
+			{checkedCoin === 'flo' || checkedCoin === 'floTestnet' ? (
 				<div className={classes.fieldRow}>
 					<span className={classes.fieldTitle}>floData</span>
 					<input
