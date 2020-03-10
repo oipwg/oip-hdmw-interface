@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Refresh} from "@material-ui/icons";
-import ReactLoader from '../../shared/ReactLoader'
+// import ReactLoader from '../../shared/ReactLoader'
 
 const getTxInfoText = (txLen, asyncState) => {
 	let el, loader = null
 	if (asyncState.fetching) {
 		el = <h4 style={{color: 'blue'}}>LOADING</h4>
-		loader = <ReactLoader type={'BeatLoader'} size={5}/>
+		loader = <span>loading</span> // <ReactLoader type={'BeatLoader'} size={5}/>
 	} else if (asyncState.error) {
 		el = <h4 style={{color: 'red'}}>ERROR FETCHING NEW TRANSACTIONS</h4>
 	} else {
 		//success
 		el = null
 	}
-	
+
 	return {el, loader}
 }
 

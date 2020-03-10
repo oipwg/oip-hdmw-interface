@@ -1,7 +1,7 @@
 import * as actions from '../actions/Interface/creators'
 
 const Interface = (state = {
-	activeCoin: 'bitcoin',
+	activeCoin: 'flo',
 	activeView: 'addresses',
 	coins: {},
 }, action) => {
@@ -84,7 +84,7 @@ const Interface = (state = {
 				...state,
 				coins: {...state.coins, ...action.coinObject}
 			}
-		
+
 		case actions.LOAD_INTERFACE:
 			return {
 				...state,

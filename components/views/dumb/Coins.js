@@ -38,7 +38,7 @@ const Coins = (props) => {
 	}
 	
 	const getFiatText = (coin) => {
-		if (!xrAsyncState[coin] || coin.includes('_testnet'))
+		if (!xrAsyncState[coin] || coin.endsWith('Testnet'))
 			return
 		let fiatText, color
 		if (xrAsyncState[coin].fetching) {

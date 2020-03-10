@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Wallet} from 'oip-hdmw'
+import {Wallet} from '@oipwg/hdmw'
 import bip39 from 'bip39'
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
@@ -25,7 +25,7 @@ import {setMnemonic} from '../../redux/actions/HDMW/creators'
 
 let LoadWarning = (props) => {
 	const {open, classes, mnemonic, setLoadWarning, setMnemonic} = props
-	
+
 	return <Modal open={open} className={classes.modal}>
 		<Paper className={`${classes.paper}`}>
 			<Typography color="error" align={'center'} className={classes.cautionTyp}>CAUTION</Typography>
@@ -68,19 +68,19 @@ LoadWarning = connect(undefined, mapDispatchToProps)(withStyles(LoadWarningModal
 
 function LoadForm(props) {
 	const {classes} = props
-	
+
 	const [mnemonic, setMnemonic] = useState('');
 	const [displayLoadWarning, setLoadWarning] = useState(false)
-	
+
 	const generateMnemonic = (e) => {
 		e.preventDefault()
 		let wallet = new Wallet(undefined, {discover: false})
 		let mnemonic = wallet.getMnemonic()
 		setMnemonic(mnemonic)
 	}
-	
+
 	const lockLoadButton = !bip39.validateMnemonic(mnemonic);
-	
+
 	return (
 		<main className={classes.main}>
 			<Head>
