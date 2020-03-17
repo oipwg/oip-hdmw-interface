@@ -6,7 +6,7 @@ const initialState = {
 	displayBalances: true,
 	explorerUrls: {},
 	defaultExplorerUrls: {},
-	displayCoins: ['bitcoin', 'flo'],
+	displayCoins: ['flo', 'raven'],
 	refreshLimit: 15000, // 15 seconds
 }
 

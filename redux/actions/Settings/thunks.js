@@ -10,14 +10,14 @@ export const toggleTestnetCoins = (bool, wallet) => (dispatch, getState) => {
 		let coins = Object.keys(wallet.getCoins())
 		if (!getState().Settings.testnetAdded) {
 			for (let coin of coins) {
-				if (coin.includes('_testnet')) {
+				if (coin.endsWith('Testnet')) {
 					dispatch(addCoinToRedux(coin, wallet)) //add to display
 				}
 			}
 			dispatch(testnetAdded())
 		} else {
 			for (let coin of coins) {
-				if (coin.includes('_testnet')) {
+				if (coin.endsWith('Testnet')) {
 					dispatch(addDisplayCoin(coin)) //add to display
 				}
 			}
@@ -25,7 +25,7 @@ export const toggleTestnetCoins = (bool, wallet) => (dispatch, getState) => {
 	} else {
 		let coins = Object.keys(wallet.getCoins())
 		for (let coin of coins) {
-			if (coin.includes('_testnet')) {
+			if (coin.endsWith('Testnet')) {
 				dispatch(displayCoin(coin, false))
 			}
 		}
@@ -60,14 +60,14 @@ export const initialLoad = () => dispatch => {
 			parsedSettings = JSON.parse(settings)
 			dispatch(loadSettings(parsedSettings))
 		}
-		
+
 		let interface_settings
 		try {
 			interface_settings = localStorage.getItem('interface')
 		} catch (err) {
 			return false
 		}
-		
+
 		if (interface_settings) {
 			let parsedInterfaceSettings = JSON.parse(interface_settings)
 			dispatch(loadInterface(parsedInterfaceSettings))

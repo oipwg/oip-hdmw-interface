@@ -26,6 +26,7 @@ class CreateTXContainer extends React.Component {
 		try {
 			res = await this.props.Wallet.sendPayment(options)
 		} catch (err) {
+			console.error(err)
 			this.props.sendPaymentError()
 		}
 		if (!!res) {
@@ -33,7 +34,7 @@ class CreateTXContainer extends React.Component {
 			notifier(`txid: ${res}`)
 		}
 	}
-	
+
 	render() {
 		return <CreateTXWrapper
 			handleSendClick={this.handleSendClick}

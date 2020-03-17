@@ -14,7 +14,7 @@ const getTxInfoText = (txLen, asyncState) => {
 		//success
 		el = null
 	}
-	
+
 	return {el, loader}
 }
 

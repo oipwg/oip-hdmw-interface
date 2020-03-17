@@ -9,7 +9,7 @@ import styles from '../../../styles/views/dumb/InterfaceHeader'
 const calculateFiatBalance = (balances, exchangeRates) => {
 	let balance = 0, errors = []
 	for (let coinB in balances) {
-		if (coinB.includes('_testnet'))
+		if (coinB.endsWith('Testnet'))
 			continue
 		for (let coinX in exchangeRates) {
 			if (coinB === coinX) {

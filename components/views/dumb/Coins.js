@@ -8,16 +8,16 @@ import capDecimals from '../../../lib/util/capDecimals'
 
 const Coins = (props) => {
 	const {classes, coinAsyncState, xrAsyncState} = props
-	
+
 	const selectedCoinBorder = (coin) => {
 		let border = {
 			borderLeft: `1px solid ${props.theme.palette.primary.main}`,
 			marginTop: '1 px'
 		}
-		
+
 		return coin === props.activeCoin ? border : {}
 	}
-	
+
 	const getBalanceText = (coin) => {
 		if (!coinAsyncState[coin])
 			return
@@ -36,9 +36,9 @@ const Coins = (props) => {
 		}
 		return balanceText
 	}
-	
+
 	const getFiatText = (coin) => {
-		if (!xrAsyncState[coin] || coin.includes('_testnet'))
+		if (!xrAsyncState[coin] || coin.endsWith('Testnet'))
 			return
 		let fiatText, color
 		if (xrAsyncState[coin].fetching) {
@@ -60,7 +60,7 @@ const Coins = (props) => {
 		}
 		return <span style={{color, marginLeft: '5px'}}>{fiatText}</span>
 	}
-	
+
 	const coins = Object.keys(props.Wallet.getCoins()).filter(coin => props.displayCoins.includes(coin))
 	return <div className={classes.coinsContainer}>
 		<div className={classes.coinsList}>
@@ -119,4 +119,4 @@ Coins.propTypes = {
 	setActiveCoin: PropTypes.func.isRequired,
 }
 
-export default withTheme()(withStyles(styles)(Coins));
+export default withTheme(withStyles(styles)(Coins));

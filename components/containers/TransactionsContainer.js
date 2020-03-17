@@ -10,18 +10,18 @@ function TransactionsContainer(props) {
 	const {activeCoin, coinState, HDMW, Wallet} = props
 	const transactions = HDMW[`txs_${activeCoin}_${coinState.activeAccountIndex}`] || {}
 	const pubAddresses = HDMW[`upa_${activeCoin}_${coinState.activeAccountIndex}`] || []
-	
+
 	//transactions via props
 	//on mount fetch tx and on coin change
 	const [txs, setTxs] = useState([])
-	
+
 	useEffect(() => {
 		if (Object.keys(transactions).length === 0) {
 			getTransactions(props.Wallet)
 		}
 	}, [props.activeCoin])
-	
-	
+
+
 	const getTransactions = async (Wallet) => {
 		const transactions = await props.getTransactions(Wallet, Wallet.getNetworks()[activeCoin].explorer)
 		if (transactions) {
@@ -29,13 +29,13 @@ function TransactionsContainer(props) {
 				notifier('No new transactions found')
 			} else {
 				setTxs(Object.keys(transactions))
-				if (!activeCoin.includes('_testnet')) {
+				if (!activeCoin.endsWith('Testnet')) {
 					props.updateBalances(Wallet, activeCoin)
 				}
  			}
 		}
 	}
-	
+
 	return <TransactionsWrapper
 		activeCoin={activeCoin}
 		coinState={coinState}
